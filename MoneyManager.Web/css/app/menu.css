@@ -1,0 +1,112 @@
+﻿.menu-title{
+    background-color: #272424;
+    color: white;
+    font: bold 20px arial;
+    line-height: 60px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.main-menu{
+    background-color: #282E33;
+    height: 100%;
+}
+
+.main-menu ul{
+    list-style:none;
+    padding-left:0;
+    width: 100%;
+    margin: 0;
+    width: 250px;
+}
+
+.main-menu ul > li{
+    height: 50px;
+    color: grey;
+    font: 18px arial;
+    line-height: 50px;
+    vertical-align: central;
+    background-color: #282E33;
+    background-repeat: no-repeat;
+    background-position: 20px center;
+    background-size: 21px 21px;
+    padding-left: 60px;
+    border-bottom: solid 2px #272424;
+}
+
+.main-menu ul > li.selected {
+    background-color: #09c1f3;
+    color: white;
+}
+
+.main-menu ul > li.selected:hover {
+    background-color: #09c1f3;
+    color: white;
+}
+
+.menu-item-dashboard{
+    background-image: url(/icons/icon-dashboardNormal.png);
+}
+
+.menu-item-dashboard:hover, .menu-item-dashboard.selected{
+    background-image: url(/icons/icon-dashboardActive.png);
+}
+
+.menu-item-budgets{
+    background-image: url(/icons/icon-budgetsNormal.png);
+}
+
+.menu-item-budgets:hover, .menu-item-budgets.selected{
+    background-image: url(/icons/icon-budgetsActive.png);
+}
+
+.memu-item-incomes{
+    background-image: url(/icons/icon-IncomesNormal.png);
+}
+
+.memu-item-incomes:hover, .memu-item-incomes.selected{
+    background-image: url(/icons/icon-incomesActive.png);
+}
+
+.menu-item-expenses{
+    background-image: url(/icons/icon-espensesNormal.png);
+}
+
+.menu-item-expenses:hover, .menu-item-expenses.selected{
+    background-image: url(/icons/icon-expensesActive.png);
+}
+
+.menu-item-categories{
+    background-image: url(/icons/icon-tagsNormal.png);
+}
+
+.menu-item-categories:hover, .menu-item-categories.selected{
+    background-image: url(/icons/icon-tagsActive.png);
+}
+
+li.selected .menu-item-container{
+    background-image: url(/icons/arrow-Active.png);
+}
+
+.menu-item-container{
+    width: 100%;
+    background-image: url(/icons/arrow-Normal.png);
+    background-repeat: no-repeat;
+    background-position: 80% center;
+}
+
+.menu-item-container:hover{
+    background-image: url(/icons/arrow-Active.png);
+}
+
+.main-menu ul > li:hover{
+    background-color: #495055;
+    color: white;
+    cursor: pointer;
+}
+
+.action-bar{
+    background-color: #d5d6d7;
+    width: 100%;
+    height: 50px;
+}

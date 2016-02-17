@@ -1,0 +1,11 @@
+/MoneyManager.Business/bin
+/MoneyManager.DataAccess/bin
+/MoneyManager.DataAccess/obj
+/MoneyManager.Business/obj
+/MoneyManager.Models/bin
+/MoneyManager.Models/obj
+/MoneyManager.Web/bin
+/MoneyManager.Web/obj
+/MoneyManager.WebApi/bin
+/MoneyManager.WebApi/obj
+/packages

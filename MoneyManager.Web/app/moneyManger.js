@@ -1,0 +1,1 @@
+﻿angular.module('moneyManager', ['ui.router', 'ui.bootstrap', 'moneyManager.category', 'moneyManager.expense', 'moneyManager.income']);

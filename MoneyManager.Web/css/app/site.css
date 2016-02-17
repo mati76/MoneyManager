@@ -1,0 +1,154 @@
+﻿.container{
+    background-color: whitesmoke;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    border: solid 1px #d5d6d7;
+}
+
+.title-bar{
+    background-color: white;
+    line-height: 70px;
+    padding-left: 60px;
+    height: 70px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    color: #09c1f3;
+    font: 24px arial;
+}
+
+.widget{
+    border: solid 1px #d5d6d7;
+    margin: 20px;
+    border-radius: 5px;
+    background-color: white;
+    box-sizing: border-box;
+    height: auto;
+    max-height: 300px;
+}
+
+.panel-heading{
+    font-weight: bold;
+    padding: 0 !important;
+    padding-left: 10px !important;
+    height: 50px;
+    line-height: 50px;
+    vertical-align: middle;
+}
+
+.panel-footer{
+    background-color: white; 
+    border-width: 0;
+}
+
+ul.list{
+    list-style:none;
+    padding-left:0;
+    width: 100%;
+    margin: 0;
+    vertical-align: middle;
+}
+
+ul.list > li.list-item{
+    height: 50px;
+    color: black;
+    line-height: 50px;
+    vertical-align: middle;
+    background-color: white;
+    margin: 10px 10px 10px 10px;
+    padding-left: 10px;
+    border-radius: 5px;
+    border: solid 2px powderblue;
+}
+
+.btn-transparent{
+    border-width: 0 !important; 
+    float: right; 
+    height: 100%;
+    background-color: transparent !important;
+}
+
+.btn-transparent:hover{
+    border: solid 1px grey;
+    /* RGBa with 0.6 opacity */
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    border-radius: 5px;
+}
+
+.modal {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.loading-panel{
+    position: absolute;
+    width:100%;
+    height:100%;
+    background-color: black;
+    opacity: 0.4;
+    z-index: 100;
+}
+
+.loading-panel img {
+  width: 150px;
+  height: 150px;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background-color: transparent;
+}
+
+#categories{
+    border-spacing: 20px;
+    table-layout: fixed;
+}
+
+#categories div.panel-heading{
+    height: 50px;
+    background-color: powderblue;
+}
+
+#categories div.panel-body{
+    height: 280px;
+    overflow: auto;
+}
+
+#categories div.panel-body:before{
+    display: inline;
+}
+
+#categories div.panel-body:after{
+    display: inline;
+}
+
+#categories div.panel-footer{
+    background-color: white; 
+    border-width: 0; 
+    height: 50px;
+}
+
+#categories div.panel-footer button{
+    float: right; 
+    margin-bottom: 15px;
+}
+
+
+
+
+

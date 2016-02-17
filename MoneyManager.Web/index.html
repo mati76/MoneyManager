@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+   
+    <link href="/application_root/api/expense/2015/1" rel="stylesheet" />
+    <link href="css/app/site.css" rel="stylesheet" />
+    <link href="css/app/core.css" rel="stylesheet" />
+    <link href="css/app/menu.css" rel="stylesheet" />
+    <link href="css/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script src="/libs/angular/angular.js"></script>
+    <script src="/libs/angular/angular-ui-router.js"></script>
+    <script src="libs/ui-bootstrap/ui-bootstrap-tpls-1.1.2.js"></script>
+
+    <script src="app/shared/shared.js"></script>
+    <script src="app/shared/directives.js"></script>
+    
+    <script src="app/components/category/category.js"></script>
+    <script src="app/components/category/categoryService.js"></script>
+    <script src="app/components/category/categoriesController.js"></script>
+    <script src="app/components/category/categoryController.js"></script>
+    <script src="app/components/expense/expense.js"></script>
+    <script src="app/components/expense/expensesController.js"></script>
+    <script src="app/components/income/income.js"></script>
+    <script src="app/components/income/incomesController.js"></script>
+
+    <script src="app/moneyManger.js"></script>
+    <script src="app/router.js"></script>
+    <script src="app/moneyManagerController.js"></script>
+    <script src="app/components/home/homeController.js"></script>
+    
+</head>
+<body ng-app="moneyManager" ng-controller="moneyManagerController">
+    <div class="loading-panel" ng-show="isLoading">
+        <img src="icons/loading.gif" width="150" height="150"/>
+    </div>
+    <div class="display-table stretched">
+        <div class="main-menu display-table-cell">
+            <div class="menu-title">BUXFER</div>
+            <ul>
+                <li class="menu-item-dashboard" ui-sref="dashboard" ui-sref-active="selected"><div class="menu-item-container">DASHBOARD</div></li>
+                <li class="menu-item-expenses" ui-sref="expenses" ui-sref-active="selected"><div class="menu-item-container">EXPENSES</div></li>
+                <li class="memu-item-incomes" ui-sref="incomes" ui-sref-active="selected"><div class="menu-item-container">INCOMES</div></li>
+                <li class="menu-item-budgets" ui-sref="budgets" ui-sref-active="selected"><div class="menu-item-container">BUDGETS</div></li>
+                <li class="menu-item-categories" ui-sref="categories" ui-sref-active="selected"><div class="menu-item-container">CATEGORIES</div></li>
+            </ul>
+        </div>
+        <div class="display-table-cell stretched">
+            <div class="display-table stretched">
+                <div class="display-table-row">
+                    <div class="display-table-cell action-bar">
+
+                    </div>
+                </div>
+                <div class="display-table-row">
+                    <div class="display-table-cell title-bar">
+                        {{ pageName }}
+                    </div>
+                </div>
+                <div class="display-table-row">
+                    <div class="display-table-cell container" ui-view="">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
