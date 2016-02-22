@@ -1,10 +1,8 @@
 ﻿using MoneyManager.Business.Interfaces;
 using MoneyManager.Business.Models;
-using MoneyManager.WebApi.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using DTO = MoneyManager.WebApi.DTO;
 
 namespace MoneyManager.WebApi.Services
 {
@@ -21,24 +19,24 @@ namespace MoneyManager.WebApi.Services
             _expenseBusiness = expenseBusiness;
         }
 
-        public IEnumerable<ExpenseViewModel> GetExpenses(ExpenseCriteriaViewModel criteria)
+        public IEnumerable<DTO.Expense> GetExpenses(DTO.ExpenseCriteria criteria)
         {
-            return _mapperService.Map<IEnumerable<ExpenseViewModel>>(_expenseBusiness.GetExpenses(_mapperService.Map<ExpenseCriteria>(criteria)));
+            return _mapperService.Map<IEnumerable<DTO.Expense>>(_expenseBusiness.GetExpenses(_mapperService.Map<ExpenseCriteria>(criteria)));
         }
 
-        public IEnumerable<ExpenseViewModel> GetExpenses(DateTime date)
+        public IEnumerable<DTO.Expense> GetExpenses(DateTime date)
         {
-            return _mapperService.Map<IEnumerable<ExpenseViewModel>>(_expenseBusiness.GetExpenses(date));
+            return _mapperService.Map<IEnumerable<DTO.Expense>>(_expenseBusiness.GetExpenses(date));
         }
 
-        public IEnumerable<ExpenseViewModel> GetExpenses(int year, int month)
+        public IEnumerable<DTO.Expense> GetExpenses(int year, int month)
         {
-            return _mapperService.Map<IEnumerable<ExpenseViewModel>>(_expenseBusiness.GetExpenses(year, month));
+            return _mapperService.Map<IEnumerable<DTO.Expense>>(_expenseBusiness.GetExpenses(year, month));
         }
 
-        public ExpenseViewModel GetExpense(int id)
+        public DTO.Expense GetExpense(int id)
         {
-            return _mapperService.Map<ExpenseViewModel>(_expenseBusiness.GetExpense(id));
+            return _mapperService.Map<DTO.Expense>(_expenseBusiness.GetExpense(id));
         }
     }
 }

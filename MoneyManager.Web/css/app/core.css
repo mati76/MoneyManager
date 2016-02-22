@@ -49,3 +49,11 @@ ul{
 .large-font{
     font-size: 24px !important;
 }
+
+.float-left{
+    float: left;
+}
+
+.float-right{
+    float: right;
+}

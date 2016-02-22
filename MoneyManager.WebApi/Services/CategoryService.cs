@@ -1,6 +1,6 @@
 ﻿using MoneyManager.Business;
 using MoneyManager.Business.Models;
-using MoneyManager.WebApi.ViewModels;
+using DTO = MoneyManager.WebApi.DTO;
 using System;
 using System.Collections.Generic;
 
@@ -19,17 +19,17 @@ namespace MoneyManager.WebApi.Services
             _categoryBusiness = categoryBusiness;
         }
 
-        public IEnumerable<CategoryViewModel> GetAllCategories()
+        public IEnumerable<DTO.Category> GetCategories()
         {
-            return _mapperService.Map<IEnumerable<CategoryViewModel>>(_categoryBusiness.GetAllCategories());
+            return _mapperService.Map<IEnumerable<DTO.Category>>(_categoryBusiness.GetCategories());
         }
 
-        public CategoryViewModel GetCategory(int id)
+        public DTO.Category GetCategory(int id)
         {
-            return _mapperService.Map<CategoryViewModel>(_categoryBusiness.GetCategoryById(id));
+            return _mapperService.Map<DTO.Category>(_categoryBusiness.GetCategoryById(id));
         }
 
-        public void SaveCategory(CategoryViewModel category)
+        public void SaveCategory(DTO.Category category)
         {
             _categoryBusiness.SaveCategory(_mapperService.Map<Category>(category));
         }

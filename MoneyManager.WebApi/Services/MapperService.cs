@@ -1,5 +1,5 @@
 ﻿using MoneyManager.Business.Models;
-using MoneyManager.WebApi.ViewModels;
+using DTO = MoneyManager.WebApi.DTO;
  
 namespace MoneyManager.WebApi.Services
 {
@@ -12,8 +12,8 @@ namespace MoneyManager.WebApi.Services
 
         public static void Configure()
         {
-            AutoMapper.Mapper.CreateMap<CategoryViewModel, Category>();
-            AutoMapper.Mapper.CreateMap<Category, CategoryViewModel>();
+            AutoMapper.Mapper.CreateMap<DTO.Category, Category>();
+            AutoMapper.Mapper.CreateMap<Category, DTO.Category>();
         }
     }
 }

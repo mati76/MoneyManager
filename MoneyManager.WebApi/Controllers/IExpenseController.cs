@@ -1,24 +1,21 @@
 ﻿using MoneyManager.WebApi.Services;
-using MoneyManager.WebApi.ViewModels;
+using MoneyManager.WebApi.DTO;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MoneyManager.WebApi.Controllers
 {
     public interface IExpenseController
     {
-        IEnumerable<ExpenseViewModel> Get(ExpenseCriteriaViewModel criteria);
+        IEnumerable<Expense> Get(ExpenseCriteria criteria);
 
-        ExpenseViewModel GetById(int id);
+        Expense GetById(int id);
 
-        IEnumerable<ExpenseViewModel> GetByDate(DateTime date);
+        IEnumerable<Expense> GetByDate(DateTime date);
 
-        IEnumerable<ExpenseViewModel> GetByDate(int year, int month);
+        IEnumerable<Expense> GetByDate(int year, int month);
 
-        void Post(ExpenseViewModel expense);
+        void Post(Expense expense);
 
         void Delete(int id);
         }

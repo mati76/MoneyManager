@@ -110,14 +110,12 @@
     <Content Include="app\router.js" />
     <Content Include="css\bootstrap\css\bootstrap.css" />
     <Content Include="libs\angular\angular-animate.js" />
+    <Content Include="libs\angular\angular-messages.js" />
     <Content Include="libs\angular\angular-ui-router.js" />
     <Content Include="libs\angular\angular.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="app\test.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="libs\ui-bootstrap\ui-bootstrap-tpls-1.1.2.js" />

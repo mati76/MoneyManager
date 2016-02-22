@@ -1,4 +1,4 @@
-﻿using MoneyManager.WebApi.ViewModels;
+﻿using MoneyManager.WebApi.DTO;
 using System;
 using System.Collections.Generic;
 
@@ -6,10 +6,10 @@ namespace MoneyManager.WebApi.Services
 {
     public interface IIncomeService
     {
-        IEnumerable<IncomeViewModel> GetIncome(DateTime from, DateTime to);
+        IEnumerable<Income> GetIncome(DateTime from, DateTime to);
 
-        IEnumerable<IncomeViewModel> GetIncome(int year, int month);
+        IEnumerable<Income> GetIncome(int year, int month);
 
-        IncomeViewModel GetIncome(int id);
+        Income GetIncome(int id);
     }
 }

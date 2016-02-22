@@ -5,7 +5,7 @@ namespace MoneyManager.Business
 {
     public interface ICategoryBusiness
     {
-        IEnumerable<Category> GetAllCategories();
+        IEnumerable<Category> GetCategories();
         Category GetCategoryById(int id);
         void SaveCategory(Category category);
         void DeleteCategoryById(int id);

@@ -114,9 +114,13 @@ ul.list > li.list-item{
   background-color: transparent;
 }
 
-#categories{
-    border-spacing: 20px;
+#categories > button{
+    margin-right: 20px;
+}
+
+#categories .display-table{
     table-layout: fixed;
+    border-spacing: 20px;
 }
 
 #categories div.panel-heading{

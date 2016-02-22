@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using MoneyManager.WebApi.Services;
-using MoneyManager.WebApi.ViewModels;
+using MoneyManager.WebApi.DTO;
 
 namespace MoneyManager.WebApi.Controllers
 {
@@ -16,21 +16,20 @@ namespace MoneyManager.WebApi.Controllers
             {
                 throw new ArgumentNullException("categoryService");
             }
-
             _categoryService = categoryService;
         }
 
-        public IEnumerable<CategoryViewModel> Get()
+        public IEnumerable<Category> Get()
         {
-            return _categoryService.GetAllCategories();
+            return _categoryService.GetCategories();
         }
 
-        public CategoryViewModel Get(int id)
+        public Category Get(int id)
         {
             return _categoryService.GetCategory(id);
         }
 
-        public void Post(CategoryViewModel category)
+        public void Post(Category category)
         {
             _categoryService.SaveCategory(category);
         }

@@ -11,7 +11,12 @@
     };
 
     $scope.removeCategory = function (categoryId) {
-
+        categoryService.removeCategory(categoryId).then(
+            function (data) {
+                reload();
+            }, function (error) {
+                alert(error);
+            })
     }
 
     function openDialog(mode, parentCategoryId, category) {
@@ -25,7 +30,7 @@
         });
 
         modalInstance.result.then(function () {
-            //reload;
+            reload();
         });
     };
 

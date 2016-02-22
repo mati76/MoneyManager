@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace MoneyManager.Business.Models
 {
     public class Category : BaseEntity
@@ -8,5 +10,9 @@ namespace MoneyManager.Business.Models
         public string Color { get; set; }
 
         public int? ParentId { get; set; }
+
+        public Category Parent { get; set; }
+
+        public ICollection<Category> Categories { get; set; }
     }
 }

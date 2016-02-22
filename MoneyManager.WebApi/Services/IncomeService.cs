@@ -1,10 +1,7 @@
 ﻿using MoneyManager.Business.Interfaces;
-using MoneyManager.Business.Models;
-using MoneyManager.WebApi.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using DTO = MoneyManager.WebApi.DTO;
 
 namespace MoneyManager.WebApi.Services
 {
@@ -21,19 +18,19 @@ namespace MoneyManager.WebApi.Services
             _incomeBusiness = incomeBusiness;
         }
 
-        public IEnumerable<IncomeViewModel> GetIncome(DateTime from, DateTime to)
+        public IEnumerable<DTO.Income> GetIncome(DateTime from, DateTime to)
         {
-            return _mapperService.Map<IEnumerable<IncomeViewModel>>(_incomeBusiness.GetIncome(from, to));
+            return _mapperService.Map<IEnumerable<DTO.Income>>(_incomeBusiness.GetIncome(from, to));
         }
 
-        public IEnumerable<IncomeViewModel> GetIncome(int year, int month)
+        public IEnumerable<DTO.Income> GetIncome(int year, int month)
         {
-            return _mapperService.Map<IEnumerable<IncomeViewModel>>(_incomeBusiness.GetIncome(year, month));
+            return _mapperService.Map<IEnumerable<DTO.Income>>(_incomeBusiness.GetIncome(year, month));
         }
 
-        public IncomeViewModel GetIncome(int id)
+        public DTO.Income GetIncome(int id)
         {
-            return _mapperService.Map<IncomeViewModel>(_incomeBusiness.GetIncome(id));
+            return _mapperService.Map<DTO.Income>(_incomeBusiness.GetIncome(id));
         }
     }
 }

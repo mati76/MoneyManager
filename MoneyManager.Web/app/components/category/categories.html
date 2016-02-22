@@ -1,32 +1,41 @@
-﻿<div id="categories" class="display-table full-width">
-    <div ng-repeat="row in categoryRows" class="display-table-row">
-        <div ng-repeat="category in row" class="panel panel-default display-table-cell">
-             <div class="mid-font panel-heading"> {{ category.Name }}
-                <button class="btn btn-default btn-transparent" type="button">
-                    <span class="mid-font glyphicon glyphicon-trash"></span>
-                </button>
-            </div>
-            <div class="panel-body">
-                <ul class="list">
-                    <li ng-repeat="c in category.categories" class="small-font list-item"> {{ c.Name }}
-                        <button id="btnRemove" class="btn btn-transparent btn-default" type="button" ng-click="removeCategory(c.Id)">
-                            <span class="mid-font glyphicon glyphicon-trash"></span>
-                        </button>
-                        <button id="btnEdit" class="btn btn-transparent btn-default" type="button" ng-click="editCategory(c)">
-                            <span class="mid-font glyphicon glyphicon-cog"></span>
-                        </button>
-                    </li>
-                </ul>
-            </div>
-            <div class="panel-footer">
-                <button class="mid-font btn btn-default" ng-click="addCategory(category.Id)">
-                    Add
-                    <span class="glyphicon glyphicon-plus-sign"></span>
-                </button>
+﻿<div id="categories">
+    <div class="display-table full-width">
+        <div ng-repeat="row in categoryRows" class="display-table-row">
+            <div ng-repeat="category in row" class="panel panel-default display-table-cell">
+                <div class="mid-font panel-heading">
+                    {{ category.Name }}
+                    <button class="btn btn-default btn-transparent" type="button" ng-click="removeCategory(category.Id)">
+                        <span class="mid-font glyphicon glyphicon-trash"></span>
+                    </button>
+                </div>
+                <div class="panel-body">
+                    <ul class="list">
+                        <li ng-repeat="c in category.Categories" class="small-font list-item">
+                            {{ c.Name }}
+                            <button id="btnRemove" class="btn btn-transparent btn-default" type="button" ng-click="removeCategory(c.Id)">
+                                <span class="mid-font glyphicon glyphicon-trash"></span>
+                            </button>
+                            <button id="btnEdit" class="btn btn-transparent btn-default" type="button" ng-click="editCategory(c)">
+                                <span class="mid-font glyphicon glyphicon-cog"></span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <button class="mid-font btn btn-default" ng-click="addCategory(category.Id)">
+                        Add
+                        <span class="glyphicon glyphicon-plus-sign"></span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
+    <button class="mid-font btn btn-default float-right" ng-click="addCategory()">
+        Add Group
+        <span class="glyphicon glyphicon-plus-sign"></span>
+    </button>
 </div>
+
 
 
 

@@ -156,16 +156,16 @@
     <Compile Include="Services\IncomeService.cs" />
     <Compile Include="Services\ExpenseService.cs" />
     <Compile Include="Services\IIncomeService.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\ExpenseViewModel.cs" />
+    <Compile Include="DTO\BaseDTO.cs" />
+    <Compile Include="DTO\Expense.cs" />
     <Compile Include="Services\ICategoryService.cs" />
     <Compile Include="Services\IExpenseService.cs" />
     <Compile Include="Services\IMapperService.cs" />
     <Compile Include="Services\MapperService.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\CategoryViewModel.cs" />
-    <Compile Include="ViewModels\ExpenseCriteriaViewModel.cs" />
-    <Compile Include="ViewModels\IncomeViewModel.cs" />
+    <Compile Include="DTO\Category.cs" />
+    <Compile Include="DTO\ExpenseCriteria.cs" />
+    <Compile Include="DTO\Income.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config">

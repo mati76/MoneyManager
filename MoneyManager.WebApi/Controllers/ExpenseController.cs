@@ -1,5 +1,5 @@
 ﻿using MoneyManager.WebApi.Services;
-using MoneyManager.WebApi.ViewModels;
+using MoneyManager.WebApi.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,30 +23,30 @@ namespace MoneyManager.WebApi.Controllers
             _expenseService = expenseService;
         }
 
-        public IEnumerable<ExpenseViewModel> Get([FromUri]ExpenseCriteriaViewModel criteria)
+        public IEnumerable<Expense> Get([FromUri]ExpenseCriteria criteria)
         {
             return _expenseService.GetExpenses(criteria);
         }
 
         [Route("{id:int}")]
-        public ExpenseViewModel GetById(int id)
+        public Expense GetById(int id)
         {
             return _expenseService.GetExpense(id);
         }
 
         [Route("{date:datetime}")]
-        public IEnumerable<ExpenseViewModel> GetByDate(DateTime date)
+        public IEnumerable<Expense> GetByDate(DateTime date)
         {
             return _expenseService.GetExpenses(date);
         }
 
         [Route("{year:int:min(1900)}/{month:int:range(1,12)}")]
-        public IEnumerable<ExpenseViewModel> GetByDate(int year, int month)
+        public IEnumerable<Expense> GetByDate(int year, int month)
         {
             return _expenseService.GetExpenses(year, month);
         }
 
-        public void Post([FromBody]ExpenseViewModel expense)
+        public void Post([FromBody]Expense expense)
         {
         }
         

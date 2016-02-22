@@ -18,6 +18,7 @@
                 $uibModalInstance.close();
             }, function (error) {
                 //handle error
+      
                 $scope.cancel();
             });
         }

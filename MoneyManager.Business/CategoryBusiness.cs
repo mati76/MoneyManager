@@ -17,11 +17,12 @@ namespace MoneyManager.Business
             _unitOfWorkFactory = unitOfWorkFactory;
         }
 
-        public IEnumerable<Category> GetAllCategories()
+        public IEnumerable<Category> GetCategories()
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<ICategoryRepository>().GetAll().ToList();
+                var test = session.GetRepository<ICategoryRepository>().GetParentCategories();
+                return test;
             }
         }
 
@@ -54,7 +55,9 @@ namespace MoneyManager.Business
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                session.GetRepository<ICategoryRepository>().DeleteById(id);
+                var repo = session.GetRepository<ICategoryRepository>();
+                repo.DeleteByParentId(id);
+                repo.DeleteById(id);
             }
         }
     }

@@ -14,6 +14,7 @@ namespace MoneyManager.DataAccess.Repositories
     {
         protected readonly IMapperService _mapperService;
         protected readonly DbSet<TDAC> _dbset;
+        protected readonly IDbContext _dbContext;
 
         public BaseRepository(IMapperService mapperService, IDbContext dbContext)
         {
@@ -28,6 +29,7 @@ namespace MoneyManager.DataAccess.Repositories
 
             _mapperService = mapperService;
             _dbset = dbContext.Set<TDAC>();
+            _dbContext = dbContext;
         }
 
         public virtual void Add(TBLL o)
@@ -49,7 +51,11 @@ namespace MoneyManager.DataAccess.Repositories
         public virtual void Update(TBLL o)
         {
             o.UpdDateTime = DateTime.Now;
-            _dbset.Attach(_mapperService.Map<TDAC>(o));
+            var entity = _mapperService.Map<TDAC>(o);
+            _dbset.Attach(entity);
+            _dbContext.Entry(entity).State = EntityState.Modified;
+            _dbContext.Entry(entity).Property(e => e.AddDateTime).IsModified = false;
+            _dbContext.Entry(entity).Property(e => e.AddUserName).IsModified = false;
         }
 
         public virtual TBLL GetById(int id)

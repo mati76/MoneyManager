@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace MoneyManager.WebApi.ViewModels
+namespace MoneyManager.WebApi.DTO
 {
-    public class ExpenseViewModel : BaseViewModel
+    public class Expense : BaseDTO
     {
         public decimal Value { get; set; }
 
@@ -10,6 +10,6 @@ namespace MoneyManager.WebApi.ViewModels
 
         public string Note { get; set; }
 
-        public virtual CategoryViewModel Category { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

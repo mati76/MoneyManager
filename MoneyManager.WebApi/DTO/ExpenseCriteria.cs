@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MoneyManager.WebApi.ViewModels
+namespace MoneyManager.WebApi.DTO
 {
-    public class ExpenseCriteriaViewModel : BaseViewModel
+    public class ExpenseCriteria : BaseDTO
     {
-        public IEnumerable<CategoryViewModel> Categories { get; set; }
+        public IEnumerable<Category> Categories { get; set; }
 
         public DateTime? DateFrom { get; set; }
 

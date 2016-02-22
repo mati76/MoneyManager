@@ -1,5 +1,5 @@
 ﻿using MoneyManager.WebApi.Services;
-using MoneyManager.WebApi.ViewModels;
+using MoneyManager.WebApi.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,24 +24,24 @@ namespace MoneyManager.WebApi.Controllers
         }
 
         [Route("{id:int}")]
-        public IncomeViewModel GetById(int id)
+        public Income GetById(int id)
         {
             return _IncomeService.GetIncome(id);
         }
 
         [Route("{from:datetime}/{to:datetime}")]
-        public IEnumerable<IncomeViewModel> GetByDateRange(DateTime from, DateTime to)
+        public IEnumerable<Income> GetByDateRange(DateTime from, DateTime to)
         {
             return _IncomeService.GetIncome(from, to);
         }
 
         [Route("{year:int}/{month:int}")]
-        public IEnumerable<IncomeViewModel> GetByMonth(int year, int month)
+        public IEnumerable<Income> GetByMonth(int year, int month)
         {
             return _IncomeService.GetIncome(year, month);
         }
 
-        public void Post([FromBody]IncomeViewModel income)
+        public void Post([FromBody]Income income)
         {
         }
         

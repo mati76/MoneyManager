@@ -1,37 +1,32 @@
 ﻿angular.module('moneyManager.category').factory('categoryService', ['$http', function ($http) {
+    var uri = 'http://localhost:8080/api/category';
+
     return {
         getCategories: getCategories,
         saveCategory: saveCategory,
         removeCategory: removeCategory
     };
 
-    function httpGet(url) {
-        return $http({
-            method: 'GET',
-            url: url
-        })
-    }
-
-    function httpPost(url, data) {
-        return $http({
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: JSON.stringify(data),
-            method: 'POST',
-            url: url
-        })
-    }
+    //function httpPost(url, data) {
+    //    return $http({
+    //        headers: {
+    //            'Content-Type': 'application/json'
+    //        },
+    //        data: JSON.stringify(data),
+    //        method: 'POST',
+    //        url: url
+    //    })
+    //}
 
     function getCategories() {
-        return httpGet('http://localhost:8080/api/category');
+        return $http.get(uri);
     }
 
     function saveCategory(category) {
-        return httpPost('http://localhost:8080/api/category', category);
+        return $http.post(uri, category);
     }
 
-    function removeCategory() {
-
+    function removeCategory(categoryId) {
+        return $http.delete(uri + '/' + categoryId);
     }
 }]);

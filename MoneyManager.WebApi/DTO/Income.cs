@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace MoneyManager.WebApi.ViewModels
+namespace MoneyManager.WebApi.DTO
 {
-    public class IncomeViewModel : BaseViewModel
+    public class Income : BaseDTO
     {
         public decimal Value { get; set; }
 

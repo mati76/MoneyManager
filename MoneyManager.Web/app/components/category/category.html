@@ -6,7 +6,11 @@
         <form name="categoryForm">
             <div class="form-group">
                 <label for="name">Name:</label>
-                <input type="text" class="form-control" id="name" required ng-model="model.Name">
+                <input name="name" type="text" class="form-control" id="name" required ng-model="model.Name">
+            </div>
+
+            <div ng-messages="categoryForm.name.$error" ng-if="categoryForm.name.$dirty" style="color:maroon" role="alert">
+                <div ng-message="required">Please enter category name</div>
             </div>
         </form>
     </div>

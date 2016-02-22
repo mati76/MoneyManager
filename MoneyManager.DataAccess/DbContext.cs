@@ -3,6 +3,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using MoneyManager.DataAccess.Models;
 using MoneyManager.DataAccess.Infrastructure;
 using System.ComponentModel.DataAnnotations.Schema;
+using MoneyManager.DataAccess.Mappings;
 
 namespace MoneyManager.DataAccess
 {
@@ -17,9 +18,10 @@ namespace MoneyManager.DataAccess
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<StoreGeneratedIdentityKeyConvention>();
-            modelBuilder.Entity<Category>().HasKey(p => p.Id).Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            modelBuilder.Entity<Expense>().HasKey(p => p.Id).Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            modelBuilder.Entity<Income>().HasKey(p => p.Id).Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            modelBuilder.Configurations.Add(new CategoryConfig());
+            modelBuilder.Configurations.Add(new IncomeConfig());
+            modelBuilder.Configurations.Add(new ExpenseConfig());
 
             base.OnModelCreating(modelBuilder);
         }
