@@ -7,15 +7,26 @@
     border: solid 1px #d5d6d7;
 }
 
-.title-bar{
+div.title-bar{
     background-color: white;
     line-height: 70px;
-    padding-left: 60px;
+    
     height: 70px;
     box-sizing: border-box;
     vertical-align: middle;
     color: #09c1f3;
     font: 24px arial;
+}
+
+span.title-bar{
+    padding-left: 60px;
+    background-repeat: no-repeat;
+    background-position: 20px center;
+    background-size: 21px 21px;
+}
+
+span.title-bar-expense{
+    background-image: url('../../icons/icon-espensesTitle.png');
 }
 
 .widget{
@@ -76,10 +87,6 @@ ul.list > li.list-item{
     border-radius: 5px;
 }
 
-.modal {
-  text-align: center;
-}
-
 @media screen and (min-width: 768px) { 
   .modal:before {
     display: inline-block;
@@ -87,12 +94,6 @@ ul.list > li.list-item{
     content: " ";
     height: 100%;
   }
-}
-
-.modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
 }
 
 .loading-panel{
@@ -151,6 +152,24 @@ ul.list > li.list-item{
     float: right; 
     margin-bottom: 15px;
 }
+
+p.summary-label{
+    font-size: 13pt;
+    font-weight: bold;
+    color: #606472;
+    margin-bottom: 0 !important;
+}
+
+p.summary-value{
+    font-size: 18pt;
+}
+
+p.expense-value{
+    color: #e64b30;
+}
+
+
+
 
 
 

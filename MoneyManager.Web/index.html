@@ -3,26 +3,37 @@
 <head>
     <title></title>
 	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
    
     <link href="/application_root/api/expense/2015/1" rel="stylesheet" />
     <link href="css/app/site.css" rel="stylesheet" />
     <link href="css/app/core.css" rel="stylesheet" />
     <link href="css/app/menu.css" rel="stylesheet" />
+    <link href="css/app/modal.css" rel="stylesheet" />
     <link href="css/bootstrap/css/bootstrap.css" rel="stylesheet" />
-    <script src="/libs/angular/angular.js"></script>
-    <script src="/libs/angular/angular-ui-router.js"></script>
-    <script src="/libs/angular/angular-messages.js"></script>
+    <link href="css/angular-chart.css" rel="stylesheet" />
+
+    <script src="libs/angular/angular.js"></script>
+    <script src="libs/angular/angular-ui-router.js"></script>
+    <script src="libs/angular/angular-messages.js"></script>
     <script src="libs/ui-bootstrap/ui-bootstrap-tpls-1.1.2.js"></script>
-    
+    <script src="libs/charts/Chart.js"></script>
+    <script src="libs/charts/angular-chart.js"></script>
+
+    <script src="configuration/configuration.js"></script>
     <script src="app/shared/shared.js"></script>
     <script src="app/shared/directives.js"></script>
-    
+    <script src="app/shared/messageBox/messageBoxService.js"></script>
+    <script src="app/shared/messageBox/messageBoxController.js"></script>
+
     <script src="app/components/category/category.js"></script>
     <script src="app/components/category/categoryService.js"></script>
     <script src="app/components/category/categoriesController.js"></script>
     <script src="app/components/category/categoryController.js"></script>
     <script src="app/components/expense/expense.js"></script>
+    <script src="app/components/expense/expenseService.js"></script>
     <script src="app/components/expense/expensesController.js"></script>
+    <script src="app/components/expense/expenseController.js"></script>
     <script src="app/components/income/income.js"></script>
     <script src="app/components/income/incomesController.js"></script>
 
@@ -38,7 +49,7 @@
     </div>
     <div class="display-table stretched">
         <div class="main-menu display-table-cell">
-            <div class="menu-title">BUXFER</div>
+            <div class="menu-title">MONEFY</div>
             <ul>
                 <li class="menu-item-dashboard" ui-sref="dashboard" ui-sref-active="selected"><div class="menu-item-container">DASHBOARD</div></li>
                 <li class="menu-item-expenses" ui-sref="expenses" ui-sref-active="selected"><div class="menu-item-container">EXPENSES</div></li>
@@ -56,7 +67,13 @@
                 </div>
                 <div class="display-table-row">
                     <div class="display-table-cell title-bar">
-                        {{ pageName }}
+                        <span class="title-bar" ng-bind="pageName" ng-class="addBtnClass"></span>
+                        <div class="btn-group" uib-dropdown style="float: right; margin-right: 15px">
+                            <button class="mid-font btn btn-default float-right" ng-click="addFunc()">
+                                Add Expense
+                                <span class="glyphicon glyphicon-plus-sign"></span>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="display-table-row">

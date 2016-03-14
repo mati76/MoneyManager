@@ -1,4 +1,4 @@
-﻿angular.module('moneyManager.category').controller('categoriesController', ['$scope', '$uibModal', 'categoryService', function ($scope, $uibModal, categoryService) {
+﻿angular.module('moneyManager.category').controller('categoriesController', ['$scope', '$uibModal', 'categoryService', 'messageBoxService', function ($scope, $uibModal, categoryService, messageBoxService) {
    
     $scope.$parent.pageName = "CATEGORIES";
     
@@ -11,6 +11,13 @@
     };
 
     $scope.removeCategory = function (categoryId) {
+        messageBoxService.showMessage('Are you sure you want to remove category?', 'Remove category', 'warning')
+            .then(function () {
+                removeCategory(categoryId)
+            });
+    }
+
+    function removeCategory(categoryId) {
         categoryService.removeCategory(categoryId).then(
             function (data) {
                 reload();
@@ -56,52 +63,4 @@
     (function () {
         reload();
     })();
-
-    //var categories = [
-    //    {
-    //        "name": 'Spożywcze', color: '#435677',
-    //        "categories": [
-    //            { "name": 'Jedzenie', color: '#435677' },
-    //            { "name": 'Alkohol', color: '#777777' }
-    //        ]
-    //    },
-    //    {
-    //        "name": 'Chemia', color: '#435677',
-    //        "categories": [
-    //            { "name": 'Sprzątanie', color: '#435677' },
-    //            { "name": 'Kosmetyki', color: '#777777' }
-    //        ]
-    //    },
-    //    {
-    //        "name": 'Samochód', color: '#435677',
-    //        "categories": [
-    //            { "name": 'Mycie', color: '#435677' },
-    //            { "name": 'Paliwo', color: '#777777' },
-    //            { "name": 'Wymiany', color: '#777777' }
-    //        ]
-    //    },
-    //    {
-    //        "name": 'Kosmetyczne', color: '#435677',
-    //        "categories": [
-    //            { "name": 'Fryzjer', color: '#435677' },
-    //            { "name": 'Kosmetyczka', color: '#777777' }
-    //        ]
-    //    },
-    //    {
-    //        "name": 'Inne wydatki', color: '#435677',
-    //        "categories": [
-    //            { "name": 'Kino', color: '#435677' },
-    //            { "name": 'Ubrania', color: '#777777' },
-    //            { "name": 'Restauracje', color: '#777777' },
-    //            { "name": 'Dominik', color: '#777777' }
-                
-    //        ]
-    //    },
-    //    {
-    //        "name": 'Wypoczynek', color: '#435677',
-    //        "categories": [
-    //            { "name": 'Wczasy', color: '#435677' }
-    //        ]
-    //    }
-    //];
 }]);

@@ -1,0 +1,72 @@
+﻿<div id="editExpense">
+    <div class="modal-header">
+        <h3 class="modal-title">ADD EXPENSE</h3>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <form name="expenseForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="amount">Amount:</label>
+                            <input class="form-control" type="number" name="amount" id="amount" ng-model="model.Amount" required />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="amount">Date:</label>
+                            <p class="input-group">
+                                <input type="text" id="date" name="date" class="form-control" uib-datepicker-popup="{{format}}" ng-model="model.Date" is-open="pickerPopup.opened" 
+                                       datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" required />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="openPicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="amount">Comment:</label>
+                            <input class="form-control" name="comment" id="comment" ng-model="model.Comment"/>
+                        </div>
+                    </div>
+                </div>
+                <label>Category:</label>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-2" style="padding: 0">
+                            <button class="btn btn-primary" style="width: 100%">Spożywcze</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-default" style="width: 100%">Rozrywka</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-warning" style="width: 100%">Paliwo</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary" style="width: 100%">Chemia</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-default" style="width: 100%">Dom</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary" style="width: 100%">Other</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div ng-messages="expenseForm.amount.$error" ng-if="expenseForm.amount.$dirty" style="color:maroon" role="alert">
+            <div ng-message="required">Please enter an amount</div>
+        </div>
+        <div ng-messages="expenseForm.date.$error" ng-if="expenseForm.date.$dirty" style="color:maroon" role="alert">
+            <div ng-message="required">Please enter a valid date</div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-disabled="expenseForm.$invalid" ng-click="save()">Ok</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</div>

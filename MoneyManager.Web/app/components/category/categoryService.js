@@ -1,5 +1,5 @@
-﻿angular.module('moneyManager.category').factory('categoryService', ['$http', function ($http) {
-    var uri = 'http://localhost:8080/api/category';
+﻿angular.module('moneyManager.category').factory('categoryService', ['$http', 'API_END_POINT', function ($http, API_END_POINT) {
+    var uri = API_END_POINT + '/api/category';
 
     return {
         getCategories: getCategories,

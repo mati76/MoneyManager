@@ -69,9 +69,12 @@
     <Content Include="app\components\category\category.html" />
     <Content Include="app\components\category\category.js" />
     <Content Include="app\components\category\categoryController.js" />
+    <Content Include="app\components\expense\expense.html" />
+    <Content Include="app\components\expense\expenseController.js" />
     <Content Include="app\components\expense\expense.js" />
     <Content Include="app\components\expense\expenses.html" />
     <Content Include="app\components\expense\expensesController.js" />
+    <Content Include="app\components\expense\expenseService.js" />
     <Content Include="app\components\home\home.html" />
     <Content Include="app\components\home\homeController.js" />
     <Content Include="app\components\category\categories.html" />
@@ -83,8 +86,14 @@
     <Content Include="app\components\login\loginController.js" />
     <Content Include="app\moneyManagerController.js" />
     <Content Include="app\shared\directives.js" />
+    <Content Include="app\shared\messageBox\messageBox.html" />
+    <Content Include="app\shared\messageBox\messageBoxController.js" />
+    <Content Include="app\shared\messageBox\messageBoxService.js" />
     <Content Include="app\shared\shared.js" />
+    <Content Include="configuration\configuration.js" />
+    <Content Include="css\angular-chart.css" />
     <Content Include="css\app\core.css" />
+    <Content Include="css\app\modal.css" />
     <Content Include="css\app\site.css" />
     <Content Include="css\app\menu.css" />
     <Content Include="css\bootstrap\fonts\glyphicons-halflings-regular.svg" />
@@ -95,6 +104,7 @@
     <Content Include="icons\icon-dashboardActive.png" />
     <Content Include="icons\icon-dashboardNormal.png" />
     <Content Include="icons\icon-espensesNormal.png" />
+    <Content Include="icons\icon-espensesTitle.png" />
     <Content Include="icons\icon-expensesActive.png" />
     <Content Include="icons\icon-incomesActive.png" />
     <Content Include="icons\icon-IncomesNormal.png" />
@@ -103,6 +113,7 @@
     <Content Include="icons\icon-tagsActive.png" />
     <Content Include="icons\icon-tagsNormal.png" />
     <Content Include="icons\loading.gif" />
+    <Content Include="icons\Logo-sidebar.png" />
     <Content Include="icons\minus-icon.png" />
     <Content Include="icons\plus-icon.png" />
     <Content Include="index.html" />
@@ -118,6 +129,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="libs\charts\angular-chart.js" />
+    <Content Include="libs\charts\Chart.js" />
     <Content Include="libs\ui-bootstrap\ui-bootstrap-tpls-1.1.2.js" />
     <Content Include="web.config" />
   </ItemGroup>

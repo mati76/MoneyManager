@@ -1,0 +1,47 @@
+﻿.modal {
+  text-align: center;
+}
+
+.modal-header {
+    background-color: #09c1f3;
+    color: white;
+}
+
+.modal-body{
+    padding: 20px;
+}
+
+.modal-body p{
+    font-size: 14pt;
+    font-weight: bold;
+    text-align: center;
+}
+
+.message-box-body{
+    font-size: 14pt;
+    min-height: 120px;
+    width: 100%;
+    display: table;
+}
+
+.message-box-body > div{
+    vertical-align: middle;
+}
+
+.message-warning{
+    color: goldenrod;
+}
+
+.message-info{
+    color: darkblue;
+}
+
+.message-error{
+    color: red;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}

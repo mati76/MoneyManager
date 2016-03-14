@@ -32,9 +32,9 @@ namespace MoneyManager.DataAccess.Repositories
             if (criteria.Categories.Count() > 0)
                 qry.Where(o => criteria.Categories.Select(c => c.Id).Contains(o.Id));
             if (criteria.MinAmount.HasValue)
-                qry.Where(o => o.Value >= criteria.MinAmount);
+                qry.Where(o => o.Amount >= criteria.MinAmount);
             if (criteria.MaxAmount.HasValue)
-                qry.Where(o => o.Value <= criteria.MaxAmount);
+                qry.Where(o => o.Amount <= criteria.MaxAmount);
             if(criteria.SortAsc.HasValue)
                 qry.OrderBy(criteria.SortBy, criteria.SortAsc == true ? "ASC" : "DESC");
 

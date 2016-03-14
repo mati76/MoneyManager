@@ -1,10 +1,15 @@
 ﻿.menu-title{
+    background-image: url(/icons/Logo-sidebar.png);
+    background-repeat: no-repeat;
+    background-position: 20px center;
+    background-size: 147px 20px;
     background-color: #272424;
     color: white;
     font: bold 20px arial;
     line-height: 60px;
     text-align: center;
     vertical-align: middle;
+    letter-spacing: 2px;
 }
 
 .main-menu{
