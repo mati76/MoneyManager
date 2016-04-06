@@ -11,7 +11,9 @@ namespace MoneyManager.DataAccess.Models
 
         public int? ParentId { get; set; }
 
-        public Category Parent { get; set; }
+        public virtual Category Parent { get; set; }
+
+        public virtual ICollection<Expense> Expenses { get; set; }
 
         public virtual ICollection<Category> Categories { get; set; }
     }

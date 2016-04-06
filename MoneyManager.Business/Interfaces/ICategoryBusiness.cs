@@ -9,5 +9,6 @@ namespace MoneyManager.Business
         Category GetCategoryById(int id);
         void SaveCategory(Category category);
         void DeleteCategoryById(int id);
+        IEnumerable<Category> GetTopCategories(int count);
     }
 }

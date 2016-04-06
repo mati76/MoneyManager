@@ -1,6 +1,5 @@
 ﻿using MoneyManager.Business;
 using MoneyManager.Business.Models;
-using DTO = MoneyManager.WebApi.DTO;
 using System;
 using System.Collections.Generic;
 
@@ -37,6 +36,11 @@ namespace MoneyManager.WebApi.Services
         public void DeleteCategory(int id)
         {
             _categoryBusiness.DeleteCategoryById(id);
+        }
+
+        public IEnumerable<DTO.CategoryInfo> GetTopFiveCategories()
+        {
+            return _mapperService.Map<IEnumerable<DTO.CategoryInfo>>(_categoryBusiness.GetTopCategories(5));
         }
     }
 }

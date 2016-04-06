@@ -65,6 +65,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\components\category\categoryPicker.html" />
+    <Content Include="app\components\category\categoryPickerController.js" />
     <Content Include="app\components\category\categoryService.js" />
     <Content Include="app\components\category\category.html" />
     <Content Include="app\components\category\category.js" />
@@ -112,7 +114,9 @@
     <Content Include="icons\Icon-reportsNormal2.png" />
     <Content Include="icons\icon-tagsActive.png" />
     <Content Include="icons\icon-tagsNormal.png" />
+    <Content Include="icons\icon-tagsTitle.png" />
     <Content Include="icons\loading.gif" />
+    <Content Include="icons\loading1.gif" />
     <Content Include="icons\Logo-sidebar.png" />
     <Content Include="icons\minus-icon.png" />
     <Content Include="icons\plus-icon.png" />

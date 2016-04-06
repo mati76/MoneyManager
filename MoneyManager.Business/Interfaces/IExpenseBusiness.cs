@@ -13,5 +13,7 @@ namespace MoneyManager.Business.Interfaces
         IEnumerable<Expense> GetExpenses(DateTime date);
 
         IEnumerable<Expense> GetExpenses(ExpenseCriteria criteria);
+
+        void SaveExpense(Expense expense);
     }
 }

@@ -34,35 +34,32 @@
                     </div>
                 </div>
                 <label>Category:</label>
-                <div class="container-fluid">
+                <div id="expenseCategories" class="container-fluid">
                     <div class="row">
-                        <div class="col-md-2" style="padding: 0">
-                            <button class="btn btn-primary" style="width: 100%">Spożywcze</button>
+                        <div class="col-md-2" ng-repeat="category in topCategories">
+                            <button type="button" class="btn btn-primary" ng-class="{selected: isSelected(category.Id)}" ng-click="selectCategory(category.Id)">
+                                <span ng-show="isSelected(category.Id)" style="float: left" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                {{category.Name}}
+                            </button>
                         </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-default" style="width: 100%">Rozrywka</button>
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-warning" style="width: 100%">Paliwo</button>
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-primary" style="width: 100%">Chemia</button>
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-default" style="width: 100%">Dom</button>
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-primary" style="width: 100%">Other</button>
+                        <div class="col-md-2 btn-group" uib-dropdown>
+                            <button type="button" class="btn btn-primary dropdown-toggle" ng-class="{selected: isOtherCategorySelected}" ng-click="categoryPopup()">
+                                {{ categoryToggleBtnText }}
+                                <span ng-show="isOtherCategorySelected" style="float: left" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                <span ng-hide="loadingCategories" class="caret" style="float: right; margin-top: 10px"></span>
+                                <img ng-show="loadingCategories" src="../../../icons/loading1.gif" width="20" height="20" style="float: right"/>
+                            </button>
                         </div>
                     </div>
                 </div>
+                <br/>
+                <div ng-messages="expenseForm.amount.$error" ng-if="expenseForm.amount.$dirty" >
+                    <div class="alert alert-warning" role="alert" ng-message="required">Please enter an amount</div>
+                </div>
+                <div ng-messages="expenseForm.date.$error" ng-if="expenseForm.date.$dirty" style="color:maroon" role="alert">
+                    <div class="alert alert-warning" role="alert" ng-message="required">Please enter a valid date</div>
+                </div>
             </form>
-        </div>
-        <div ng-messages="expenseForm.amount.$error" ng-if="expenseForm.amount.$dirty" style="color:maroon" role="alert">
-            <div ng-message="required">Please enter an amount</div>
-        </div>
-        <div ng-messages="expenseForm.date.$error" ng-if="expenseForm.date.$dirty" style="color:maroon" role="alert">
-            <div ng-message="required">Please enter a valid date</div>
         </div>
     </div>
     <div class="modal-footer">

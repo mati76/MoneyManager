@@ -39,14 +39,7 @@ namespace MoneyManager.Business
             using (var session = _unitOfWorkFactory.GetSession())
             {
                 var repository = session.GetRepository<ICategoryRepository>();
-                if(category.Id > 0)
-                {
-                    repository.Update(category);
-                }
-                else
-                {
-                    repository.Add(category);
-                }
+                repository.AddOrUpdate(category);
                 session.Save();
             }
         }
@@ -58,6 +51,14 @@ namespace MoneyManager.Business
                 var repo = session.GetRepository<ICategoryRepository>();
                 repo.DeleteByParentId(id);
                 repo.DeleteById(id);
+            }
+        }
+
+        public IEnumerable<Category> GetTopCategories(int count)
+        {
+            using (var session = _unitOfWorkFactory.GetSession())
+            {
+                return session.GetRepository<ICategoryRepository>().GetTopCategories(count);
             }
         }
     }

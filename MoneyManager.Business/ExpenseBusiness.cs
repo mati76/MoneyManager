@@ -56,5 +56,15 @@ namespace MoneyManager.Business
                 session.GetRepository<IExpenseRepository>().Delete(expense);
             }
         }
+
+        public void SaveExpense(Expense expense)
+        {
+            using (var session =_unitOfWorkFactory.GetSession())
+            {
+                var repository = session.GetRepository<IExpenseRepository>();
+                repository.AddOrUpdate(expense);
+                session.Save();
+            }
+        }
     }
 }

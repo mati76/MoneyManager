@@ -8,5 +8,7 @@ namespace MoneyManager.Business.Repository
         ICollection<Category> GetParentCategories();
 
         void DeleteByParentId(int parentId);
+
+        ICollection<Category> GetTopCategories(int count);
     }
 }

@@ -10,6 +10,8 @@ namespace MoneyManager.DataAccess.Models
 
         public string Comment { get; set; }
 
+        public int CategoryId { get; set; }
+
         public virtual Category Category { get; set; }
     }
 }

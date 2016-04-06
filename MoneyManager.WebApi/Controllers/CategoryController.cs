@@ -39,6 +39,11 @@ namespace MoneyManager.WebApi.Controllers
             _categoryService.DeleteCategory(id);
         }
 
+        [Route("api/category/top")]
+        public IEnumerable<CategoryInfo> GetTopFive()
+        {
+            return _categoryService.GetTopFiveCategories();
+        }
         /*
 
         Categories:

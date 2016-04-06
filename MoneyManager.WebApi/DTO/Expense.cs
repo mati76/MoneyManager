@@ -10,6 +10,6 @@ namespace MoneyManager.WebApi.DTO
 
         public string Comment { get; set; }
 
-        public virtual Category Category { get; set; }
+        public CategoryInfo Category { get; set; }
     }
 }

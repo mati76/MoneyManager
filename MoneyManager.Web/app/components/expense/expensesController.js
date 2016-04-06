@@ -1,7 +1,8 @@
 ﻿angular.module('moneyManager.expense').controller('expensesController', ['$scope', '$uibModal', function ($scope, $uibModal) {
 
     $scope.$parent.pageName = "EXPENSES";
-    $scope.$parent.addBtnClass = "title-bar-expense";
+    $scope.$parent.titleBarClass = "title-bar-expense";
+    $scope.$parent.btnAddCaption = "Add Expense";
     $scope.$parent.addFunc = function () {
         expensePopup('add');
     };
@@ -9,6 +10,7 @@
     function expensePopup(mode, expense) {
         var modalInstance = $uibModal.open({
             animation: true,
+            size: 'lg',
             templateUrl: '/app/components/expense/expense.html',
             controller: 'expenseController',
             resolve: {
@@ -25,8 +27,6 @@
         maintainAspectRatio: true,
         responsive: false
     };
-
-    
 
     $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
     $scope.data = [300, 500, 100];

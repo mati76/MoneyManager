@@ -4,7 +4,8 @@
     return {
         getCategories: getCategories,
         saveCategory: saveCategory,
-        removeCategory: removeCategory
+        removeCategory: removeCategory,
+        getTopCategories: getTopCategories
     };
 
     //function httpPost(url, data) {
@@ -28,5 +29,9 @@
 
     function removeCategory(categoryId) {
         return $http.delete(uri + '/' + categoryId);
+    }
+
+    function getTopCategories() {
+        return $http.get(uri + '/top');
     }
 }]);

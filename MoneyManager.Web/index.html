@@ -28,6 +28,7 @@
 
     <script src="app/components/category/category.js"></script>
     <script src="app/components/category/categoryService.js"></script>
+    <script src="app/components/category/categoryPickerController.js"></script>
     <script src="app/components/category/categoriesController.js"></script>
     <script src="app/components/category/categoryController.js"></script>
     <script src="app/components/expense/expense.js"></script>
@@ -67,10 +68,10 @@
                 </div>
                 <div class="display-table-row">
                     <div class="display-table-cell title-bar">
-                        <span class="title-bar" ng-bind="pageName" ng-class="addBtnClass"></span>
+                        <span class="title-bar" ng-bind="pageName" ng-class="titleBarClass"></span>
                         <div class="btn-group" uib-dropdown style="float: right; margin-right: 15px">
                             <button class="mid-font btn btn-default float-right" ng-click="addFunc()">
-                                Add Expense
+                                {{ btnAddCaption }}
                                 <span class="glyphicon glyphicon-plus-sign"></span>
                             </button>
                         </div>

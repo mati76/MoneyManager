@@ -21,6 +21,13 @@ namespace MoneyManager.DataAccess.Repositories
             return _mapperService.Map<ICollection<Category>>(_dbset.Where(c => c.Parent == null));
         }
 
+        public ICollection<Category> GetTopCategories(int count)
+        {
+            return _mapperService.Map<ICollection<Category>>(_dbset.Where(c => c.ParentId > 0)
+                .Select(c => new { Category = c, ExpenseItems = c.Expenses.Count() })
+                .OrderByDescending(c => c.ExpenseItems).Select(c => c.Category).Take(count));
+        }
+
         public void DeleteByParentId(int parentId)
         {
             _dbset.Where(c => c.Parent != null && c.Parent.Id == parentId).Delete();

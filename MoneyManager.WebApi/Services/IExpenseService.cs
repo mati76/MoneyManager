@@ -14,6 +14,6 @@ namespace MoneyManager.WebApi.Services
 
         Expense GetExpense(int id);
 
-
+        void SaveExpense(Expense expense);
     }
 }

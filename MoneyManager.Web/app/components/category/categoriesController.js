@@ -1,6 +1,11 @@
 ﻿angular.module('moneyManager.category').controller('categoriesController', ['$scope', '$uibModal', 'categoryService', 'messageBoxService', function ($scope, $uibModal, categoryService, messageBoxService) {
    
     $scope.$parent.pageName = "CATEGORIES";
+    $scope.$parent.titleBarClass = "title-bar-category";
+    $scope.$parent.btnAddCaption = "Add Category";
+    $scope.$parent.addFunc = function () {
+        $scope.addCategory();
+    };
     
     $scope.addCategory = function (parentCategoryId) {
         openDialog('add', parentCategoryId);

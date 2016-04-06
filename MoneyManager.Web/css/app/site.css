@@ -29,10 +29,14 @@ span.title-bar-expense{
     background-image: url('../../icons/icon-espensesTitle.png');
 }
 
+span.title-bar-category{
+    background-image: url('../../icons/icon-tagsTitle.png');
+}
+
 .widget{
     border: solid 1px #d5d6d7;
     margin: 20px;
-    border-radius: 5px;
+    border-radius: 5;
     background-color: white;
     box-sizing: border-box;
     height: auto;
@@ -115,8 +119,18 @@ ul.list > li.list-item{
   background-color: transparent;
 }
 
+span.loading{
+    background-image: url(../../icons/loading1.gif);
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+}
+
 #categories > button{
     margin-right: 20px;
+}
+
+#categories .btn.full-width{
+    margin-top: 10px;
 }
 
 #categories .display-table{
@@ -166,6 +180,22 @@ p.summary-value{
 
 p.expense-value{
     color: #e64b30;
+}
+
+#expenseCategories .col-md-2{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#expenseCategories .btn{
+    width: 100%;
+}
+
+.btn.selected{
+    background: -moz-linear-gradient(top, #87e0fd 0%, #53cbf1 40%, #05abe0 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    color: white;
 }
 
 

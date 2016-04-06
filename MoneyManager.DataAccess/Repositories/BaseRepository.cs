@@ -58,6 +58,18 @@ namespace MoneyManager.DataAccess.Repositories
             _dbContext.Entry(entity).Property(e => e.AddUserName).IsModified = false;
         }
 
+        public virtual void AddOrUpdate(TBLL o)
+        {
+            if(o.Id > 0)
+            {
+                Update(o);
+            }
+            else
+            {
+                Add(o);
+            }
+        }
+
         public virtual TBLL GetById(int id)
         {
             return _mapperService.Map<TBLL>(_dbset.Find(id));

@@ -48,6 +48,7 @@ namespace MoneyManager.WebApi.Controllers
 
         public void Post([FromBody]Expense expense)
         {
+            _expenseService.SaveExpense(expense);
         }
         
         public void Delete(int id)

@@ -40,5 +40,7 @@ namespace MoneyManager.DataAccess.Repositories
 
             return _mapperService.Map<IEnumerable<Expense>>(qry);
         }
+
+        
     }
 }

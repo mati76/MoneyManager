@@ -1,0 +1,24 @@
+﻿<div id="categories">
+    <div class="display-table full-width full-height">
+        <div ng-repeat="row in categoryRows" class="display-table-row">
+            <div ng-repeat="category in row" class="panel panel-default display-table-cell">
+                <div class="mid-font panel-heading">
+                    {{ category.Name }}
+                </div>
+                <div class="panel-body">
+                    <button type="button" class="btn btn-primary full-width" ng-repeat="c in category.Categories" ng-click="select(c)">
+                        {{ c.Name }}
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" type="button" ng-click="close()">Cancel</button>
+    </div>
+</div>
+
+
+
+

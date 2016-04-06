@@ -9,6 +9,7 @@ namespace MoneyManager.Business.Repository
         void Delete(T entity);
         void DeleteById(int id);
         void Update(T entity);
+        void AddOrUpdate(T entity);
         T GetById(int id);
         IEnumerable<T> GetAll(); 
     }

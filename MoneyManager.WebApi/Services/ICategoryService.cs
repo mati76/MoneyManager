@@ -9,5 +9,6 @@ namespace MoneyManager.WebApi.Services
         Category GetCategory(int id);
         void SaveCategory(Category category);
         void DeleteCategory(int id);
+        IEnumerable<CategoryInfo> GetTopFiveCategories();
     }
 }
