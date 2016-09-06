@@ -40,6 +40,12 @@ namespace MoneyManager.WebApi.Controllers
             return _expenseService.GetExpenses(date);
         }
 
+        [Route("totals/{date:datetime}")]
+        public ExpenseTotals GetTotals(DateTime date)
+        {
+            return _expenseService.GetExpenseTotals(date);
+        }
+
         [Route("{year:int:min(1900)}/{month:int:range(1,12)}")]
         public IEnumerable<Expense> GetByDate(int year, int month)
         {

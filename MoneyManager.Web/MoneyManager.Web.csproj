@@ -21,7 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
-    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -88,11 +88,17 @@
     <Content Include="app\components\login\loginController.js" />
     <Content Include="app\moneyManagerController.js" />
     <Content Include="app\shared\directives.js" />
+    <Content Include="app\shared\eventAggregator.js" />
+    <Content Include="app\shared\helperService.js" />
     <Content Include="app\shared\messageBox\messageBox.html" />
     <Content Include="app\shared\messageBox\messageBoxController.js" />
     <Content Include="app\shared\messageBox\messageBoxService.js" />
     <Content Include="app\shared\shared.js" />
     <Content Include="configuration\configuration.js" />
+    <Content Include="css\ag-grid\ag-grid.css" />
+    <Content Include="css\ag-grid\theme-blue.css" />
+    <Content Include="css\ag-grid\theme-dark.css" />
+    <Content Include="css\ag-grid\theme-fresh.css" />
     <Content Include="css\angular-chart.css" />
     <Content Include="css\app\core.css" />
     <Content Include="css\app\modal.css" />
@@ -124,6 +130,7 @@
     <Content Include="app\moneyManger.js" />
     <Content Include="app\router.js" />
     <Content Include="css\bootstrap\css\bootstrap.css" />
+    <Content Include="libs\ag-grid\ag-grid.js" />
     <Content Include="libs\angular\angular-animate.js" />
     <Content Include="libs\angular\angular-messages.js" />
     <Content Include="libs\angular\angular-ui-router.js" />

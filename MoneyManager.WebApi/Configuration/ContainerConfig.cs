@@ -1,5 +1,5 @@
 ﻿using Microsoft.Practices.Unity;
-using MoneyManager.DataAccess;
+using MoneyManager.DataAccess.EF;
 using MoneyManager.DataAccess.Infrastructure;
 using MoneyManager.DataAccess.Repositories;
 using MoneyManager.Business.Repository;
@@ -8,6 +8,7 @@ using MoneyManager.WebApi.Controllers;
 using MoneyManager.WebApi.Services;
 using MoneyManager.Business;
 using MoneyManager.Business.Interfaces;
+using MoneyManager.Business.Utilities;
 
 namespace MoneyManager.WebApi.Configuration
 {
@@ -46,6 +47,7 @@ namespace MoneyManager.WebApi.Configuration
             container.RegisterType<IIncomeBusiness, IncomeBusiness>();
             container.RegisterType<IUnitOfWorkFactory, UnitOfWorkFactory>();
             container.RegisterType<IUnitOfWork, UnitOfWork>();
+            container.RegisterType<IDateHelper, DateHelper>();
         }
     }
 }

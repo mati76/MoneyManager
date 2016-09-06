@@ -72,10 +72,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbContext.cs" />
-    <Compile Include="Mappings\CategoryConfig.cs" />
-    <Compile Include="Mappings\IncomeConfig.cs" />
-    <Compile Include="Mappings\ExpenseConfig.cs" />
+    <Compile Include="EF\DbContext.cs" />
+    <Compile Include="EF\DbInitializer.cs" />
+    <Compile Include="EF\Mappings\CategoryConfig.cs" />
+    <Compile Include="EF\Mappings\IncomeConfig.cs" />
+    <Compile Include="EF\Mappings\ExpenseConfig.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Expense.cs" />

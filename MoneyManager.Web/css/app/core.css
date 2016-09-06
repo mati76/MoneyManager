@@ -50,6 +50,11 @@ ul{
     font-size: 24px !important;
 }
 
+.semi-bold {
+    font-weight: 600;
+    font-style: normal;
+}
+
 .float-left{
     float: left;
 }

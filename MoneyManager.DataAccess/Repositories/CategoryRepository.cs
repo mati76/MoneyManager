@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Data.Entity;
 using EntityFramework.Extensions;
 using MoneyManager.Business.Repository;
 using MoneyManager.Business.Models;
@@ -18,7 +19,7 @@ namespace MoneyManager.DataAccess.Repositories
 
         public ICollection<Category> GetParentCategories()
         {
-            return _mapperService.Map<ICollection<Category>>(_dbset.Where(c => c.Parent == null));
+            return _mapperService.Map<ICollection<Category>>(_dbset.Where(c => c.Parent == null).Include(c => c.Categories));
         }
 
         public ICollection<Category> GetTopCategories(int count)

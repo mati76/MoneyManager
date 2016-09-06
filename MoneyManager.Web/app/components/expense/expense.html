@@ -52,12 +52,16 @@
                         </div>
                     </div>
                 </div>
+                <input name="category" type="hidden" required ng-model="model.Category" />
                 <br/>
                 <div ng-messages="expenseForm.amount.$error" ng-if="expenseForm.amount.$dirty" >
                     <div class="alert alert-warning" role="alert" ng-message="required">Please enter an amount</div>
                 </div>
                 <div ng-messages="expenseForm.date.$error" ng-if="expenseForm.date.$dirty" style="color:maroon" role="alert">
                     <div class="alert alert-warning" role="alert" ng-message="required">Please enter a valid date</div>
+                </div>
+                <div ng-messages="expenseForm.category.$error" ng-if="expenseForm.category.$dirty" style="color:maroon" role="alert">
+                    <div class="alert alert-warning" role="alert" ng-message="required">Please select category</div>
                 </div>
             </form>
         </div>

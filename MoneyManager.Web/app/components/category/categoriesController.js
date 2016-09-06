@@ -1,4 +1,4 @@
-﻿angular.module('moneyManager.category').controller('categoriesController', ['$scope', '$uibModal', 'categoryService', 'messageBoxService', function ($scope, $uibModal, categoryService, messageBoxService) {
+﻿angular.module('moneyManager.category').controller('categoriesController', ['$scope', '$uibModal', 'categoryService', 'messageBoxService', 'eventAggregatorService', function ($scope, $uibModal, categoryService, messageBoxService, eventAggregatorService) {
    
     $scope.$parent.pageName = "CATEGORIES";
     $scope.$parent.titleBarClass = "title-bar-category";
@@ -47,7 +47,7 @@
     };
 
     function reload() {
-        $scope.$parent.isLoading = true;
+        eventAggregatorService.publishEvent(eventAggregatorService.eventNames.loadingStarted)
         categoryService.getCategories().then(function (result) {
             var categories = result.data;
 
@@ -58,10 +58,10 @@
                 }
                 $scope.categoryRows[$scope.categoryRows.length - 1].push(categories[i]);
             }
-            $scope.$parent.isLoading = false;
+            eventAggregatorService.publishEvent(eventAggregatorService.eventNames.loadingFinished)
         }),
         function (error) {
-            $scope.$parent.isLoading = false;
+            eventAggregatorService.publishEvent(eventAggregatorService.eventNames.loadingFinished)
         }
     }
 

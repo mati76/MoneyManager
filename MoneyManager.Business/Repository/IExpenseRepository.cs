@@ -11,5 +11,7 @@ namespace MoneyManager.Business.Repository
         IEnumerable<Expense> GetExpenses(DateTime date);
 
         IEnumerable<Expense> GetExpensesByCriteria(ExpenseCriteria criteria);
+
+        decimal GetExpenseTotalsFromDates(DateTime from, DateTime to);
     }
 }

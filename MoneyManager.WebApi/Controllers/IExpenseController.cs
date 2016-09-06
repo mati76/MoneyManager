@@ -1,5 +1,4 @@
-﻿using MoneyManager.WebApi.Services;
-using MoneyManager.WebApi.DTO;
+﻿using MoneyManager.WebApi.DTO;
 using System;
 using System.Collections.Generic;
 
@@ -13,10 +12,12 @@ namespace MoneyManager.WebApi.Controllers
 
         IEnumerable<Expense> GetByDate(DateTime date);
 
+        ExpenseTotals GetTotals(DateTime date);
+
         IEnumerable<Expense> GetByDate(int year, int month);
 
         void Post(Expense expense);
 
         void Delete(int id);
-        }
+    }
 }

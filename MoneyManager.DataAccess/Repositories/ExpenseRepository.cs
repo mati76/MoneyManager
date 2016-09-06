@@ -29,18 +29,23 @@ namespace MoneyManager.DataAccess.Repositories
         {
             var qry = _dbset.Where(e => e.Date >= criteria.DateFrom && e.Date <= criteria.DateTo);
 
-            if (criteria.Categories.Count() > 0)
-                qry.Where(o => criteria.Categories.Select(c => c.Id).Contains(o.Id));
+            if (criteria.Categories.Any())
+                qry = qry.Where(o => criteria.Categories.Select(c => c.Id).Contains(o.Id));
             if (criteria.MinAmount.HasValue)
-                qry.Where(o => o.Amount >= criteria.MinAmount);
+                qry = qry.Where(o => o.Amount >= criteria.MinAmount);
             if (criteria.MaxAmount.HasValue)
-                qry.Where(o => o.Amount <= criteria.MaxAmount);
-            if(criteria.SortAsc.HasValue)
-                qry.OrderBy(criteria.SortBy, criteria.SortAsc == true ? "ASC" : "DESC");
+                qry = qry.Where(o => o.Amount <= criteria.MaxAmount);
+            if(!string.IsNullOrEmpty(criteria.SortBy))
+                qry = qry.OrderBy(criteria.SortBy, criteria.SortAsc == true ? "ASC" : "DESC");
+            if(criteria.CurrentPage.HasValue)
+                qry = qry.Skip(criteria.CurrentPage.Value * criteria.PageSize).Take(criteria.PageSize);
 
             return _mapperService.Map<IEnumerable<Expense>>(qry);
         }
 
-        
+        public decimal GetExpenseTotalsFromDates(DateTime from, DateTime to)
+        {
+            return _dbset.Where(e => e.Date >= from && e.Date <= to).Select(e => e.Amount).DefaultIfEmpty(0).Sum();
+        }
     }
 }

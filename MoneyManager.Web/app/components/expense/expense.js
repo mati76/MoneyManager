@@ -1,1 +1,1 @@
-﻿angular.module('moneyManager.expense', []);
+﻿angular.module('moneyManager.expense', ['moneyManager.shared', 'agGrid']);

@@ -26,5 +26,9 @@ namespace MoneyManager.Business.Models
         public decimal? MinAmount { get; set; }
 
         public decimal? MaxAmount { get; set; }
+
+        public int? CurrentPage { get; set; }
+
+        public int PageSize { get; set; } = 50;
     }
 }

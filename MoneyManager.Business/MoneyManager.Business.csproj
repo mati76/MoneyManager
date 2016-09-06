@@ -50,6 +50,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Expense.cs" />
     <Compile Include="Models\ExpenseCriteria.cs" />
+    <Compile Include="Models\ExpenseTotals.cs" />
     <Compile Include="Models\Income.cs" />
     <Compile Include="Repository\ICategoryRepository.cs" />
     <Compile Include="Repository\IExpenseRepository.cs" />
@@ -58,6 +59,8 @@
     <Compile Include="Repository\IUnitOfWork.cs" />
     <Compile Include="Repository\IUnitOfWorkFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\DateHelper.cs" />
+    <Compile Include="Utilities\IDateHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -150,6 +150,7 @@
     <Compile Include="Controllers\ICategoryController.cs" />
     <Compile Include="Controllers\IExpenseController.cs" />
     <Compile Include="DTO\CategoryInfo.cs" />
+    <Compile Include="DTO\ExpenseTotals.cs" />
     <Compile Include="program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BaseService.cs" />

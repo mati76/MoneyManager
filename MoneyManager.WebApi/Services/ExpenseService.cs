@@ -43,5 +43,10 @@ namespace MoneyManager.WebApi.Services
         {
             _expenseBusiness.SaveExpense(_mapperService.Map<Expense>(expense));
         }
+
+        public DTO.ExpenseTotals GetExpenseTotals(DateTime currentDate)
+        {
+            return _mapperService.Map<DTO.ExpenseTotals>(_expenseBusiness.GetExpenseTotals(currentDate));
+        }
     }
 }

@@ -5,11 +5,12 @@
     background-size: 147px 20px;
     background-color: #272424;
     color: white;
-    font: bold 20px arial;
+    font: bold 24px arial;
     line-height: 60px;
     text-align: center;
     vertical-align: middle;
     letter-spacing: 2px;
+    padding-left: 20px;
 }
 
 .main-menu{
@@ -22,14 +23,14 @@
     padding-left:0;
     width: 100%;
     margin: 0;
-    width: 250px;
+    width: 220px;
 }
 
 .main-menu ul > li{
-    height: 50px;
+    height: 70px;
     color: grey;
     font: 18px arial;
-    line-height: 50px;
+    line-height: 70px;
     vertical-align: central;
     background-color: #282E33;
     background-repeat: no-repeat;

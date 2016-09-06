@@ -10,12 +10,12 @@
 div.title-bar{
     background-color: white;
     line-height: 70px;
-    
+    padding-top: 10px;
     height: 70px;
     box-sizing: border-box;
     vertical-align: middle;
     color: #09c1f3;
-    font: 24px arial;
+    font: 28px arial;
 }
 
 span.title-bar{
@@ -168,14 +168,13 @@ span.loading{
 }
 
 p.summary-label{
-    font-size: 13pt;
-    font-weight: bold;
+    font-size: 15px;
     color: #606472;
     margin-bottom: 0 !important;
 }
 
 p.summary-value{
-    font-size: 18pt;
+    font-size: 22px;
 }
 
 p.expense-value{
@@ -191,11 +190,53 @@ p.expense-value{
     width: 100%;
 }
 
+#expenseSummary {
+    height: 80px;
+    text-align: center;
+    font-family: inherit;
+}
+
 .btn.selected{
     background: -moz-linear-gradient(top, #87e0fd 0%, #53cbf1 40%, #05abe0 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(top, #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom, #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     color: white;
+}
+
+#expenseGrid .ag-header {
+    background: inherit;
+    background-color: white;
+    border-bottom: 0;
+}
+
+#expenseGrid .ag-root,
+#expenseGrid .ag-fresh,
+#expenseGrid .ag-header-cell,
+#expenseGrid .ag-cell{
+    border: 0;
+    border-top: solid 1px darkgray;
+}
+
+#expenseGrid .ag-header-cell{
+    font-size: 16px;
+    font-weight: bold;
+    height: 60px;
+    padding-top: 5px;
+    vertical-align: middle;
+}
+
+#expenseGrid .ag-header-row,
+#expenseGrid .ag-header-cell,
+#expenseGrid .ag-header{
+    height: 60px !important;
+}
+
+.ag-body{
+    padding-top: 60px !important;
+}
+
+.ag-row-odd{
+    background-color: white !important;
 }
 
 
