@@ -6,6 +6,15 @@
         edit: 'Edit '
     };
 
+    $scope.showAllCategories = false;
+    $scope.format = 'dd.MM.yyyy';
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        maxDate: new Date(2020, 5, 22),
+        minDate: new Date(),
+        startingDay: 1
+    };
+
     $scope.model = {
         Amount: '',
         Date: new Date(),
@@ -18,15 +27,15 @@
     $scope.isOtherCategorySelected = false;
     
     $scope.isSelected = function (categoryId) {
-        return $scope.model.Category != null &&
-            $scope.model.Category.Id == categoryId && !$scope.isOtherCategorySelected;
+        return $scope.model.CategoryId != null &&
+            $scope.model.CategoryId == categoryId && !$scope.isOtherCategorySelected;
     };
 
     $scope.selectCategory = function (categoryId) {
         var isCategorySelected = false;
         $scope.topCategories.forEach(function(category){
             if(category.Id == categoryId){
-                $scope.model.Category = category;
+                $scope.model.CategoryId = category.Id;
                 isCategorySelected = true;
             }
         });
@@ -48,7 +57,7 @@
 
         modalInstance.result.then(function (category) {
             if (!$scope.selectCategory(category.Id)) {
-                $scope.model.Category = category;
+                $scope.model.CategoryId = category.Id;
                 $scope.categoryToggleBtnText = category.Name;
                 $scope.isOtherCategorySelected = true;
             }
@@ -77,7 +86,14 @@
 
     $scope.save = function () {
         if ($scope.expenseForm.$valid) {
-            expenseService.saveExpense($scope.model).then(function (result) {
+            var expense = {
+                Amount: $scope.model.Amount,
+                Comment: $scope.model.Comment,
+                Date: new Date($scope.model.Date),
+                Id: $scope.model.Id,
+                Category: { Id: $scope.model.CategoryId }
+            };
+            expenseService.saveExpense(expense).then(function (result) {
                 $uibModalInstance.close();
             }, function (error) {
                 //handle error
@@ -104,19 +120,12 @@
         } else {
             $scope.model.Amount = params.expense.Amount;
             $scope.model.Comment = params.expense.Comment;
-            $scope.model.Date = params.expense.Date;
+            $scope.model.Date = Date.parse(params.expense.Date);
             $scope.model.Id = params.expense.Id;
+            $scope.model.CategoryId = params.expense.Category.Id;
         }
     })();
 
-    $scope.showAllCategories = false;
-    $scope.format = 'dd.MM.yyyy';
-    $scope.dateOptions = {
-        formatYear: 'yy',
-        maxDate: new Date(2020, 5, 22),
-        minDate: new Date(),
-        startingDay: 1
-    };
     $scope.pickerPopup = {
         opened: false
     };

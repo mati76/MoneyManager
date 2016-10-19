@@ -45,3 +45,8 @@
   text-align: left;
   vertical-align: middle;
 }
+
+.expence-modal .modal-dialog {
+    width: 60%;
+    min-width: 800px !important;
+}

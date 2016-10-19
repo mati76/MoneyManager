@@ -3,13 +3,22 @@
 
     return {
         getExpense: getExpense,
+        getExpenses: getExpenses,
         getExpenseTotals, getExpenseTotals,
         saveExpense: saveExpense,
         removeExpense: removeExpense
     };
 
     function getExpense(id) {
-        return $http.get(uri);
+        return $http.get(uri + '/' + id);
+    }
+
+    function getExpenses() {
+        return $http.get(uri + '/' + $filter('date')(new Date(), 'yyyy-MM-dd'));
+    }
+
+    function getExpenses(criteria) {
+        return $http.get(uri, { params: criteria });
     }
 
     function saveExpense(expense) {
@@ -21,6 +30,6 @@
     }
 
     function getExpenseTotals() {
-        return $http.get(uri + '/totals/' + $filter('date')(new Date(), 'yyyy-MM-dd'))
+        return $http.get(uri + '/totals/' + $filter('date')(new Date(), 'yyyy-MM-dd'));
     }
 }]);

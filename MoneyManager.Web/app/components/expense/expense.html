@@ -1,6 +1,7 @@
 ﻿<div id="editExpense">
     <div class="modal-header">
         <h3 class="modal-title">ADD EXPENSE</h3>
+        {{ model.Date | date:'fullDate'}}
     </div>
     <div class="modal-body">
         <div class="container-fluid">
@@ -52,7 +53,7 @@
                         </div>
                     </div>
                 </div>
-                <input name="category" type="hidden" required ng-model="model.Category" />
+                <input name="category" type="hidden" required ng-model="model.CategoryId" />
                 <br/>
                 <div ng-messages="expenseForm.amount.$error" ng-if="expenseForm.amount.$dirty" >
                     <div class="alert alert-warning" role="alert" ng-message="required">Please enter an amount</div>
@@ -67,7 +68,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-disabled="expenseForm.$invalid" ng-click="save()">Ok</button>
+        <button class="btn btn-primary" type="button" ng-click="save()">Ok</button>
         <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
     </div>
 </div>

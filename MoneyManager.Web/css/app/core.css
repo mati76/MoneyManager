@@ -1,11 +1,21 @@
-﻿html {
+﻿@font-face {
+  font-family: 'MyWebFont';
+  src:  url('../../fonts/proximasansregular.ttf') format('truetype')
+}
+
+html {
     padding: 0;
-    height: 100%;
+    height: 100% !important;
 }
 
 body {
     margin: 0;
-    height: 100%;
+    position: relative;
+    height: auto;
+    min-height: 100% !important;
+    font-family: 'MyWebFont', Fallback, serif !important;
+    font-weight:normal;
+    font-style:normal
 }
 
 .display-table{
@@ -61,4 +71,20 @@ ul{
 
 .float-right{
     float: right;
+}
+
+.cursor-hand{
+    cursor: pointer;
+}
+
+.align-left{
+    text-align: left;
+}
+
+.align-right{
+    text-align: right;
+}
+
+.align-center{
+    text-align: center;
 }

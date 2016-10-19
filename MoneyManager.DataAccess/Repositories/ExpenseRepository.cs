@@ -17,7 +17,7 @@ namespace MoneyManager.DataAccess.Repositories
 
         public IEnumerable<Expense> GetExpenses(DateTime date)
         {
-            return _mapperService.Map<IEnumerable<Expense>>(_dbset.Where(o => DbFunctions.TruncateTime(o.Date) == date));
+            return _mapperService.Map<IEnumerable<Expense>>(_dbset.Where(o => DbFunctions.TruncateTime(o.Date) == date).Include(o => o.Category));
         }
 
         public IEnumerable<Expense> GetExpenses(int year, int month)
@@ -27,7 +27,8 @@ namespace MoneyManager.DataAccess.Repositories
 
         public IEnumerable<Expense> GetExpensesByCriteria(ExpenseCriteria criteria)
         {
-            var qry = _dbset.Where(e => e.Date >= criteria.DateFrom && e.Date <= criteria.DateTo);
+            var qry = _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(criteria.DateFrom)
+                && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(criteria.DateTo));
 
             if (criteria.Categories.Any())
                 qry = qry.Where(o => criteria.Categories.Select(c => c.Id).Contains(o.Id));
@@ -36,11 +37,11 @@ namespace MoneyManager.DataAccess.Repositories
             if (criteria.MaxAmount.HasValue)
                 qry = qry.Where(o => o.Amount <= criteria.MaxAmount);
             if(!string.IsNullOrEmpty(criteria.SortBy))
-                qry = qry.OrderBy(criteria.SortBy, criteria.SortAsc == true ? "ASC" : "DESC");
+                qry = qry.OrderBy(criteria.SortBy + (criteria.SortAsc == true ? " ascending" : " descending"));
             if(criteria.CurrentPage.HasValue)
                 qry = qry.Skip(criteria.CurrentPage.Value * criteria.PageSize).Take(criteria.PageSize);
 
-            return _mapperService.Map<IEnumerable<Expense>>(qry);
+            return _mapperService.Map<IEnumerable<Expense>>(qry.Include(e => e.Category));
         }
 
         public decimal GetExpenseTotalsFromDates(DateTime from, DateTime to)

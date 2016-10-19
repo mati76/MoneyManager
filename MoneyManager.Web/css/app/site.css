@@ -91,6 +91,13 @@ ul.list > li.list-item{
     border-radius: 5px;
 }
 
+.btn.selected{
+    background: -moz-linear-gradient(top, #87e0fd 0%, #53cbf1 40%, #05abe0 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    color: white;
+}
+
 @media screen and (min-width: 768px) { 
   .modal:before {
     display: inline-block;
@@ -103,20 +110,32 @@ ul.list > li.list-item{
 .loading-panel{
     position: absolute;
     width:100%;
-    height:100%;
-    background-color: black;
+    height: 100%;
+    display: block;
+    overflow:auto;
     opacity: 0.4;
     z-index: 100;
 }
 
+.loading-panel-black{
+    background-color: black;
+}
+
 .loading-panel img {
-  width: 150px;
-  height: 150px;
   overflow: auto;
   margin: auto;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
   background-color: transparent;
+}
+
+p.nothing-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #09c1f3;
+  font-size: 22px;
 }
 
 span.loading{
@@ -196,13 +215,6 @@ p.expense-value{
     font-family: inherit;
 }
 
-.btn.selected{
-    background: -moz-linear-gradient(top, #87e0fd 0%, #53cbf1 40%, #05abe0 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    color: white;
-}
-
 #expenseGrid .ag-header {
     background: inherit;
     background-color: white;
@@ -239,7 +251,135 @@ p.expense-value{
     background-color: white !important;
 }
 
+tr.grid-row-expanded{
+    background-color: #fafafa;
+}
 
+div.grid-buttons{
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+    float: right; 
+    margin-right: 60px
+}
+
+tr.grid-row{
+    border-top: solid 1px #ddd; 
+    color: #4c4c4c;
+    height: 40px;
+}
+
+tr.grid-row td
+tr.grid-row th{
+    padding-right: 25px;
+}
+
+tr.grid-header{
+    line-height: 50px; 
+    height: 50px; 
+    vertical-align: middle; 
+    font-weight:bolder !important;
+    background-color: #FAFAFA;
+}
+
+div.check-box{
+    text-align: center; 
+    line-height: 20px; 
+    vertical-align: middle;
+    width: 20px; 
+    height: 20px; 
+    border: solid 1px #ddd;
+    color: #0094ff; 
+    float: left
+}
+
+button.grid-btn{
+    background-color: gray;
+    border-radius: 0 !important;
+    color: whitesmoke;
+    height: 32px;
+    min-width: 150px;
+    border: solid 1px gray;
+    font-weight: normal;
+    margin-left: 20px;
+    background-position: 10px 8px;
+    background-repeat: no-repeat;
+    background-size: 16px;
+}
+
+button.grid-btn-edit{
+    background-image: url('../../icons/edit.png');
+}
+
+button.grid-btn-split{
+    background-image: url('../../icons/split.png');
+}
+
+button.grid-btn-repeat{
+    background-image: url('../../icons/repeat.png');
+}
+
+button.grid-btn-disabled{
+    background-color: #FAFAFA;
+    color: #DFDFDF;
+
+}
+
+button.grid-btn-delete{
+    background-color: #d14040;
+    background-color: #ec6552;
+    background-image: url('../../icons/delete.png');
+}
+
+button.grid-btn-delete:hover {
+    background-color: #d14040 !important;
+}
+
+button.grid-btn:hover {
+    background-color: #282E33;
+}
+
+.title-label{
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+}
+
+#transactions-header{
+    padding-left: 15px;
+}
+
+.expense{
+    color: #f17878;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#transactions{
+    min-height: 400px;
+    margin-top: 20px;
+    padding-top: 20px; 
+    padding-bottom: 20px;
+    font-weight:bold; 
+    color: #7c7c7c;
+    position: relative;
+}
+
+#transactions-grid{
+    font-size: 15px; 
+    table-layout: fixed;
+}
+
+#transactions-grid-buttons{
+    float: right; 
+    margin-right: 60px;
+}
 
 
 

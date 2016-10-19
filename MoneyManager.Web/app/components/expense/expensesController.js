@@ -1,57 +1,111 @@
-﻿angular.module('moneyManager.expense').controller('expensesController', ['$scope', '$uibModal', 'expenseService', 'eventAggregatorService', function ($scope, $uibModal, expenseService, eventAggregatorService) {
+﻿angular.module('moneyManager.expense').controller('expensesController', ['$scope', 'expenseService', 'eventAggregatorService', 'popupService', function ($scope, expenseService, eventAggregatorService, popupService) {
+
+    $scope.gridOptions = {
+        fields: [
+            { title: 'DATE', field: 'Date' },
+            { title: 'AMOUNT', field: 'Amount' },
+            { title: 'DESCRIPTION', field: 'Comment' },
+            { title: 'CATEGORY', field: 'Category.Name' }
+        ]
+    };
 
     $scope.$parent.pageName = "EXPENSES";
     $scope.$parent.titleBarClass = "title-bar-expense";
     $scope.$parent.btnAddCaption = "Add Expense";
     $scope.$parent.addFunc = function () {
-        expensePopup('add');
+        popupService.expensePopup('add');
     };
 
-    function expensePopup(mode, expense) {
-        var modalInstance = $uibModal.open({
-            animation: true,
-            size: 'lg',
-            templateUrl: '/app/components/expense/expense.html',
-            controller: 'expenseController',
-            resolve: {
-                params: { dialogMode: mode, expense: expense }
+    $scope.sortColumn = "Date";
+    $scope.sortAscending = false;
+   
+    $scope.isSortedBy = function (field) {
+        return $scope.sortColumn == field ? $scope.sortAscending  : undefined;
+    }
+
+    $scope.multipleChecked = function () {
+        var cnt = 0;
+        if ($scope.expenses == null) {
+            return false;
+        }
+
+        $scope.expenses.forEach(function (expense) {
+            if (expense.checked) {
+                cnt++;
+            }
+            if (cnt > 1) {
+                return true;
             }
         });
+        $scope.checkedAll = cnt == $scope.expenses.length;
+        return cnt > 1;
+    };
 
-        modalInstance.result.then(function () {
-            //reload();
+    $scope.checkAll = function (args) {
+        $scope.expenses.forEach(function (e) {
+            e.checked = args.isChecked;
         });
+    };
+
+    $scope.sort = function (e) {
+        $scope.sortColumn = e.f;
+        $scope.sortAscending = e.e;
+        $scope.onLoad();
+    };
+   
+    $scope.expenseAction = function (e) {
+        switch (e.action) {
+            case 'edit':
+                popupService.expensePopup('edit', $scope.onLoad, e.expense);
+                break;
+            case 'split':
+                break;
+            case 'delete':
+                break;
+        }
     }
+
+    $scope.selectExpense = function (e) {
+        e.isSelected = !e.isSelected;
+        $scope.expenses.forEach(function (expense) {
+            if (expense.Id != e.Id) {
+                expense.isSelected = false;
+            }
+        });
+    };
 
     $scope.options = {
         maintainAspectRatio: true,
         responsive: false
     };
 
+    $scope.onLoad = function () {
+        var criteria = {
+            DateFrom: new Date(2016,9,1),
+            DateTo: new Date(),
+            SortBy: $scope.sortColumn,
+            SortAsc: $scope.sortAscending
+        };
+        expenseService.getExpenses(criteria).then(function (result) {
+            $scope.expenses = result.data;
+            eventAggregatorService.publishEvent(eventAggregatorService.eventNames.loadingFinished)
+        }, function (error) {
 
+        });
 
-    (function () {
-        eventAggregatorService.publishEvent(eventAggregatorService.eventNames.loadingStarted)
         expenseService.getExpenseTotals().then(function (result) {
             $scope.totals = result.data;
             eventAggregatorService.publishEvent(eventAggregatorService.eventNames.loadingFinished)
         }, function (error) {
 
         });
-    })();
+    };
 
-    $scope.expenses = [
-        { Date: '2016-04-10', Amount: 15.50, Description: 'Apteka - lekarstwa', Category: "Lekarstwa" },
-        { Date: '2016-04-11', Amount: 10.20, Description: 'myjnia', Category: "Samochód" },
-        { Date: '2016-04-12', Amount: 35, Description: '', Category: "Żywność" },
-        { Date: '2016-04-12', Amount: 200.50, Description: 'Apteka - lekarstwa', Category: "Lekarstwa" },
-        { Date: '2016-04-14', Amount: 55.20, Description: 'Apteka - lekarstwa', Category: "Zabawki" },
-        { Date: '2016-04-15', Amount: 5.60, Description: '', Category: "Żywność" },
-        { Date: '2016-04-15', Amount: 17.50, Description: '', Category: "Żywność" },
-        { Date: '2016-04-16', Amount: 29.90, Description: 'Rossmann', Category: "Chemia" },
-        { Date: '2016-04-16', Amount: 19, Description: '', Category: "Żywność" },
-        { Date: '2016-04-17', Amount: 130, Description: 'Bluzka i biustonosz', Category: "Ciuchy" }
-    ];
+    (function () {
+        eventAggregatorService.publishEvent(eventAggregatorService.eventNames.loadingStarted)
+
+        $scope.onLoad();
+    })();
 
     $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
     $scope.data = [300, 500, 100];

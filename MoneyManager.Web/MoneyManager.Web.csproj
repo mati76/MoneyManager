@@ -71,12 +71,14 @@
     <Content Include="app\components\category\category.html" />
     <Content Include="app\components\category\category.js" />
     <Content Include="app\components\category\categoryController.js" />
+    <Content Include="app\components\expense\directives.js" />
     <Content Include="app\components\expense\expense.html" />
     <Content Include="app\components\expense\expenseController.js" />
     <Content Include="app\components\expense\expense.js" />
     <Content Include="app\components\expense\expenses.html" />
     <Content Include="app\components\expense\expensesController.js" />
     <Content Include="app\components\expense\expenseService.js" />
+    <Content Include="app\components\expense\popupService.js" />
     <Content Include="app\components\home\home.html" />
     <Content Include="app\components\home\homeController.js" />
     <Content Include="app\components\category\categories.html" />
@@ -107,6 +109,9 @@
     <Content Include="css\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="icons\arrow-Active.png" />
     <Content Include="icons\arrow-Normal.png" />
+    <Content Include="icons\copy.png" />
+    <Content Include="icons\delete.png" />
+    <Content Include="icons\edit.png" />
     <Content Include="icons\icon-budgetsActive.png" />
     <Content Include="icons\icon-budgetsNormal.png" />
     <Content Include="icons\icon-dashboardActive.png" />
@@ -121,11 +126,17 @@
     <Content Include="icons\icon-tagsActive.png" />
     <Content Include="icons\icon-tagsNormal.png" />
     <Content Include="icons\icon-tagsTitle.png" />
+    <Content Include="icons\icons-sortingDown.png" />
+    <Content Include="icons\icons-sortingNothing.png" />
+    <Content Include="icons\icons-sortingUp.png" />
+    <Content Include="icons\loading-black.gif" />
+    <Content Include="icons\split.png" />
     <Content Include="icons\loading.gif" />
     <Content Include="icons\loading1.gif" />
     <Content Include="icons\Logo-sidebar.png" />
     <Content Include="icons\minus-icon.png" />
     <Content Include="icons\plus-icon.png" />
+    <Content Include="icons\repeat.png" />
     <Content Include="index.html" />
     <Content Include="app\moneyManger.js" />
     <Content Include="app\router.js" />
@@ -150,6 +161,7 @@
     <Content Include="css\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="css\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="css\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\proximasansregular.ttf" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

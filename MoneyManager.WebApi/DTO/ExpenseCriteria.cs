@@ -15,6 +15,8 @@ namespace MoneyManager.WebApi.DTO
 
         public decimal? MaxAmount { get; set; }
 
-        public string SortAsc { get; set; }
+        public string SortBy { get; set; }
+
+        public bool SortAsc { get; set; }
     }
 }
