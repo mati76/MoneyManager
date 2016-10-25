@@ -56,9 +56,11 @@ namespace MoneyManager.WebApi.Controllers
         {
             _expenseService.SaveExpense(expense);
         }
-        
+
+        [Route("{id:int}")]
         public void Delete(int id)
         {
+            _expenseService.DeleteExpense(id);
         }
     }
 }

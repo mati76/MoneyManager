@@ -16,6 +16,8 @@ namespace MoneyManager.Business.Interfaces
 
         void SaveExpense(Expense expense);
 
+        void DeleteExpense(int id);
+
         ExpenseTotals GetExpenseTotals(DateTime currentDate);
     }
 }

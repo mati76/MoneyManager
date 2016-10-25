@@ -91,7 +91,7 @@
                 Comment: $scope.model.Comment,
                 Date: new Date($scope.model.Date),
                 Id: $scope.model.Id,
-                Category: { Id: $scope.model.CategoryId }
+                CategoryId: $scope.model.CategoryId 
             };
             expenseService.saveExpense(expense).then(function (result) {
                 $uibModalInstance.close();
@@ -117,12 +117,14 @@
 
         if (params.dialogMode == 'add') {
             $scope.model.Date = new Date();
+            $scope.label = 'ADD EXPENSE';
         } else {
             $scope.model.Amount = params.expense.Amount;
             $scope.model.Comment = params.expense.Comment;
             $scope.model.Date = Date.parse(params.expense.Date);
             $scope.model.Id = params.expense.Id;
-            $scope.model.CategoryId = params.expense.Category.Id;
+            $scope.model.CategoryId = params.expense.CategoryId;
+            $scope.label = 'EDIT EXPENSE';
         }
     })();
 

@@ -12,6 +12,8 @@ namespace MoneyManager.WebApi.Services
 
         IEnumerable<Expense> GetExpenses(int year, int month);
 
+        void DeleteExpense(int id);
+
         Expense GetExpense(int id);
 
         void SaveExpense(Expense expense);

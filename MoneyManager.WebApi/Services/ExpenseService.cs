@@ -39,6 +39,11 @@ namespace MoneyManager.WebApi.Services
             return _mapperService.Map<DTO.Expense>(_expenseBusiness.GetExpense(id));
         }
 
+        public void DeleteExpense(int id)
+        {
+            _expenseBusiness.DeleteExpense(id);
+        }
+
         public void SaveExpense(DTO.Expense expense)
         {
             _expenseBusiness.SaveExpense(_mapperService.Map<Expense>(expense));

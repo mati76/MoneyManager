@@ -91,6 +91,7 @@
     <Content Include="app\moneyManagerController.js" />
     <Content Include="app\shared\directives.js" />
     <Content Include="app\shared\eventAggregator.js" />
+    <Content Include="app\shared\filters.js" />
     <Content Include="app\shared\helperService.js" />
     <Content Include="app\shared\messageBox\messageBox.html" />
     <Content Include="app\shared\messageBox\messageBoxController.js" />

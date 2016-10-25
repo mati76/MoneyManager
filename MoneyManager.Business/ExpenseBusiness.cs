@@ -57,11 +57,11 @@ namespace MoneyManager.Business
             }
         }
 
-        public void Delete(Expense expense)
+        public void DeleteExpense(int id)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                session.GetRepository<IExpenseRepository>().Delete(expense);
+                session.GetRepository<IExpenseRepository>().DeleteById(id);
             }
         }
 
@@ -85,7 +85,7 @@ namespace MoneyManager.Business
                 var currentYear = _dateHelper.GetYearBoundaries(currentDate);
 
                 var totals = new ExpenseTotals();
-                totals.Today = repository.GetExpenseTotalsFromDates(currentDate, currentDate);
+                totals.Today = repository.GetExpenseTotalsFromDates(currentDate, currentDate.AddHours(23).AddMinutes(59).AddSeconds(59));
                 totals.CurrentWeek = repository.GetExpenseTotalsFromDates(currentWeek.Item1, currentWeek.Item2);
                 totals.CurrentMonth = repository.GetExpenseTotalsFromDates(currentMonth.Item1, currentMonth.Item2);
                 totals.CurrentYear = repository.GetExpenseTotalsFromDates(currentYear.Item1, currentYear.Item2);

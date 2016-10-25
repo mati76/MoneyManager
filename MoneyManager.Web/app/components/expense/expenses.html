@@ -1,28 +1,16 @@
 ﻿<div class="container-fluid full-height">
     <div id="expenseSummary" class="row">
-        <div class="col-xs-3 col-md-3">
-            <p class="summary-label semi-bold">TODAY:</p>
-            <p class="summary-value expense-value" ng-cloak>
-                {{(totals.Today | currency : '') + " PLN"}}
-            </p>
+        <div class="col-xs-3 col-md-3 no-padding">
+            <expense-totals label="TODAY:" value="totals.Today" is-loading="loadingTotals"></expense-totals>
         </div>
-        <div class="col-xs-3 col-md-3">
-            <p class="summary-label semi-bold">THIS WEEK:</p>
-            <p class="summary-value expense-value" ng-cloak>
-                {{(totals.CurrentWeek | currency : '') + " PLN"}}
-            </p>
+        <div class="col-xs-3 col-md-3 no-padding">
+            <expense-totals label="THIS WEEK:" value="totals.CurrentWeek" is-loading="loadingTotals"></expense-totals>
         </div>
-        <div class="col-xs-3 col-md-3">
-            <p class="summary-label semi-bold">THIS MONTH:</p>
-            <p class="summary-value expense-value" ng-cloak>
-                {{(totals.CurrentMonth | currency : '') + " PLN"}}
-            </p>
+        <div class="col-xs-3 col-md-3 no-padding">
+            <expense-totals label="THIS MONTH:" value="totals.CurrentMonth" is-loading="loadingTotals"></expense-totals>
         </div>
-        <div class="col-xs-3 col-md-3">
-            <p class="summary-label semi-bold">THIS YEAR:</p>
-            <p class="summary-value expense-value" ng-cloak>
-                {{(totals.CurrentYear | currency : '') + " PLN"}}
-            </p>
+        <div class="col-xs-3 col-md-3 no-padding">
+            <expense-totals label="THIS YEAR:" value="totals.CurrentYear" is-loading="loadingTotals"></expense-totals>
         </div>
     </div>
     <div class="row">
@@ -58,16 +46,7 @@
                 <button style="display: inline" class="grid-btn grid-btn-delete">DELETE</button>
             </span>
         </p>
-        <grid options="options" source="expenses" sort-column="sortColumn" sort-ascending="sortAscending"></grid>
-        <!--<div>
-            <loading-panel is-loading="true" width="50" height="50"></loading-panel>
-            <table id="transactions-grid" class="full-width">
-                <tr expense-header>
-                <tr ng-show="expenses.length > 0" ng-repeat-start="expense in expenses track by expense.Id" expense="expense" click="selectExpense(e)" />
-                <tr ng-repeat-end="" ng-if="expense.isSelected" expense-buttons for="expense" click="expenseAction(e)" />
-            </table>
-            <p class="nothing-label" ng-show="expenses.length == 0">NO TRANSACTIONS</p>
-        </div>-->
+        <grid options="gridOptions" is-loading="loadingTotals" source="expenses" sorted-by="expenseParams" on-sort="sort(e)" on-button-click="expenseAction(e)"></grid>
     </div>
 </div>
 

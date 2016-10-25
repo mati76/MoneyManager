@@ -17,7 +17,7 @@ namespace MoneyManager.WebApi.Services
             AutoMapper.Mapper.CreateMap<Category, DTO.CategoryInfo>();
             AutoMapper.Mapper.CreateMap<DTO.CategoryInfo, Category>();
             AutoMapper.Mapper.CreateMap<Expense, DTO.Expense>();
-            AutoMapper.Mapper.CreateMap<DTO.Expense, Expense>().AfterMap((dto, bll) => { bll.CategoryId = dto.Category.Id; bll.Category = null; });
+            AutoMapper.Mapper.CreateMap<DTO.Expense, Expense>().AfterMap((dto, bll) => { bll.CategoryId = dto.CategoryId; bll.Category = null; });
             AutoMapper.Mapper.CreateMap<DTO.ExpenseCriteria, ExpenseCriteria>();
             AutoMapper.Mapper.CreateMap<ExpenseTotals, DTO.ExpenseTotals>();
         }
