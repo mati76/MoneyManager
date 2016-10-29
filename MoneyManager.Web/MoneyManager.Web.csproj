@@ -89,6 +89,7 @@
     <Content Include="app\components\login\login.html" />
     <Content Include="app\components\login\loginController.js" />
     <Content Include="app\moneyManagerController.js" />
+    <Content Include="app\shared\dateService.js" />
     <Content Include="app\shared\directives.js" />
     <Content Include="app\shared\eventAggregator.js" />
     <Content Include="app\shared\filters.js" />
@@ -96,6 +97,8 @@
     <Content Include="app\shared\messageBox\messageBox.html" />
     <Content Include="app\shared\messageBox\messageBoxController.js" />
     <Content Include="app\shared\messageBox\messageBoxService.js" />
+    <Content Include="app\shared\periodPicker\periodPicker.html" />
+    <Content Include="app\shared\periodPicker\periodPicker.js" />
     <Content Include="app\shared\shared.js" />
     <Content Include="configuration\configuration.js" />
     <Content Include="css\ag-grid\ag-grid.css" />
@@ -115,6 +118,7 @@
     <Content Include="icons\edit.png" />
     <Content Include="icons\icon-budgetsActive.png" />
     <Content Include="icons\icon-budgetsNormal.png" />
+    <Content Include="icons\icon-calendar.png" />
     <Content Include="icons\icon-dashboardActive.png" />
     <Content Include="icons\icon-dashboardNormal.png" />
     <Content Include="icons\icon-espensesNormal.png" />

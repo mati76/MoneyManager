@@ -50,6 +50,30 @@
     color: white;
 }
 
+.menu-item{
+    min-height: 30px;
+    line-height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+    color: #224072;
+    background-color: white;
+    margin: 10px 10px 10px 10px;
+    border-radius: 5px;
+    border: solid 2px powderblue;
+}
+
+.menu-item-selected,
+.menu-item:hover{
+    background-color: powderblue;
+    color: white;
+    cursor: pointer;
+}
+
+.dropdown-menu{
+    width: 300px;
+}
+
 .menu-item-dashboard{
     background-image: url(/icons/icon-dashboardNormal.png);
 }

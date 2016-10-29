@@ -24,6 +24,8 @@
 
     <script src="configuration/configuration.js"></script>
     <script src="app/shared/shared.js"></script>
+    <script src="app/shared/dateService.js"></script>
+    <script src="app/shared/periodPicker/periodPicker.js"></script>
     <script src="app/shared/eventAggregator.js"></script>
     <script src="app/shared/filters.js"></script>
     <script src="app/shared/directives.js"></script>
@@ -72,8 +74,10 @@
                     </div>
                 </div>
                 <div class="display-table-row">
-                    <div class="display-table-cell title-bar">
+                    <div class="unselectable display-table-cell title-bar">
                         <span class="title-bar" ng-bind="pageName" ng-class="titleBarClass"></span>
+                        
+                        <period-picker></period-picker>
                         <div class="btn-group" uib-dropdown style="float: right; margin-right: 15px">
                             <button class="mid-font btn btn-default float-right" ng-click="addFunc()">
                                 {{ btnAddCaption }}

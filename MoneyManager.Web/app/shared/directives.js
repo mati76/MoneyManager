@@ -2,13 +2,15 @@
     return {
         template: '<div class="check-box" ng-class="{\'glyphicon glyphicon-ok\': isChecked == true }" aria-hidden="true" ng-click="onclick()"/>',
         restrict: 'E',
-        scope: { isChecked: '=', click: '&' },
+        scope: { disabled: '=', isChecked: '=', click: '&' },
         link: function(scope, element, attrs) {
             scope.title = attrs.title;
 
             scope.onclick = function () {
-                scope.isChecked = !scope.isChecked;
-                scope.click({ checked: scope.isChecked });
+                if (scope.disabled != true) {
+                    scope.isChecked = !scope.isChecked;
+                    scope.click({ checked: scope.isChecked });
+                }
             };
         }
     }
@@ -34,7 +36,7 @@ angular.module('moneyManager.shared').directive('sortingHeader', function(){
         template: '<div ng-click="changeSorting()" style="cursor: pointer"><span ng-transclude></span><img ng-src="../../../icons/icons-sorting{{sortingIcon}}.png" style="margin-left: 10px"/></div>',
         restrict: 'E',
         transclude: true,
-        scope: { sorted: '@', onSort: '&' },
+        scope: { disabled: '=', sorted: '@', onSort: '&' },
         link: function (scope, element, attrs) {
             scope.changeSorting = function () {
                 scope.asc = !scope.asc;
@@ -42,17 +44,23 @@ angular.module('moneyManager.shared').directive('sortingHeader', function(){
                 scope.onSort({ asc: scope.asc });
             }
 
+            scope.$watch('disabled', function (newval) {
+                if (newval != null) {
+                    scope.asc = scope.sorted === "false" ? false : (scope.sorted == "" ? null : true);
+                    scope.setIcon(scope.asc);
+                }
+            });
+
             scope.$watch('sorted', function(newval, oldVal){
                 scope.asc = scope.sorted === "false" ? false : (scope.sorted == "" ? null : true);
                 scope.setIcon(scope.asc);
             });
 
-            scope.setIcon = function(asc) {
-                scope.sortingIcon = asc ? 'Up' : (asc == null ? 'Nothing' : 'Down');
+            scope.setIcon = function (asc) {
+                if (scope.disabled != true) {
+                    scope.sortingIcon = asc ? 'Up' : (asc == null ? 'Nothing' : 'Down');
+                }
             }
-
-            scope.asc = scope.sorted === "false" ? false : (scope.sorted == "" ? null : true);
-            scope.setIcon(scope.asc);
         }
     }
 });
@@ -62,10 +70,10 @@ angular.module('moneyManager.shared').directive('gridHeader', function () {
         restrict: 'A',
         replace: true,
         template: '<tr class="grid-header">' +
-                '<th width = "10px"/>' +
-                '<th width = "60px"><check-box is-checked=\"checkedAll\" click="checkAll({ isChecked: checked})"></th>' +
+                '<th width = "10px"></th>' +
+                '<th width = "60px"><check-box disabled="source.length == 0 || isLoading === true" is-checked=\"checkedAll\" click="checkAll({ isChecked: checked})"></th>' +
                 '<th ng-repeat="field in options.fields" class="unselectable" ng-class="field.headerClass" ng-style="field.headerStyle">' +
-                    '<sorting-header sorted="{{ isSortedBy(field.field) }}" on-sort = "sort({f: field.sortBy != null ? field.sortBy : field.field, e: asc})">{{field.title}}</sorting-header></th>' +
+                    '<sorting-header disabled="source.length == 0 || isLoading === true" sorted="{{ isSortedBy(field.field) }}" on-sort = "sort({f: field.sortBy != null ? field.sortBy : field.field, e: asc})">{{field.title}}</sorting-header></th>' +
                 '<th width = "60px"/>' +
                 '</tr>',
         scope: false

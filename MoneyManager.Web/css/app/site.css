@@ -20,9 +20,25 @@ div.title-bar{
 
 span.title-bar{
     padding-left: 60px;
+    padding-right: 60px;
     background-repeat: no-repeat;
     background-position: 20px center;
     background-size: 21px 21px;
+}
+
+.period-container{
+    background-image: url('../../icons/icon-calendar.png');
+    background-position: 0, center;
+    background-size: 21px 21px;
+    background-repeat: no-repeat;
+    font-size: 20px;
+    padding-left: 40px;
+    color: #606472;
+    vertical-align: middle;
+}
+
+.period-container:hover{
+    cursor: pointer;
 }
 
 span.title-bar-expense{
@@ -57,6 +73,16 @@ span.title-bar-category{
     border-width: 0;
 }
 
+#customPeriodOptions > li{
+    margin-top: 0;
+    width: 43%;
+}
+
+ul.horizontal-list> li{
+    float: left;
+}
+
+ul.horizontal-list,
 ul.list{
     list-style:none;
     padding-left:0;
