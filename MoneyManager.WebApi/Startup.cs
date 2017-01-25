@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Owin.Cors;
 using MoneyManager.WebApi.Configuration;
+using Microsoft.Owin;
 
+[assembly: OwinStartup(typeof(MoneyManager.WebApi.Startup))]
 namespace MoneyManager.WebApi
 {
     using AppFunc = Func<IDictionary<string, object>, Task>;
@@ -15,10 +17,12 @@ namespace MoneyManager.WebApi
         public void Configuration(IAppBuilder app)
         {
             // Use the extension method provided by the WebApi.Owin library:
-            app.Use(new Func<AppFunc, AppFunc>(MyMiddleWare));
+            //app.Use(new Func<AppFunc, AppFunc>(MyMiddleWare));
             app.UseCors(CorsOptions.AllowAll);
+            AuthConfig.ConfigureOAuth(app);
             app.UseWebApi(WebApiConfig.ConfigureWebApi());
 
+            
             Services.MapperService.Configure();
         }
 

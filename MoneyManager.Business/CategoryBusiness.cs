@@ -10,19 +10,21 @@ namespace MoneyManager.Business
     {
         public CategoryBusiness(IUnitOfWorkFactory unitOfWorkFactory) : base(unitOfWorkFactory)
         {
-            if (unitOfWorkFactory == null)
-            {
-                throw new ArgumentNullException(nameof(unitOfWorkFactory));
-            }
-            _unitOfWorkFactory = unitOfWorkFactory;
         }
 
-        public IEnumerable<Category> GetCategories()
+        public IEnumerable<Category> GetExpenseCategories()
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                var test = session.GetRepository<ICategoryRepository>().GetParentCategories();
-                return test;
+                return session.GetRepository<ICategoryRepository>().GetParentCategories();
+            }
+        }
+
+        public IEnumerable<Category> GetIncomeCategories()
+        {
+            using (var session = _unitOfWorkFactory.GetSession())
+            {
+                return session.GetRepository<IIncomeCategoryRepository>().GetAll();
             }
         }
 
@@ -58,7 +60,18 @@ namespace MoneyManager.Business
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<ICategoryRepository>().GetTopCategories(count);
+                var repo = session.GetRepository<ICategoryRepository>();
+                var topCategories = repo.GetTopCategories(count);
+                if(topCategories.Count != count)
+                {
+                    var allCategories = repo.GetAll();
+                    for(var i = topCategories.Count; i < count; i++)
+                    {
+                        var cat = allCategories.Where(c => !topCategories.Any(t => t.ParentId == c.Id)).SelectMany(c => c.Categories).First();
+                        topCategories.Add(cat);
+                    }
+                }
+                return topCategories;
             }
         }
     }

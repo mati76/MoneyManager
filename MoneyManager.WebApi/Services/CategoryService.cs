@@ -1,5 +1,6 @@
 ﻿using MoneyManager.Business;
 using MoneyManager.Business.Models;
+using MoneyManager.WebApi.Enums;
 using System;
 using System.Collections.Generic;
 
@@ -18,9 +19,9 @@ namespace MoneyManager.WebApi.Services
             _categoryBusiness = categoryBusiness;
         }
 
-        public IEnumerable<DTO.Category> GetCategories()
+        public IEnumerable<DTO.Category> GetCategories(CategoryTypeEnum categoryType)
         {
-            return _mapperService.Map<IEnumerable<DTO.Category>>(_categoryBusiness.GetCategories());
+            return _mapperService.Map<IEnumerable<DTO.Category>>(categoryType == CategoryTypeEnum.Expense ?_categoryBusiness.GetExpenseCategories() : _categoryBusiness.GetIncomeCategories());
         }
 
         public DTO.Category GetCategory(int id)

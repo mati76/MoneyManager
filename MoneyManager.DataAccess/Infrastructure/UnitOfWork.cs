@@ -6,9 +6,9 @@ namespace MoneyManager.DataAccess.Infrastructure
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly IDbContext _ctx;
         private IUnityContainer _container;
-        private bool _disposed;
+        protected readonly IDbContext _ctx;
+        protected bool _disposed;
 
         public UnitOfWork(IDbContext context, IUnityContainer container)
         {

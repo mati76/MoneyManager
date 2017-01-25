@@ -12,12 +12,14 @@ namespace MoneyManager.Business.Interfaces
 
         IEnumerable<Expense> GetExpenses(DateTime date);
 
-        IEnumerable<Expense> GetExpenses(ExpenseCriteria criteria);
+        IEnumerable<Expense> GetExpenses(SearchCriteria criteria);
 
         void SaveExpense(Expense expense);
 
         void DeleteExpense(int id);
 
-        ExpenseTotals GetExpenseTotals(DateTime currentDate);
+        TransactionTotals GetExpenseTotals(DateTime currentDate);
+
+        List<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId);
     }
 }

@@ -5,7 +5,9 @@ namespace MoneyManager.WebApi.Controllers
 {
     public interface ICategoryController
     {
-        IEnumerable<Category> Get();
+        IEnumerable<Category> GetExpenseCategories();
+
+        IEnumerable<Category> GetIncomeCategories();
 
         Category Get(int id);
 

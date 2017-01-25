@@ -3,7 +3,8 @@ angular.module('moneyManager.shared').factory('eventAggregatorService', [functio
 
     var eventNames = {
         loadingStarted: 'loadingStarted',
-        loadingFinished: 'loadingFinished'
+        loadingFinished: 'loadingFinished',
+        expensePeriodChanged: 'expensePeriodChanged'
     };
 
     // Return public API.

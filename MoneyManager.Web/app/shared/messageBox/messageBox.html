@@ -2,13 +2,13 @@
     <div class="modal-header">
         <h3 class="modal-title" ng-bind="title"></h3>
     </div>
-    <div class="modal-body message-box-body" ng-class="{ 'message-warning': type == 'warning', 'message-info': type == 'info', 'message-error': type == error }">
+    <div class="modal-body message-box-body" ng-class="{ 'message-warning': type == 'warning', 'message-info': type == 'info', 'message-error': type == 'error' }">
         <div class="display-table-cell" >
             <p ng-bind="message"></p>
         </div>
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" type="button" ng-click="ok()">Ok</button>
-        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        <button ng-hide="type == 'error'" class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
     </div>
 </div>

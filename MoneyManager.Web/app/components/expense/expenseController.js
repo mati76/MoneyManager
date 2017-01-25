@@ -66,7 +66,7 @@
 
     $scope.categoryPopup = function () {
         $scope.loadingCategories = true;
-        categoryService.getCategories().then(function (result) {
+        categoryService.getExpenseCategories().then(function (result) {
             $scope.loadingCategories = false;
             var data = result.data;
 
@@ -100,6 +100,10 @@
 
                 $scope.cancel();
             });
+        } else {
+            $scope.expenseForm.category.$dirty = true;
+            $scope.expenseForm.amount.$dirty = true;
+            $scope.expenseForm.date.$dirty = true;
         }
     };
 
@@ -110,7 +114,7 @@
     //onLoad
     (function () {
         $scope.$parent.isLoading = true;
-        categoryService.getTopCategories().then(function (result) {
+        categoryService.getTopExpenseCategories().then(function (result) {
             $scope.$parent.isLoading = false;
             $scope.topCategories = result.data;
         });

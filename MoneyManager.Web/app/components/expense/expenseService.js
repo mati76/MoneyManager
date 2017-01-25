@@ -4,7 +4,8 @@
     return {
         getExpense: getExpense,
         getExpenses: getExpenses,
-        getExpenseTotals, getExpenseTotals,
+        getExpenseTotals: getExpenseTotals,
+        getCategoryTotals: getCategoryTotals,
         saveExpense: saveExpense,
         removeExpense: removeExpense
     };
@@ -19,6 +20,11 @@
 
     function getExpenses(criteria) {
         return $http.get(uri, { params: criteria });
+    }
+
+    function getCategoryTotals(dateFrom, dateTo, categoryId) {
+        return $http.get(uri + '/' + $filter('date')(dateFrom, 'yyyy-MM-dd') + '/' + $filter('date')(dateTo, 'yyyy-MM-dd') + '/category'
+            + (categoryId ?  '/' + categoryId : ''));
     }
 
     function saveExpense(expense) {

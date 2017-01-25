@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Linq;
 using MoneyManager.DataAccess.Infrastructure;
-using MoneyManager.DataAccess.Services;
 using System.Collections.Generic;
 using System.Data.Entity;
 using DAC = MoneyManager.DataAccess.Models;
 using BLL = MoneyManager.Business.Models;
 using EntityFramework.Extensions;
+using MoneyManager.Business;
 
 namespace MoneyManager.DataAccess.Repositories
 {
-    public abstract class BaseRepository<TDAC, TBLL> where TDAC : DAC.BaseModel where TBLL : BLL.BaseEntity
+    public abstract class BaseRepository<TDAC, TBLL> : IDisposable where TDAC : DAC.BaseModel where TBLL : BLL.BaseEntity
+        
     {
         protected readonly IMapperService _mapperService;
         protected readonly DbSet<TDAC> _dbset;
         protected readonly IDbContext _dbContext;
+        protected bool _disposed;
 
         public BaseRepository(IMapperService mapperService, IDbContext dbContext)
         {
@@ -34,8 +36,9 @@ namespace MoneyManager.DataAccess.Repositories
 
         public virtual void Add(TBLL o)
         {
-            o.AddDateTime = DateTime.Now;
-            _dbset.Add(_mapperService.Map<TDAC>(o));
+            var dal = _mapperService.Map<TDAC>(o);
+            dal.AddDateTime = DateTime.Now;
+            _dbset.Add(_mapperService.Map<TDAC>(dal));
         }
 
         public virtual void Delete(TBLL o)
@@ -50,12 +53,12 @@ namespace MoneyManager.DataAccess.Repositories
 
         public virtual void Update(TBLL o)
         {
-            o.UpdDateTime = DateTime.Now;
-            var entity = _mapperService.Map<TDAC>(o);
-            _dbset.Attach(entity);
-            _dbContext.Entry(entity).State = EntityState.Modified;
-            _dbContext.Entry(entity).Property(e => e.AddDateTime).IsModified = false;
-            _dbContext.Entry(entity).Property(e => e.AddUserName).IsModified = false;
+            var dal = _mapperService.Map<TDAC>(o);
+            dal.UpdateDateTime = DateTime.Now;
+            _dbset.Attach(dal);
+            _dbContext.Entry(dal).State = EntityState.Modified;
+            _dbContext.Entry(dal).Property(e => e.AddDateTime).IsModified = false;
+            _dbContext.Entry(dal).Property(e => e.AddUserName).IsModified = false;
         }
 
         public virtual void AddOrUpdate(TBLL o)
@@ -78,6 +81,30 @@ namespace MoneyManager.DataAccess.Repositories
         public virtual IEnumerable<TBLL> GetAll()
         {
             return _mapperService.Map<IEnumerable<TBLL>>(_dbset);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~BaseRepository()
+        {
+            Dispose(false);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    _dbContext.Dispose();
+                }
+
+                _disposed = true;
+            }
         }
     }
 }

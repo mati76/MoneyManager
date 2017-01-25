@@ -2,36 +2,30 @@
     var uri = API_END_POINT + '/api/category';
 
     return {
-        getCategories: getCategories,
-        saveCategory: saveCategory,
-        removeCategory: removeCategory,
-        getTopCategories: getTopCategories
+        getExpenseCategories: getExpenseCategories,
+        getIncomeCategories: getIncomeCategories,
+        saveExpenseCategory: saveExpenseCategory,
+        removeExpenseCategory: removeExpenseCategory,
+        getTopExpenseCategories: getTopExpenseCategories
     };
 
-    //function httpPost(url, data) {
-    //    return $http({
-    //        headers: {
-    //            'Content-Type': 'application/json'
-    //        },
-    //        data: JSON.stringify(data),
-    //        method: 'POST',
-    //        url: url
-    //    })
-    //}
-
-    function getCategories() {
-        return $http.get(uri);
+    function getExpenseCategories() {
+        return $http.get(uri + '/expense');
     }
 
-    function saveCategory(category) {
+    function getIncomeCategories() {
+        return $http.get(uri + '/income');
+    }
+
+    function saveExpenseCategory(category) {
         return $http.post(uri, category);
     }
 
-    function removeCategory(categoryId) {
-        return $http.delete(uri + '/' + categoryId);
+    function removeExpenseCategory(categoryId) {
+        return $http.delete(uri + '/expense' + categoryId);
     }
 
-    function getTopCategories() {
-        return $http.get(uri + '/top');
+    function getTopExpenseCategories() {
+        return $http.get(uri + '/expense/top');
     }
 }]);

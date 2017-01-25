@@ -1,6 +1,6 @@
 ﻿namespace MoneyManager.WebApi.DTO
 {
-    public class ExpenseTotals
+    public class TransactionTotals
     {
         public decimal Today { get; set; }
 

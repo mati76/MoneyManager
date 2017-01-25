@@ -2,7 +2,6 @@
 using MoneyManager.Business.Models;
 using System;
 using System.Collections.Generic;
-using DTO = MoneyManager.WebApi.DTO;
 
 namespace MoneyManager.WebApi.Services
 {
@@ -19,9 +18,9 @@ namespace MoneyManager.WebApi.Services
             _expenseBusiness = expenseBusiness;
         }
 
-        public IEnumerable<DTO.Expense> GetExpenses(DTO.ExpenseCriteria criteria)
+        public IEnumerable<DTO.Expense> GetExpenses(DTO.SearchCriteria criteria)
         {
-            return _mapperService.Map<IEnumerable<DTO.Expense>>(_expenseBusiness.GetExpenses(_mapperService.Map<ExpenseCriteria>(criteria)));
+            return _mapperService.Map<IEnumerable<DTO.Expense>>(_expenseBusiness.GetExpenses(_mapperService.Map<SearchCriteria>(criteria)));
         }
 
         public IEnumerable<DTO.Expense> GetExpenses(DateTime date)
@@ -49,9 +48,19 @@ namespace MoneyManager.WebApi.Services
             _expenseBusiness.SaveExpense(_mapperService.Map<Expense>(expense));
         }
 
-        public DTO.ExpenseTotals GetExpenseTotals(DateTime currentDate)
+        public DTO.TransactionTotals GetExpenseTotals(DateTime currentDate)
         {
-            return _mapperService.Map<DTO.ExpenseTotals>(_expenseBusiness.GetExpenseTotals(currentDate));
+            return _mapperService.Map<DTO.TransactionTotals>(_expenseBusiness.GetExpenseTotals(currentDate));
+        }
+
+        public IEnumerable<DTO.CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo)
+        {
+            return GetCategoryTotals(dateFrom, dateTo, 0);
+        }
+
+        public IEnumerable<DTO.CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId)
+        {
+            return _mapperService.Map<IEnumerable<DTO.CategoryTotal>>(_expenseBusiness.GetCategoryTotals(dateFrom, dateTo, categoryId));
         }
     }
 }

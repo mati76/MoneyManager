@@ -6,15 +6,19 @@ namespace MoneyManager.WebApi.Controllers
 {
     public interface IExpenseController
     {
-        IEnumerable<Expense> Get(ExpenseCriteria criteria);
+        IEnumerable<Expense> Get(SearchCriteria criteria);
 
         Expense GetById(int id);
 
         IEnumerable<Expense> GetByDate(DateTime date);
 
-        ExpenseTotals GetTotals(DateTime date);
+        TransactionTotals GetTotals(DateTime date);
 
         IEnumerable<Expense> GetByDate(int year, int month);
+
+        IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
+
+        IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId);
 
         void Post(Expense expense);
 

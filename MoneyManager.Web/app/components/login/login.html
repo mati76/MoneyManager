@@ -1,1 +1,24 @@
-﻿
+﻿<div class="modal-background">
+    <div class="modal-content" style="width: 500px; height: 300px">
+        <div class="unselectable display-table-cell title-bar">
+            <span style="margin-left: 15px">LOGIN</span>
+        </div>
+
+        <form style="margin: 15px" name="loginForm">
+            <div class="form-group" ng-class="{'has-error': loginForm.userId.$invalid && loginForm.userId.$dirty}">
+                <label for="userId">User Id:</label>
+                <input type="text" name="userId" class="form-control" id="userId" ng-model="credentials.userName" required/>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': loginForm.password.$invalid && loginForm.password.$dirty}">
+                <label for="userId">Password:</label>
+                <input type="password" name="password" class="form-control" id="password"  ng-model="credentials.password" required/>
+            </div>
+
+            <button type="button" class="float-right btn btn-info" ng-click="login()" ng-model="credentials.password">Login</button>
+            <button type="button" class="btn btn-success" ng-click="register()">Register</button>
+
+            <p ng-show="loginForm.$invalid && (loginForm.userId.$dirty || loginForm.password.$dirty)" class="message-error">* please fill all mandatory fields</p>
+        </form>
+        
+    </div>
+</div>

@@ -10,8 +10,12 @@ namespace MoneyManager.Business.Repository
 
         IEnumerable<Expense> GetExpenses(DateTime date);
 
-        IEnumerable<Expense> GetExpensesByCriteria(ExpenseCriteria criteria);
+        IEnumerable<Expense> GetExpensesByCriteria(SearchCriteria criteria);
 
         decimal GetExpenseTotalsFromDates(DateTime from, DateTime to);
+
+        List<CategoryTotal> GeCategoryTotals(DateTime dateFrom, DateTime dateTo);
+
+        List<CategoryTotal> GeCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId);
     }
 }

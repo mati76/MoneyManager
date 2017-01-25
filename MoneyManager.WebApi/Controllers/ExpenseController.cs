@@ -2,14 +2,12 @@
 using MoneyManager.WebApi.DTO;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace MoneyManager.WebApi.Controllers
 {
     [RoutePrefix("api/expense")]
+    [Authorize]
     public class ExpenseController : ApiController, IExpenseController
     {
         private IExpenseService _expenseService;
@@ -23,7 +21,7 @@ namespace MoneyManager.WebApi.Controllers
             _expenseService = expenseService;
         }
 
-        public IEnumerable<Expense> Get([FromUri]ExpenseCriteria criteria)
+        public IEnumerable<Expense> Get([FromUri]SearchCriteria criteria)
         {
             return _expenseService.GetExpenses(criteria);
         }
@@ -41,9 +39,21 @@ namespace MoneyManager.WebApi.Controllers
         }
 
         [Route("totals/{date:datetime}")]
-        public ExpenseTotals GetTotals(DateTime date)
+        public TransactionTotals GetTotals(DateTime date)
         {
             return _expenseService.GetExpenseTotals(date);
+        }
+
+        [Route("{dateFrom:datetime}/{dateTo:datetime}/category")]
+        public IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo)
+        {
+            return _expenseService.GetCategoryTotals(dateFrom, dateTo);
+        }
+
+        [Route("{dateFrom:datetime}/{dateTo:datetime}/category/{categoryId:int}")]
+        public IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId)
+        {
+            return _expenseService.GetCategoryTotals(dateFrom, dateTo, categoryId);
         }
 
         [Route("{year:int:min(1900)}/{month:int:range(1,12)}")]

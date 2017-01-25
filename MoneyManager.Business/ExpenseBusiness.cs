@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using MoneyManager.Business.Interfaces;
 using MoneyManager.Business.Models;
@@ -13,15 +14,10 @@ namespace MoneyManager.Business
 
         public ExpenseBusiness(IUnitOfWorkFactory unitOfWorkFactory, IDateHelper dateHelper) : base(unitOfWorkFactory)
         {
-            if (unitOfWorkFactory == null)
-            {
-                throw new ArgumentNullException(nameof(unitOfWorkFactory));
-            }
             if (dateHelper == null)
             {
                 throw new ArgumentNullException(nameof(dateHelper));
             }
-            _unitOfWorkFactory = unitOfWorkFactory;
             _dateHelper = dateHelper;
         }
 
@@ -49,7 +45,7 @@ namespace MoneyManager.Business
             }
         }
 
-        public IEnumerable<Expense> GetExpenses(ExpenseCriteria criteria)
+        public IEnumerable<Expense> GetExpenses(SearchCriteria criteria)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
@@ -75,7 +71,7 @@ namespace MoneyManager.Business
             }
         }
 
-        public ExpenseTotals GetExpenseTotals(DateTime currentDate)
+        public TransactionTotals GetExpenseTotals(DateTime currentDate)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
@@ -84,12 +80,23 @@ namespace MoneyManager.Business
                 var currentMonth = _dateHelper.GetMonthBoundaries(currentDate);
                 var currentYear = _dateHelper.GetYearBoundaries(currentDate);
 
-                var totals = new ExpenseTotals();
+                var totals = new TransactionTotals();
                 totals.Today = repository.GetExpenseTotalsFromDates(currentDate, currentDate.AddHours(23).AddMinutes(59).AddSeconds(59));
                 totals.CurrentWeek = repository.GetExpenseTotalsFromDates(currentWeek.Item1, currentWeek.Item2);
                 totals.CurrentMonth = repository.GetExpenseTotalsFromDates(currentMonth.Item1, currentMonth.Item2);
                 totals.CurrentYear = repository.GetExpenseTotalsFromDates(currentYear.Item1, currentYear.Item2);
 
+                return totals;
+            }
+        }
+
+        public List<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId)
+        {
+            using (var session = _unitOfWorkFactory.GetSession())
+            {
+                var repository = session.GetRepository<IExpenseRepository>();
+                var totals = categoryId > 0 ? repository.GeCategoryTotals(dateFrom, dateTo, categoryId) : repository.GeCategoryTotals(dateFrom, dateTo);
+                totals.ForEach(i => i.Percent = i.TotalAmount / totals.Sum(t => t.TotalAmount));
                 return totals;
             }
         }

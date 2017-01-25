@@ -1,4 +1,4 @@
-﻿angular.module('moneyManager.expense').factory('popupService', ['$uibModal', function ($uibModal) {
+﻿angular.module('moneyManager.expense').factory('expensePopupService', ['$uibModal', function ($uibModal) {
 
     return { expensePopup: expensePopup };
 

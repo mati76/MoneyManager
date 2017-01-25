@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MoneyManager.WebApi</RootNamespace>
     <AssemblyName>MoneyManager.WebApi</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -60,6 +60,26 @@
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentValidation.WebApi, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.WebApi.6.2.1.0\lib\Net45\FluentValidation.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -79,6 +99,18 @@
     </Reference>
     <Reference Include="Microsoft.Owin.Hosting, Version=2.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Hosting.2.0.2\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -141,20 +173,31 @@
     <Content Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auth\AuthorizationServerProvider.cs" />
+    <Compile Include="Auth\IAuthorizationServerProvider.cs" />
+    <Compile Include="Configuration\AuthConfig.cs" />
     <Compile Include="Configuration\ContainerConfig.cs" />
     <Compile Include="Configuration\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\IAccountController.cs" />
     <Compile Include="Controllers\IIncomeController.cs" />
     <Compile Include="Controllers\IncomeController.cs" />
     <Compile Include="Controllers\ExpenseController.cs" />
     <Compile Include="Controllers\ICategoryController.cs" />
     <Compile Include="Controllers\IExpenseController.cs" />
+    <Compile Include="DTO\AccountDTO..cs" />
     <Compile Include="DTO\CategoryInfo.cs" />
-    <Compile Include="DTO\ExpenseTotals.cs" />
+    <Compile Include="DTO\CategoryTotals.cs" />
+    <Compile Include="DTO\TransactionTotals.cs" />
+    <Compile Include="Enums\CategoryTypeEnum.cs" />
+    <Compile Include="Filters\ValidateModelStateFilter.cs" />
     <Compile Include="program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\CategoryService.cs" />
+    <Compile Include="Services\IAccountService.cs" />
     <Compile Include="Services\IncomeService.cs" />
     <Compile Include="Services\ExpenseService.cs" />
     <Compile Include="Services\IIncomeService.cs" />
@@ -162,12 +205,12 @@
     <Compile Include="DTO\Expense.cs" />
     <Compile Include="Services\ICategoryService.cs" />
     <Compile Include="Services\IExpenseService.cs" />
-    <Compile Include="Services\IMapperService.cs" />
     <Compile Include="Services\MapperService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="DTO\Category.cs" />
-    <Compile Include="DTO\ExpenseCriteria.cs" />
+    <Compile Include="DTO\SearchCriteria.cs" />
     <Compile Include="DTO\Income.cs" />
+    <Compile Include="Validation\AccountValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config">
@@ -181,6 +224,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MoneyManager.Auth\MoneyManager.Auth.csproj">
+      <Project>{2a7c01dd-57b0-4751-a4ba-6cf4936f1f9f}</Project>
+      <Name>MoneyManager.Auth</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MoneyManager.Business\MoneyManager.Business.csproj">
       <Project>{a6a56ea6-228a-448e-af46-013abf0adced}</Project>
       <Name>MoneyManager.Business</Name>

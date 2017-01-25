@@ -11,5 +11,15 @@ namespace MoneyManager.Business.Interfaces
         IEnumerable<Income> GetIncome(int year, int month);
 
         IEnumerable<Income> GetIncome(DateTime from, DateTime to);
+
+        IEnumerable<Income> GetIncome(SearchCriteria criteria);
+
+        void SaveIncome(Income income);
+
+        void DeleteIncome(int id);
+
+        TransactionTotals GetIncomeTotals(DateTime currentDate);
+
+        List<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
     }
 }

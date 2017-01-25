@@ -4,8 +4,8 @@
     <title></title>
 	<meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
    
-    <link href="/application_root/api/expense/2015/1" rel="stylesheet" />
     <link href="css/app/site.css" rel="stylesheet" />
     <link href="css/app/core.css" rel="stylesheet" />
     <link href="css/app/menu.css" rel="stylesheet" />
@@ -14,16 +14,20 @@
     <link href="css/angular-chart.css" rel="stylesheet" />
     <link href="css/ag-grid/ag-grid.css" rel="stylesheet" />
 
+    <script src="app/prototypes.js"></script>
     <script src="libs/angular/angular.js"></script>
     <script src="libs/angular/angular-ui-router.js"></script>
     <script src="libs/angular/angular-messages.js"></script>
-    <script src="libs/ui-bootstrap/ui-bootstrap-tpls-1.1.2.js"></script>
-    <script src="libs/charts/Chart.js"></script>
-    <script src="libs/charts/angular-chart.js"></script>
+    <script src="libs/ui-bootstrap/ui-bootstrap-tpls-2.4.0.min.js"></script>
+    <script src="libs/charts/Chart.min.js"></script>
+    <script src="libs/charts/angular-chart.min.js"></script>
+
     <script src="libs/ag-grid/ag-grid.js"></script>
+    <script src="libs/angular/ngStorage.min.js"></script>
 
     <script src="configuration/configuration.js"></script>
     <script src="app/shared/shared.js"></script>
+    <script src="app/shared/helperService.js"></script>
     <script src="app/shared/dateService.js"></script>
     <script src="app/shared/periodPicker/periodPicker.js"></script>
     <script src="app/shared/eventAggregator.js"></script>
@@ -32,6 +36,9 @@
     <script src="app/shared/messageBox/messageBoxService.js"></script>
     <script src="app/shared/messageBox/messageBoxController.js"></script>
     
+    <script src="app/components/login/login.js"></script>
+    <script src="app/components/login/loginController.js"></script>
+
     <script src="app/components/category/category.js"></script>
     <script src="app/components/category/categoryService.js"></script>
     <script src="app/components/category/categoryPickerController.js"></script>
@@ -39,19 +46,29 @@
     <script src="app/components/category/categoryController.js"></script>
     
     <script src="app/components/expense/expense.js"></script>
-    <script src="app/components/expense/popupService.js"></script>
+    <script src="app/components/expense/expensePopupService.js"></script>
     <script src="app/components/expense/directives.js"></script>
     <script src="app/components/expense/expenseService.js"></script>
     <script src="app/components/expense/expensesController.js"></script>
     <script src="app/components/expense/expenseController.js"></script>
+
     <script src="app/components/income/income.js"></script>
+    <script src="app/components/income/incomeService.js"></script>
+    <script src="app/components/income/incomePopupService.js"></script>
+    <script src="app/components/income/incomeController.js"></script>
     <script src="app/components/income/incomesController.js"></script>
+
+    <script src="app/components/home/home.js"></script>
+    <script src="app/components/home/homeController.js"></script>
+
+    <script src="app/components/auth/auth.js"></script>
+    <script src="app/components/auth/authService.js"></script>
 
     <script src="app/moneyManger.js"></script>
     <script src="app/router.js"></script>
     <script src="app/moneyManagerController.js"></script>
-    <script src="app/components/home/homeController.js"></script>
-    
+    <script src="app/interceptors/authInterceptor.js"></script>
+
 </head>
 <body ng-app="moneyManager" ng-controller="moneyManagerController">
     <loading-panel is-loading="isLoading" modal="true" width="150" height="150"></loading-panel>
@@ -64,6 +81,7 @@
                 <li class="memu-item-incomes" ui-sref="incomes" ui-sref-active="selected"><div class="menu-item-container">INCOMES</div></li>
                 <li class="menu-item-budgets" ui-sref="budgets" ui-sref-active="selected"><div class="menu-item-container">BUDGETS</div></li>
                 <li class="menu-item-categories" ui-sref="categories" ui-sref-active="selected"><div class="menu-item-container">CATEGORIES</div></li>
+                <li class="menu-item-categories" ui-sref="login" ui-sref-active="selected"><div class="menu-item-container">LOGIN</div></li>
             </ul>
         </div>
         <div class="display-table-cell stretched">
@@ -77,8 +95,9 @@
                     <div class="unselectable display-table-cell title-bar">
                         <span class="title-bar" ng-bind="pageName" ng-class="titleBarClass"></span>
                         
-                        <period-picker></period-picker>
-                        <div class="btn-group" uib-dropdown style="float: right; margin-right: 15px">
+                        <span ui-view="filters"></span>
+                       
+                        <div class="btn-group" ng-show="addFunc != null" style="float: right; margin-right: 15px; margin-top: -5px; margin-bottom: 5px">
                             <button class="mid-font btn btn-default float-right" ng-click="addFunc()">
                                 {{ btnAddCaption }}
                                 <span class="glyphicon glyphicon-plus-sign"></span>
@@ -87,7 +106,7 @@
                     </div>
                 </div>
                 <div class="display-table-row">
-                    <div class="display-table-cell container" ui-view="">
+                    <div class="display-table-cell container" ui-view="content">
                         
                     </div>
                 </div>

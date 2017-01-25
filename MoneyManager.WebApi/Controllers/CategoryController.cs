@@ -6,6 +6,8 @@ using MoneyManager.WebApi.DTO;
 
 namespace MoneyManager.WebApi.Controllers
 {
+    [RoutePrefix("api/category")]
+    //[Authorize]
     public class CategoryController : ApiController, ICategoryController
     {
         private ICategoryService _categoryService;
@@ -19,32 +21,44 @@ namespace MoneyManager.WebApi.Controllers
             _categoryService = categoryService;
         }
 
-        public IEnumerable<Category> Get()
+        [Route("expense")]
+        public IEnumerable<Category> GetExpenseCategories()
         {
-            return _categoryService.GetCategories();
+            return _categoryService.GetCategories(Enums.CategoryTypeEnum.Expense);
         }
 
+        [Route("income")]
+        public IEnumerable<Category> GetIncomeCategories()
+        {
+            return _categoryService.GetCategories(Enums.CategoryTypeEnum.Income);
+        }
+
+        [Route("expense/{id:int}")]
         public Category Get(int id)
         {
             return _categoryService.GetCategory(id);
         }
 
+        [Route("expense")]
         public void Post(Category category)
         {
             _categoryService.SaveCategory(category);
         }
 
+        [Route("expense")]
         public void Delete(int id)
         {
             _categoryService.DeleteCategory(id);
         }
 
-        [Route("api/category/top")]
+        [Route("expense/top")]
         public IEnumerable<CategoryInfo> GetTopFive()
         {
             return _categoryService.GetTopFiveCategories();
         }
         /*
+
+        Validation - all
 
         Categories:
             GetAll()

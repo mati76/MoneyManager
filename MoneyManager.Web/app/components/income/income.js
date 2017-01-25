@@ -1,1 +1,1 @@
-﻿angular.module('moneyManager.income', []);
+﻿angular.module('moneyManager.income', ['moneyManager.shared']);

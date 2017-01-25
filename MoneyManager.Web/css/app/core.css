@@ -11,8 +11,7 @@ html {
 body {
     margin: 0;
     position: relative;
-    height: auto;
-    min-height: 100% !important;
+    height: 100% !important;
     font-family: 'MyWebFont', Fallback, serif !important;
     font-weight:normal;
     font-style:normal
@@ -66,7 +65,10 @@ ul{
 
 .semi-bold {
     font-weight: 600;
-    font-style: normal;
+}
+
+.bold {
+    font-weight: bold;
 }
 
 .float-left{

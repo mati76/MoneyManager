@@ -7,17 +7,17 @@
             <form name="expenseForm">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{'has-error': expenseForm.amount.$invalid && expenseForm.amount.$dirty}">
                             <label for="amount">Amount:</label>
                             <input class="form-control" type="number" name="amount" id="amount" ng-model="model.Amount" required />
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="amount">Date:</label>
+                        <div class="form-group" ng-class="{'has-error': expenseForm.date.$invalid && expenseForm.date.$dirty}">
+                            <label for="date">Date:</label>
                             <p class="input-group">
                                 <input type="text" id="date" name="date" class="form-control" uib-datepicker-popup="{{format}}" ng-model="model.Date" is-open="pickerPopup.opened" 
-                                       datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" required />
+                                       datepicker-options="dateOptions" popup-placement="bottom-left" show-button-bar="false" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" required />
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-default" ng-click="openPicker()"><i class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="amount">Comment:</label>
+                            <label for="comment">Comment:</label>
                             <input class="form-control" name="comment" id="comment" ng-model="model.Comment"/>
                         </div>
                     </div>

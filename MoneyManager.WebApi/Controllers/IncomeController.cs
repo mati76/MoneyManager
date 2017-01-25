@@ -2,51 +2,63 @@
 using MoneyManager.WebApi.DTO;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace MoneyManager.WebApi.Controllers
 {
     [RoutePrefix("api/income")]
+    [Authorize]
     public class IncomeController : ApiController, IIncomeController
     {
-        private IIncomeService _IncomeService;
+        private IIncomeService _incomeService;
 
-        public IncomeController(IIncomeService IncomeService)
+        public IncomeController(IIncomeService incomeService)
         {
-            if(IncomeService == null)
+            if (incomeService == null)
             {
-                throw new ArgumentNullException(nameof(IncomeService));
+                throw new ArgumentNullException(nameof(incomeService));
             }
-            _IncomeService = IncomeService;
+            _incomeService = incomeService;
+        }
+
+        public IEnumerable<Income> Get([FromUri]SearchCriteria criteria)
+        {
+            return _incomeService.GetIncome(criteria);
         }
 
         [Route("{id:int}")]
         public Income GetById(int id)
         {
-            return _IncomeService.GetIncome(id);
+            return _incomeService.GetIncome(id);
         }
 
-        [Route("{from:datetime}/{to:datetime}")]
-        public IEnumerable<Income> GetByDateRange(DateTime from, DateTime to)
+        [Route("totals/{date:datetime}")]
+        public TransactionTotals GetTotals(DateTime date)
         {
-            return _IncomeService.GetIncome(from, to);
+            return _incomeService.GetIncomeTotals(date);
         }
 
-        [Route("{year:int}/{month:int}")]
-        public IEnumerable<Income> GetByMonth(int year, int month)
+        [Route("{dateFrom:datetime}/{dateTo:datetime}/category")]
+        public IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo)
         {
-            return _IncomeService.GetIncome(year, month);
+            return _incomeService.GetCategoryTotals(dateFrom, dateTo);
+        }
+
+        [Route("{year:int:min(1900)}/{month:int:range(1,12)}")]
+        public IEnumerable<Income> GetByDate(int year, int month)
+        {
+            return _incomeService.GetIncome(year, month);
         }
 
         public void Post([FromBody]Income income)
         {
+            _incomeService.SaveIncome(income);
         }
-        
+
+        [Route("{id:int}")]
         public void Delete(int id)
         {
+            _incomeService.DeleteIncome(id);
         }
     }
 }

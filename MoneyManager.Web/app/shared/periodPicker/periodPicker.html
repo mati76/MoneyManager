@@ -1,28 +1,28 @@
 ﻿<div uib-dropdown style="display: inline">
     <span class="unselectable period-container" uib-dropdown-toggle>
-        {{ selected.title }}
+        {{ title }}
         <i class="caret"></i>
     </span>
     <div class="dropdown-menu" uib-dropdown-menu role="menu">
         <ul class="list">
-            <li ng-class="selected.mode == 'Today' && !showCustom ? 'menu-item menu-item-selected' : 'menu-item'" role="menuitem" ng-click="select('Today')">Today</li>
-            <li ng-class="selected.mode == 'Week' && !showCustom ? 'menu-item menu-item-selected' : 'menu-item'" role="menuitem" ng-click="select('Week')">This Week</li>
-            <li ng-class="selected.mode == 'Month' && !showCustom ? 'menu-item menu-item-selected' : 'menu-item'" role="menuitem" ng-click="select('Month')">This Month</li>
-            <li ng-class="selected.mode == 'Year' && !showCustom ? 'menu-item menu-item-selected' : 'menu-item'" role="menuitem" ng-click="select('Year')">This Year</li>
-            <li ng-class="selected.mode == 'Custom' || showCustom ? 'menu-item menu-item-selected' : 'menu-item'"" ng-click="showCustom = true; $event.stopPropagation();">Custom</li>
+            <li ng-show="showToday" ng-class="selected.mode == 'Today' && !showCustom ? 'menu-item menu-item-selected' : 'menu-item'" role="menuitem" ng-click="applySelection('Today')">Today</li>
+            <li ng-show="showWeek" ng-class="selected.mode == 'Week' && !showCustom ? 'menu-item menu-item-selected' : 'menu-item'" role="menuitem" ng-click="applySelection('Week')">This Week</li>
+            <li ng-show="showMonth" ng-class="selected.mode == 'Month' && !showCustom ? 'menu-item menu-item-selected' : 'menu-item'" role="menuitem" ng-click="applySelection('Month')">This Month</li>
+            <li ng-show="showYear" ng-class="selected.mode == 'Year' && !showCustom ? 'menu-item menu-item-selected' : 'menu-item'" role="menuitem" ng-click="applySelection('Year')">This Year</li>
+            <li ng-class="selected.mode == 'Custom' || showCustom ? 'menu-item menu-item-selected' : 'menu-item'" ng-click="showCustom = true; $event.stopPropagation();">Custom</li>
         </ul>
         <div ng-show="showCustom || selected.mode == 'Custom'">
             <div ng-click="$event.stopPropagation()" style="height: 70px">
                 <ul class="horizontal-list" id="customPeriodOptions">
-                    <li class="menu-item" ng-class="{'menu-item-selected': customPeriodOption == 'from'}" ng-click="customPeriodOption = 'from'; $event.stopPropagation();">From: <div>{{customDate['from'] | date}}</div></li>
-                    <li class="menu-item" ng-class="{'menu-item-selected': customPeriodOption == 'to'}" ng-click="customPeriodOption = 'to'; $event.stopPropagation();">To: <div>{{customDate['to'] | date}}</div></li>
+                    <li class="menu-item" ng-class="{'menu-item-selected': customPeriodOption == 'from'}" ng-click="customPeriodOption = 'from'; $event.stopPropagation();">Start Date: <div>{{customDate['from'] | date}}</div></li>
+                    <li class="menu-item" ng-class="{'menu-item-selected': customPeriodOption == 'to'}" ng-click="customPeriodOption = 'to'; $event.stopPropagation();">End Date: <div>{{customDate['to'] | date}}</div></li>
                 </ul>
             </div>
             <div ng-click="$event.stopPropagation()">
-                <div uib-datepicker datepicker-options="options" ng-model="customDate[customPeriodOption]" class="well well-sm"></div>
+                <div uib-datepicker ng-model="customDate[customPeriodOption]" class="well well-sm"></div>
             </div>
             <div class="float-right">
-                <button class="btn btn-default" ng-click="select('Custom')" role="menuitem">Ok</button>
+                <button class="btn btn-default" ng-click="applySelection('Custom')" role="menuitem">Ok</button>
                 <button class="btn btn-default" role="menuitem">Cancel</button>
             </div>
         </div>

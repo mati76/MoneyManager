@@ -1,6 +1,6 @@
 ﻿namespace MoneyManager.Business.Models
 {
-    public class ExpenseTotals
+    public class TransactionTotals
     {
         public decimal Today { get; set; }
 

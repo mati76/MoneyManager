@@ -9,5 +9,11 @@ namespace MoneyManager.Business.Repository
         IEnumerable<Income> GetIncome(int year, int month);
 
         IEnumerable<Income> GetIncome(DateTime from, DateTime to);
+
+        IEnumerable<Income> GetIncomeByCriteria(SearchCriteria criteria);
+
+        decimal GetIncomeTotalsFromDates(DateTime from, DateTime to);
+
+        List<CategoryTotal> GeCategoryTotals(DateTime dateFrom, DateTime dateTo);
     }
 }

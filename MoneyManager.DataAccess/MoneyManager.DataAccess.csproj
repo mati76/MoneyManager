@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MoneyManager.DataAccess</RootNamespace>
     <AssemblyName>MoneyManager.DataAccess</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -74,23 +75,24 @@
   <ItemGroup>
     <Compile Include="EF\DbContext.cs" />
     <Compile Include="EF\DbInitializer.cs" />
-    <Compile Include="EF\Mappings\CategoryConfig.cs" />
+    <Compile Include="EF\Mappings\IncomeCategoryConfig.cs" />
+    <Compile Include="EF\Mappings\ExpenseCategoryConfig.cs" />
     <Compile Include="EF\Mappings\IncomeConfig.cs" />
     <Compile Include="EF\Mappings\ExpenseConfig.cs" />
     <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\IncomeCategory.cs" />
+    <Compile Include="Models\ExpenseCategory.cs" />
     <Compile Include="Models\Expense.cs" />
     <Compile Include="Models\Income.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
-    <Compile Include="Repositories\CategoryRepository.cs" />
+    <Compile Include="Repositories\IncomeCategoryRepository.cs" />
+    <Compile Include="Repositories\ExpenseCategoryRepository.cs" />
     <Compile Include="Infrastructure\IDbContext.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Infrastructure\UnitOfWorkFactory.cs" />
     <Compile Include="Repositories\ExpenseRepository.cs" />
     <Compile Include="Repositories\IncomeRepository.cs" />
-    <Compile Include="Services\IMapperService.cs" />
-    <Compile Include="Services\MapperService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

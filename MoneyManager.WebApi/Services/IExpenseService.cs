@@ -6,7 +6,7 @@ namespace MoneyManager.WebApi.Services
 {
     public interface IExpenseService
     {
-        IEnumerable<Expense> GetExpenses(ExpenseCriteria criteria);
+        IEnumerable<Expense> GetExpenses(SearchCriteria criteria);
 
         IEnumerable<Expense> GetExpenses(DateTime date);
 
@@ -18,6 +18,10 @@ namespace MoneyManager.WebApi.Services
 
         void SaveExpense(Expense expense);
 
-        ExpenseTotals GetExpenseTotals(DateTime currentDate);
+        TransactionTotals GetExpenseTotals(DateTime currentDate);
+
+        IEnumerable<DTO.CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
+
+        IEnumerable<DTO.CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId);
     }
 }

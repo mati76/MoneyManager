@@ -1,0 +1,1 @@
+﻿angular.module('moneyManager.home', ['moneyManager.shared']);

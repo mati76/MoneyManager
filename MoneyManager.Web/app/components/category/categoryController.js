@@ -14,7 +14,7 @@
 
     $scope.save = function () {
         if ($scope.categoryForm.$valid) {
-            categoryService.saveCategory($scope.model).then(function (result) {
+            categoryService.saveExpenseCategory($scope.model).then(function (result) {
                 $uibModalInstance.close();
             }, function (error) {
                 //handle error

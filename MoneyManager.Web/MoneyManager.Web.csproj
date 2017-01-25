@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MoneyManager.Web</RootNamespace>
     <AssemblyName>MoneyManager.Web</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -22,6 +22,7 @@
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +47,7 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -53,24 +55,26 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\components\auth\auth.js" />
+    <Content Include="app\components\auth\authService.js" />
     <Content Include="app\components\category\categoryPicker.html" />
     <Content Include="app\components\category\categoryPickerController.js" />
     <Content Include="app\components\category\categoryService.js" />
     <Content Include="app\components\category\category.html" />
     <Content Include="app\components\category\category.js" />
     <Content Include="app\components\category\categoryController.js" />
+    <Content Include="app\components\category\filterTpl.html" />
+    <Content Include="app\components\expense\filterTpl.html" />
     <Content Include="app\components\expense\directives.js" />
     <Content Include="app\components\expense\expense.html" />
     <Content Include="app\components\expense\expenseController.js" />
@@ -78,17 +82,27 @@
     <Content Include="app\components\expense\expenses.html" />
     <Content Include="app\components\expense\expensesController.js" />
     <Content Include="app\components\expense\expenseService.js" />
-    <Content Include="app\components\expense\popupService.js" />
+    <Content Include="app\components\expense\expensePopupService.js" />
+    <Content Include="app\components\home\filterTpl.html" />
     <Content Include="app\components\home\home.html" />
+    <Content Include="app\components\home\home.js" />
     <Content Include="app\components\home\homeController.js" />
     <Content Include="app\components\category\categories.html" />
     <Content Include="app\components\category\categoriesController.js" />
+    <Content Include="app\components\income\incomeController.js" />
+    <Content Include="app\components\income\income.html" />
+    <Content Include="app\components\income\filterTpl.html" />
     <Content Include="app\components\income\incomesController.js" />
     <Content Include="app\components\income\income.js" />
     <Content Include="app\components\income\incomes.html" />
+    <Content Include="app\components\income\incomeService.js" />
+    <Content Include="app\components\income\incomePopupService.js" />
     <Content Include="app\components\login\login.html" />
+    <Content Include="app\components\login\login.js" />
     <Content Include="app\components\login\loginController.js" />
+    <Content Include="app\interceptors\authInterceptor.js" />
     <Content Include="app\moneyManagerController.js" />
+    <Content Include="app\prototypes.js" />
     <Content Include="app\shared\dateService.js" />
     <Content Include="app\shared\directives.js" />
     <Content Include="app\shared\eventAggregator.js" />
@@ -156,9 +170,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="libs\angular\ngStorage.min.js" />
     <Content Include="libs\charts\angular-chart.js" />
+    <Content Include="libs\charts\angular-chart.min.js" />
     <Content Include="libs\charts\Chart.js" />
-    <Content Include="libs\ui-bootstrap\ui-bootstrap-tpls-1.1.2.js" />
+    <Content Include="libs\charts\Chart.min.js" />
+    <Content Include="libs\ui-bootstrap\ui-bootstrap-tpls-2.4.0.min.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +184,7 @@
     <Content Include="css\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="css\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\proximasansregular.ttf" />
+    <Content Include="libs\charts\angular-chart.min.js.map" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

@@ -10,6 +10,16 @@ namespace MoneyManager.WebApi.Services
 
         IEnumerable<Income> GetIncome(int year, int month);
 
+        void DeleteIncome(int id);
+
         Income GetIncome(int id);
+
+        void SaveIncome(DTO.Income income);
+        
+        IEnumerable<DTO.Income> GetIncome(SearchCriteria criteria);
+
+        TransactionTotals GetIncomeTotals(DateTime currentDate);
+
+        IEnumerable<DTO.CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
     }
 }

@@ -7,7 +7,7 @@
 
     function getWeek() {
         var current = new Date();     
-        var weekstart = current.getDate() - current.getDay() + 1;
+        var weekstart = current.getDate() - (current.getDay() == 0 ? 6 : current.getDay() - 1);
         var weekend = weekstart + 6; 
         return {
             from: new Date(current.setDate(weekstart)),
@@ -17,24 +17,24 @@
 
     function getMonth() {
         var current = new Date(); 
-        var month = current.getMonth() + 1;
+        var month = current.getMonth();
         var year = current.getYear();
         return {
-            from: new Date(year, month, 1),
-            to: new Date(year, month, daysInMonth(month - 1, year))
+            from: new Date(current.setDate(1)),
+            to: new Date(current.setDate(daysInMonth(month, year)))
         };
     }
 
     function getYear() {
-        var year = new Date().getYear();
+        var year = new Date().getFullYear();
         return {
-            from: new Date(year, 1, 1),
-            to: new Date(year, 12, 31)
+            from: new Date(year, 0, 1),
+            to: new Date(year, 11, 31)
         };
     }
 
     function daysInMonth(month, year) {
-        return new Date(year, month, 0).getDate();
+        return new Date(year, month + 1, 0).getDate();
     }
 
 }]);

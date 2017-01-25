@@ -23,7 +23,7 @@
     }
 
     function removeCategory(categoryId) {
-        categoryService.removeCategory(categoryId).then(
+        categoryService.removeExpenseCategory(categoryId).then(
             function (data) {
                 reload();
             }, function (error) {
@@ -48,7 +48,7 @@
 
     function reload() {
         eventAggregatorService.publishEvent(eventAggregatorService.eventNames.loadingStarted)
-        categoryService.getCategories().then(function (result) {
+        categoryService.getExpenseCategories().then(function (result) {
             var categories = result.data;
 
             $scope.categoryRows = [];

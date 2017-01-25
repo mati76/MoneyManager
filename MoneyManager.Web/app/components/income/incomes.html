@@ -1,1 +1,43 @@
-﻿
+﻿<div class="container-fluid full-height">
+    <div class="row">
+        <div style="min-width: 550px" class="col-md-12">
+            <nothing-to-display ng-show="chart1.noData"></nothing-to-display>
+            <loading-panel is-loading="chart1.isLoading" width="50" height="50"></loading-panel>
+            <div class="panel panel-default">
+                <div class="row">
+                    <div ng-show="!chart1.noData" style="margin-left: 20px" class="panel-heading panel-title">INCOMES BY CATEGORIES</div>
+                    <div class="col-sm-5" style="width:260px">
+                        <canvas id="bar" class="chart chart-doughnut" height="260" width="260"
+                                chart-data="chart1.data" chart-labels="chart1.labels" chart-options="chartOptions"
+                                chart-colors="chart1.colors" style="padding: 25px"></canvas>
+                        <span ng-show="chart1.total > 0" class="chart-total semi-bold income">{{chart1.total | number:2}}</span>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="chart-legend-custom">
+                            <table style="table-layout: fixed">
+                                <tr ng-repeat="item in chart1.legendItems">
+                                    <td><div ng-style="{'background-color': item.color}" /></td>
+                                    <td>{{item.label}}</td>
+                                    <td class="align-right semi-bold">{{item.percent | percentage:2}}</td>
+                                    <td class="align-right semi-bold income">{{item.amount | number:2}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="transactions" class="panel panel-default">
+        <p style="margin-bottom: 25px" id="transactions-header" class="title-label">
+            TRANSACTIONS:
+            <span id="transactions-grid-buttons" ng-show="multipleChecked()">
+                <button style="display: inline !important" class="grid-btn grid-btn-repeat">REPEAT</button>
+                <button style="display: inline" class="grid-btn grid-btn-delete">DELETE</button>
+            </span>
+        </p>
+        <grid options="gridOptions" is-loading="loadingTotals" source="incomes" sorted-by="incomeParams" on-sort="sort(e)" on-button-click="incomeAction(e)"></grid>
+    </div>
+</div>
+
+

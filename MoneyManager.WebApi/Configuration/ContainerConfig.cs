@@ -9,6 +9,7 @@ using MoneyManager.WebApi.Services;
 using MoneyManager.Business;
 using MoneyManager.Business.Interfaces;
 using MoneyManager.Business.Utilities;
+using MoneyManager.Auth;
 
 namespace MoneyManager.WebApi.Configuration
 {
@@ -29,15 +30,17 @@ namespace MoneyManager.WebApi.Configuration
             container.RegisterType<ICategoryController, CategoryController>();
             container.RegisterType<IExpenseController, ExpenseController>();
             container.RegisterType<IIncomeController, IncomeController>();
+            container.RegisterType<IAccountController, AccountController>();
             container.RegisterType<ICategoryService, CategoryService>();
             container.RegisterType<IExpenseService, ExpenseService>();
             container.RegisterType<IIncomeService, IncomeService>();
             container.RegisterType<IMapperService, MapperService>();
+            container.RegisterType<IAccountService, AccountService>();
 
             //MoneyManager.DataAccess
-            container.RegisterInstance<DAC.Services.IMapperService>(new DAC.Services.MapperService());
             container.RegisterType<IDbContext, MoneyManagerContext>();
-            container.RegisterType<ICategoryRepository, CategoryRepository>();
+            container.RegisterType<ICategoryRepository, ExpenseCategoryRepository>();
+            container.RegisterType<IIncomeCategoryRepository, IncomeCategoryRepository>();
             container.RegisterType<IExpenseRepository, ExpenseRepository>();
             container.RegisterType<IIncomeRepository, IncomeRepository>();
 
@@ -48,6 +51,10 @@ namespace MoneyManager.WebApi.Configuration
             container.RegisterType<IUnitOfWorkFactory, UnitOfWorkFactory>();
             container.RegisterType<IUnitOfWork, UnitOfWork>();
             container.RegisterType<IDateHelper, DateHelper>();
+            container.RegisterType<IAuthBusiness, AuthBusiness>();
+
+            //Auth
+            container.RegisterType<IAuthRepository, AuthRepository>();
         }
     }
 }

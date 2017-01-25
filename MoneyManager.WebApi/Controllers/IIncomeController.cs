@@ -6,13 +6,17 @@ namespace MoneyManager.WebApi.Controllers
 {
     public interface IIncomeController
     {
+        IEnumerable<Income> Get(SearchCriteria criteria);
+
         Income GetById(int id);
 
-        IEnumerable<Income> GetByDateRange(DateTime from, DateTime to);
+        TransactionTotals GetTotals(DateTime date);
 
-        IEnumerable<Income> GetByMonth(int year, int month);
+        IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
 
-        void Post(Income Income);
+        IEnumerable<Income> GetByDate(int year, int month);
+
+        void Post(Income income);
 
         void Delete(int id);
     }

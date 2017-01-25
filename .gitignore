@@ -9,3 +9,6 @@
 /MoneyManager.WebApi/bin
 /MoneyManager.WebApi/obj
 /packages
+/MoneyManager.Auth/bin/Debug
+/MoneyManager.Auth/obj/Debug
+/MoneyManager.Auth/Properties

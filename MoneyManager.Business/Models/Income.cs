@@ -4,10 +4,15 @@ namespace MoneyManager.Business.Models
 {
     public class Income : BaseEntity
     {
-        public decimal Value { get; set; }
+        public decimal Amount { get; set; }
 
         public DateTime Date { get; set; }
 
-        public string Note { get; set; }
+        public string Comment { get; set; }
+
+        public int CategoryId { get; set; }
+
+        public Category Category { get; set; }
     }
 }
+
