@@ -14,6 +14,6 @@ namespace MoneyManager.Business.Repository
 
         decimal GetIncomeTotalsFromDates(DateTime from, DateTime to);
 
-        List<CategoryTotal> GeCategoryTotals(DateTime dateFrom, DateTime dateTo);
+        IEnumerable<CategoryTotal> GeCategoryTotals(DateTime dateFrom, DateTime dateTo);
     }
 }

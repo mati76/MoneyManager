@@ -9,6 +9,8 @@ namespace MoneyManager.DataAccess.EF.Mappings
         public IncomeConfig()
         {
             HasKey(p => p.Id).Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            Property(p => p.Amount).IsRequired();
         }
     }
 }

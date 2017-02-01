@@ -67,6 +67,10 @@
   <ItemGroup>
     <Content Include="app\components\auth\auth.js" />
     <Content Include="app\components\auth\authService.js" />
+    <Content Include="app\components\budget\budget.html" />
+    <Content Include="app\components\budget\budget.js" />
+    <Content Include="app\components\budget\budgetController.js" />
+    <Content Include="app\components\budget\budgetService.js" />
     <Content Include="app\components\category\categoryPicker.html" />
     <Content Include="app\components\category\categoryPickerController.js" />
     <Content Include="app\components\category\categoryService.js" />
@@ -83,7 +87,6 @@
     <Content Include="app\components\expense\expensesController.js" />
     <Content Include="app\components\expense\expenseService.js" />
     <Content Include="app\components\expense\expensePopupService.js" />
-    <Content Include="app\components\home\filterTpl.html" />
     <Content Include="app\components\home\home.html" />
     <Content Include="app\components\home\home.js" />
     <Content Include="app\components\home\homeController.js" />

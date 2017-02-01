@@ -20,6 +20,6 @@ namespace MoneyManager.Business.Interfaces
 
         TransactionTotals GetIncomeTotals(DateTime currentDate);
 
-        List<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
+        IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
     }
 }

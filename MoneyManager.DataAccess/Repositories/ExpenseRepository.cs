@@ -49,19 +49,24 @@ namespace MoneyManager.DataAccess.Repositories
             return _dbset.Where(e => e.Date >= from && e.Date <= to).Select(e => e.Amount).DefaultIfEmpty(0).Sum();
         }
 
-        public List<CategoryTotal> GeCategoryTotals(DateTime dateFrom, DateTime dateTo)
+        public IEnumerable<CategoryTotal> GeCategoryTotals(DateTime dateFrom, DateTime dateTo)
         {
             return _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(dateFrom) && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(dateTo)).GroupBy(e => e.Category.Parent,
                 (key, g) => new CategoryTotal { CategoryId = key.Id, CategoryName = key.Name, TotalAmount = g.Sum(c => c.Amount) })
                 .OrderByDescending(c => c.TotalAmount).ToList();
         }
 
-        public List<CategoryTotal> GeCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId)
+        public IEnumerable<CategoryTotal> GeCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId)
         {
             return _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(dateFrom) && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(dateTo)
                 && e.Category.ParentId == categoryId).GroupBy(e => e.Category, 
                 (key, g) => new CategoryTotal { CategoryId = key.Id, CategoryName = key.Name, TotalAmount = g.Sum(c => c.Amount) })
                 .OrderByDescending(c => c.TotalAmount).ToList();
+        }
+
+        public IEnumerable<TransactionAggregates> GetExpenseAggregates()
+        {
+            return _dbset.GroupBy(g => new { g.Date.Year, g.Date.Month }, (key, gr) => new TransactionAggregates { Month = key.Month, Year = key.Year, Sum = gr.Sum(g => g.Amount), Avg = gr.Average(g => g.Amount) }).OrderBy(g => new { g.Year, g.Month });
         }
     }
 }

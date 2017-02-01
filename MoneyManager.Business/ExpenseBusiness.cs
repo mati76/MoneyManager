@@ -90,13 +90,13 @@ namespace MoneyManager.Business
             }
         }
 
-        public List<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId)
+        public IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
                 var repository = session.GetRepository<IExpenseRepository>();
                 var totals = categoryId > 0 ? repository.GeCategoryTotals(dateFrom, dateTo, categoryId) : repository.GeCategoryTotals(dateFrom, dateTo);
-                totals.ForEach(i => i.Percent = i.TotalAmount / totals.Sum(t => t.TotalAmount));
+                totals?.ToList().ForEach(i => i.Percent = i.TotalAmount / totals.Sum(t => t.TotalAmount));
                 return totals;
             }
         }

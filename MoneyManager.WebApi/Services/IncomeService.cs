@@ -2,7 +2,6 @@
 using MoneyManager.Business.Models;
 using System;
 using System.Collections.Generic;
-using DTO = MoneyManager.WebApi.DTO;
 
 namespace MoneyManager.WebApi.Services
 {

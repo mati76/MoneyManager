@@ -25,6 +25,8 @@ namespace MoneyManager.DataAccess.EF
             modelBuilder.Configurations.Add(new IncomeCategoryConfig());
             modelBuilder.Configurations.Add(new IncomeConfig());
             modelBuilder.Configurations.Add(new ExpenseConfig());
+            modelBuilder.Configurations.Add(new BudgetIncomeConfig());
+            modelBuilder.Configurations.Add(new BudgetExpenseConfig());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -33,5 +35,7 @@ namespace MoneyManager.DataAccess.EF
         public DbSet<IncomeCategory> IncomeCategory { get; set; }
         public DbSet<Expense> Expense { get; set; }
         public DbSet<Income> Income { get; set; }
+        public DbSet<BudgetExpense> BudgetExpense { get; set; }
+        public DbSet<BudgetIncome> BudgetIncome { get; set; }
     }
 }

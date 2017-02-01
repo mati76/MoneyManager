@@ -49,7 +49,7 @@ namespace MoneyManager.DataAccess.Repositories
             return _dbset.Where(e => e.Date >= from && e.Date <= to).Select(e => e.Amount).DefaultIfEmpty(0).Sum();
         }
 
-        public List<CategoryTotal> GeCategoryTotals(DateTime dateFrom, DateTime dateTo)
+        public IEnumerable<CategoryTotal> GeCategoryTotals(DateTime dateFrom, DateTime dateTo)
         {
             return _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= dateFrom && DbFunctions.TruncateTime(e.Date) <= dateTo).GroupBy(e => e.Category,
                 (key, g) => new CategoryTotal { CategoryId = key.Id, CategoryName = key.Name, TotalAmount = g.Sum(c => c.Amount) })

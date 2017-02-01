@@ -8,7 +8,7 @@ namespace MoneyManager.DataAccess.EF.Mappings
     {
         public IncomeCategoryConfig()
         {
-            Property(x => x.Name).IsRequired().HasMaxLength(255);
+            Property(x => x.Name).IsRequired().HasMaxLength(50);
 
             HasKey(p => p.Id).Property(p => p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }

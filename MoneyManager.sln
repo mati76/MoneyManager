@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManager.WebApi", "Mone
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManager.Auth", "MoneyManager.Auth\MoneyManager.Auth.csproj", "{2A7C01DD-57B0-4751-A4BA-6CF4936F1F9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManager.Business.Tests", "MoneyManager.Business.Tests\MoneyManager.Business.Tests.csproj", "{97BC7658-6D36-4F28-9C80-CD00A46D3E3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{2A7C01DD-57B0-4751-A4BA-6CF4936F1F9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A7C01DD-57B0-4751-A4BA-6CF4936F1F9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A7C01DD-57B0-4751-A4BA-6CF4936F1F9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97BC7658-6D36-4F28-9C80-CD00A46D3E3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97BC7658-6D36-4F28-9C80-CD00A46D3E3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97BC7658-6D36-4F28-9C80-CD00A46D3E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97BC7658-6D36-4F28-9C80-CD00A46D3E3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

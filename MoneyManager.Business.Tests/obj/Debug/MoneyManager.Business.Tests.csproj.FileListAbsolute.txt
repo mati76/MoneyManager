@@ -1,0 +1,13 @@
+C:\Users\Marcin\Documents\Visual Studio 2015\Projects\MoneyManager\MoneyManager.Business.Tests\obj\Debug\MoneyManager.Business.Tests.csprojResolveAssemblyReference.cache
+C:\Users\Marcin\Documents\Visual Studio 2015\Projects\MoneyManager\MoneyManager.Business.Tests\bin\Debug\MoneyManager.Business.Tests.dll
+C:\Users\Marcin\Documents\Visual Studio 2015\Projects\MoneyManager\MoneyManager.Business.Tests\bin\Debug\MoneyManager.Business.Tests.pdb
+C:\Users\Marcin\Documents\Visual Studio 2015\Projects\MoneyManager\MoneyManager.Business.Tests\bin\Debug\Castle.Core.dll
+C:\Users\Marcin\Documents\Visual Studio 2015\Projects\MoneyManager\MoneyManager.Business.Tests\bin\Debug\MoneyManager.Business.dll
+C:\Users\Marcin\Documents\Visual Studio 2015\Projects\MoneyManager\MoneyManager.Business.Tests\bin\Debug\Moq.dll
+C:\Users\Marcin\Documents\Visual Studio 2015\Projects\MoneyManager\MoneyManager.Business.Tests\bin\Debug\nunit.framework.dll
+C:\Users\Marcin\Documents\Visual Studio 2015\Projects\MoneyManager\MoneyManager.Business.Tests\bin\Debug\MoneyManager.Business.pdb
+C:\Users\Marcin\Documents\Visual Studio 2015\Projects\MoneyManager\MoneyManager.Business.Tests\bin\Debug\Castle.Core.xml
+C:\Users\Marcin\Documents\Visual Studio 2015\Projects\MoneyManager\MoneyManager.Business.Tests\bin\Debug\Moq.xml
+C:\Users\Marcin\Documents\Visual Studio 2015\Projects\MoneyManager\MoneyManager.Business.Tests\bin\Debug\nunit.framework.xml
+C:\Users\Marcin\Documents\Visual Studio 2015\Projects\MoneyManager\MoneyManager.Business.Tests\obj\Debug\MoneyManager.Business.Tests.dll
+C:\Users\Marcin\Documents\Visual Studio 2015\Projects\MoneyManager\MoneyManager.Business.Tests\obj\Debug\MoneyManager.Business.Tests.pdb

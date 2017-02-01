@@ -31,11 +31,13 @@ namespace MoneyManager.WebApi.Configuration
             container.RegisterType<IExpenseController, ExpenseController>();
             container.RegisterType<IIncomeController, IncomeController>();
             container.RegisterType<IAccountController, AccountController>();
+            container.RegisterType<IBudgetController, BudgetController>();
             container.RegisterType<ICategoryService, CategoryService>();
             container.RegisterType<IExpenseService, ExpenseService>();
             container.RegisterType<IIncomeService, IncomeService>();
             container.RegisterType<IMapperService, MapperService>();
             container.RegisterType<IAccountService, AccountService>();
+            container.RegisterType<IBudgetService, BudgetService>();
 
             //MoneyManager.DataAccess
             container.RegisterType<IDbContext, MoneyManagerContext>();
@@ -43,6 +45,8 @@ namespace MoneyManager.WebApi.Configuration
             container.RegisterType<IIncomeCategoryRepository, IncomeCategoryRepository>();
             container.RegisterType<IExpenseRepository, ExpenseRepository>();
             container.RegisterType<IIncomeRepository, IncomeRepository>();
+            container.RegisterType<IBudgetExpenseRepository, BudgetExpenseRepository>();
+            container.RegisterType<IBudgetIncomeRepository, BudgetIncomeRepository>();
 
             //MoneyManager.Business
             container.RegisterType<ICategoryBusiness, CategoryBusiness>();
@@ -52,6 +56,7 @@ namespace MoneyManager.WebApi.Configuration
             container.RegisterType<IUnitOfWork, UnitOfWork>();
             container.RegisterType<IDateHelper, DateHelper>();
             container.RegisterType<IAuthBusiness, AuthBusiness>();
+            container.RegisterType<IBudgetBusiness, BudgetBusiness>();
 
             //Auth
             container.RegisterType<IAuthRepository, AuthRepository>();

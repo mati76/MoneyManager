@@ -11,7 +11,8 @@
     'moneyManager.expense',
     'moneyManager.income',
     'moneyManager.auth',
-    'moneyManager.home'
+    'moneyManager.home',
+    'moneyManager.budget'
 ]);
 
 

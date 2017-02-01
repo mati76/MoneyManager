@@ -7,7 +7,7 @@ using MoneyManager.WebApi.DTO;
 namespace MoneyManager.WebApi.Controllers
 {
     [RoutePrefix("api/category")]
-    //[Authorize]
+    [Authorize]
     public class CategoryController : ApiController, ICategoryController
     {
         private ICategoryService _categoryService;

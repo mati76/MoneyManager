@@ -260,7 +260,7 @@ p.expense-value{
     width: 100%;
 }
 
-#expenseSummary {
+.totals-bar {
     height: 80px;
     text-align: center;
     font-family: inherit;

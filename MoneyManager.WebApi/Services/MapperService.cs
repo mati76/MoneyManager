@@ -2,7 +2,6 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using MoneyManager.Business;
 using MoneyManager.Business.Models;
-using DTO = MoneyManager.WebApi.DTO;
 using BLL = MoneyManager.Business.Models;
 using DAC = MoneyManager.DataAccess.Models;
 
@@ -31,6 +30,7 @@ namespace MoneyManager.WebApi.Services
             AutoMapper.Mapper.CreateMap<DTO.AccountDTO, AppUser>();
             AutoMapper.Mapper.CreateMap<IdentityResult, ActionResult>();
             AutoMapper.Mapper.CreateMap<AppUser, IdentityUser>();
+            AutoMapper.Mapper.CreateMap<BudgetTotals, DTO.BudgetTotals>();
 
             AutoMapper.Mapper.CreateMap<DAC.ExpenseCategory, BLL.Category>();
             AutoMapper.Mapper.CreateMap<BLL.Category, DAC.ExpenseCategory>();
@@ -41,6 +41,8 @@ namespace MoneyManager.WebApi.Services
             AutoMapper.Mapper.CreateMap<DAC.Income, BLL.Income>();
             AutoMapper.Mapper.CreateMap<BLL.Expense, DAC.Expense>();
             AutoMapper.Mapper.CreateMap<BLL.Income, DAC.Income>();
+            AutoMapper.Mapper.CreateMap<DAC.BudgetExpense, BLL.Expense>();
+            AutoMapper.Mapper.CreateMap<BLL.Expense, DAC.BudgetExpense>();
         }
     }
 }
