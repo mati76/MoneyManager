@@ -56,8 +56,8 @@
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\ActionResult.cs" />
     <Compile Include="Models\BaseEntity.cs" />
-    <Compile Include="Models\BudgetTotals.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\CategoryBalance.cs" />
     <Compile Include="Models\CategoryTotal.cs" />
     <Compile Include="Models\Expense.cs" />
     <Compile Include="Models\Income.cs" />

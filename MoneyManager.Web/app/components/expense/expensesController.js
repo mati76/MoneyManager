@@ -26,7 +26,7 @@
     $scope.$parent.titleBarClass = "title-bar-expense";
     $scope.$parent.btnAddCaption = "Add Expense";
     $scope.$parent.addFunc = function () {
-        expensePopupService.expensePopup('add', $scope.reload);
+        expensePopupService.expensePopup('add', $scope.reload, expenseService.saveExpense);
     };
 
     $scope.chartOptions = {
@@ -63,7 +63,7 @@
     };
    
     $scope.editExpense = function (expense) {
-        expensePopupService.expensePopup('edit', $scope.reload, expense);
+        expensePopupService.expensePopup('edit', $scope.reload, expenseService.saveExpense, expense);
     };
 
     $scope.deleteExpense = function (expense) {

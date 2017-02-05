@@ -8,10 +8,12 @@
             <li ng-show="showToday" ng-class="selected.mode == 'Today' && !showCustom ? 'menu-item menu-item-selected' : 'menu-item'" role="menuitem" ng-click="applySelection('Today')">Today</li>
             <li ng-show="showWeek" ng-class="selected.mode == 'Week' && !showCustom ? 'menu-item menu-item-selected' : 'menu-item'" role="menuitem" ng-click="applySelection('Week')">This Week</li>
             <li ng-show="showMonth" ng-class="selected.mode == 'Month' && !showCustom ? 'menu-item menu-item-selected' : 'menu-item'" role="menuitem" ng-click="applySelection('Month')">This Month</li>
+            <li ng-show="showNextMonth" ng-class="selected.mode == 'NextMonth' && !showCustom ? 'menu-item menu-item-selected' : 'menu-item'" role="menuitem" ng-click="applySelection('NextMonth')">Next Month</li>
+            <li ng-show="showPrevMonth" ng-class="selected.mode == 'PrevMonth' && !showCustom ? 'menu-item menu-item-selected' : 'menu-item'" role="menuitem" ng-click="applySelection('PrevMonth')">Previous Month</li>
             <li ng-show="showYear" ng-class="selected.mode == 'Year' && !showCustom ? 'menu-item menu-item-selected' : 'menu-item'" role="menuitem" ng-click="applySelection('Year')">This Year</li>
-            <li ng-class="selected.mode == 'Custom' || showCustom ? 'menu-item menu-item-selected' : 'menu-item'" ng-click="showCustom = true; $event.stopPropagation();">Custom</li>
+            <li ng-show="showCustomDates" ng-class="selected.mode == 'Custom' || showCustom ? 'menu-item menu-item-selected' : 'menu-item'" ng-click="showCustom = true; $event.stopPropagation();">Custom</li>
         </ul>
-        <div ng-show="showCustom || selected.mode == 'Custom'">
+        <div ng-show="showCustomDates && (showCustom || selected.mode == 'Custom')">
             <div ng-click="$event.stopPropagation()" style="height: 70px">
                 <ul class="horizontal-list" id="customPeriodOptions">
                     <li class="menu-item" ng-class="{'menu-item-selected': customPeriodOption == 'from'}" ng-click="customPeriodOption = 'from'; $event.stopPropagation();">Start Date: <div>{{customDate['from'] | date}}</div></li>

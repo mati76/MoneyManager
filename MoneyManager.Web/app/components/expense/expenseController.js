@@ -1,5 +1,5 @@
-﻿angular.module('moneyManager.expense').controller('expenseController', ['$scope', '$uibModal', '$uibModalInstance', 'params', 'expenseService', 'categoryService',
-    function ($scope, $uibModal, $uibModalInstance, params, expenseService, categoryService) {
+﻿angular.module('moneyManager.expense').controller('expenseController', ['$scope', '$uibModal', '$uibModalInstance', 'params', 'categoryService',
+    function ($scope, $uibModal, $uibModalInstance, params, categoryService) {
 
     var mode = {
         add: 'Add New ',
@@ -23,6 +23,8 @@
     }
 
     $scope.mode = mode[params.dialogMode];
+    $scope.saveFunc = params.saveFunc;
+
     $scope.categoryToggleBtnText = "Select...";
     $scope.isOtherCategorySelected = false;
     
@@ -93,7 +95,7 @@
                 Id: $scope.model.Id,
                 CategoryId: $scope.model.CategoryId 
             };
-            expenseService.saveExpense(expense).then(function (result) {
+            $scope.saveFunc(expense).then(function (result) {
                 $uibModalInstance.close();
             }, function (error) {
                 //handle error

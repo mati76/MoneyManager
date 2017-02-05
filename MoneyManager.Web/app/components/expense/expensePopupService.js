@@ -2,7 +2,7 @@
 
     return { expensePopup: expensePopup };
 
-    function expensePopup(mode, reloadFunc, expense) {
+    function expensePopup(mode, reloadFunc, saveFunc, expense ) {
         callback = reloadFunc;
         var modalInstance = $uibModal.open({
             animation: true,
@@ -10,7 +10,7 @@
             templateUrl: '/app/components/expense/expense.html',
             controller: 'expenseController',
             resolve: {
-                params: { dialogMode: mode, expense: expense }
+                params: { dialogMode: mode, expense: expense, saveFunc: saveFunc }
             }
         });
 

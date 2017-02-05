@@ -1,4 +1,5 @@
 ﻿using MoneyManager.Business.Models;
+using System;
 using System.Collections.Generic;
 
 namespace MoneyManager.Business
@@ -30,8 +31,15 @@ namespace MoneyManager.Business
 
         void DeleteIncome(int id);
 
+
         decimal GetAvgExpenseDeviation();
 
-        BudgetTotals GetTotals(int year, int month);
+        decimal GetBudgetLimit(DateTime dateFrom, DateTime dateTo);
+
+        decimal GetBudgetDeviation(DateTime dateFrom, DateTime dateTo);
+
+        decimal GetBudgetBalance(DateTime dateFrom, DateTime dateTo);
+
+        IEnumerable<CategoryBalance> GetCategoryBalance(DateTime dateFrom, DateTime dateTo);
     }
 }

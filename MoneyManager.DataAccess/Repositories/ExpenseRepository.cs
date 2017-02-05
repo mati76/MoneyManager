@@ -20,6 +20,12 @@ namespace MoneyManager.DataAccess.Repositories
             return _mapperService.Map<IEnumerable<Expense>>(_dbset.Where(o => DbFunctions.TruncateTime(o.Date) == date).Include(o => o.Category));
         }
 
+        public IEnumerable<Expense> GetExpenses(DateTime dateFrom, DateTime dateTo)
+        {
+            return _mapperService.Map<IEnumerable<Expense>>(_dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(dateFrom)
+                && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(dateTo)));
+        }
+
         public IEnumerable<Expense> GetExpenses(int year, int month)
         {
             return _mapperService.Map<IEnumerable<Expense>>(_dbset.Where(o => o.Date.Year == year && o.Date.Month == month));
@@ -49,14 +55,14 @@ namespace MoneyManager.DataAccess.Repositories
             return _dbset.Where(e => e.Date >= from && e.Date <= to).Select(e => e.Amount).DefaultIfEmpty(0).Sum();
         }
 
-        public IEnumerable<CategoryTotal> GeCategoryTotals(DateTime dateFrom, DateTime dateTo)
+        public IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo)
         {
             return _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(dateFrom) && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(dateTo)).GroupBy(e => e.Category.Parent,
                 (key, g) => new CategoryTotal { CategoryId = key.Id, CategoryName = key.Name, TotalAmount = g.Sum(c => c.Amount) })
                 .OrderByDescending(c => c.TotalAmount).ToList();
         }
 
-        public IEnumerable<CategoryTotal> GeCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId)
+        public IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId)
         {
             return _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(dateFrom) && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(dateTo)
                 && e.Category.ParentId == categoryId).GroupBy(e => e.Category, 

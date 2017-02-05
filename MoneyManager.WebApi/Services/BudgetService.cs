@@ -68,9 +68,31 @@ namespace MoneyManager.WebApi.Services
             _budgetBusiness.SaveIncome(_mapperService.Map<Income>(income));
         }
 
-        public DTO.BudgetTotals GetBudgetTotals(int year, int month)
+        public DTO.BudgetTotals GetBudgetTotals(DateTime dateFrom, DateTime dateTo)
         {
-            return _mapperService.Map<DTO.BudgetTotals>(_budgetBusiness.GetTotals(year, month));
+            return new DTO.BudgetTotals
+            {
+                BudgetLimit = _budgetBusiness.GetBudgetLimit(dateFrom, dateTo),
+                AvgDeviation = _budgetBusiness.GetAvgExpenseDeviation(),
+                BudgetBalance = _budgetBusiness.GetBudgetBalance(dateFrom, dateTo),
+                Deviation = _budgetBusiness.GetBudgetDeviation(dateFrom, dateTo)
+            };
+        }
+
+        public IEnumerable<DTO.BudgetRealization> GetBudgetRealization(DateTime dateFrom, DateTime dateTo)
+        {
+            var result = new List<DTO.BudgetRealization>();
+            foreach (var categoryBalance in _budgetBusiness.GetCategoryBalance(dateFrom, dateTo))
+            {
+                result.Add(new DTO.BudgetRealization
+                {
+                    CategoryName = categoryBalance.CategoryName,
+                    Expense = categoryBalance.Expense,
+                    Left = categoryBalance.Balance.HasValue ? (categoryBalance.Balance.Value > 0 ? categoryBalance.Balance.Value : 0) : 0,
+                    Over = categoryBalance.Balance.HasValue ? (categoryBalance.Balance.Value < 0 ? Math.Abs(categoryBalance.Balance.Value) : 0) : 0
+                });
+            }
+            return result;
         }
     }
 }

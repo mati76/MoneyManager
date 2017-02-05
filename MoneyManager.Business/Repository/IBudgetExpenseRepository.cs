@@ -8,10 +8,14 @@ namespace MoneyManager.Business.Repository
     {
         IEnumerable<Expense> GetExpenses(int year, int month);
 
+        IEnumerable<Expense> GetExpenses(DateTime dateFrom, DateTime dateTo);
+
         IEnumerable<Expense> GetExpenses(int year);
 
         IEnumerable<Expense> GetExpensesByCriteria(SearchCriteria criteria);
 
         IEnumerable<TransactionAggregates> GetExpenseAggregates();
+
+        IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
     }
 }

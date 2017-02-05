@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using MoneyManager.WebApi.DTO;
+using System;
 
 namespace MoneyManager.WebApi.Controllers
 {
@@ -14,5 +15,6 @@ namespace MoneyManager.WebApi.Controllers
         Income GetIncomeById(int id);
         void Post([FromBody] Income income);
         void Post([FromBody] Expense expense);
+        IEnumerable<BudgetRealization> GetRealization(DateTime from, DateTime to);
     }
 }

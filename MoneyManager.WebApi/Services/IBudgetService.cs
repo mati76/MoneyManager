@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using MoneyManager.WebApi.DTO;
+using System;
 
 namespace MoneyManager.WebApi.Services
 {
@@ -15,6 +16,7 @@ namespace MoneyManager.WebApi.Services
         IEnumerable<Income> GetIncome(int year, int month);
         void SaveExpense(Expense expense);
         void SaveIncome(Income income);
-        BudgetTotals GetBudgetTotals(int year, int month);
+        BudgetTotals GetBudgetTotals(DateTime dateFrom, DateTime dateTo);
+        IEnumerable<BudgetRealization> GetBudgetRealization(DateTime dateFrom, DateTime dateTo);
     }
 }

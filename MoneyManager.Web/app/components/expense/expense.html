@@ -37,15 +37,15 @@
                 <div id="expenseCategories" class="container-fluid">
                     <div class="row">
                         <div class="col-md-2" ng-repeat="category in topCategories">
-                            <button type="button" class="btn btn-primary" ng-class="{selected: isSelected(category.Id)}" ng-click="selectCategory(category.Id)">
-                                <span ng-show="isSelected(category.Id)" style="float: left" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                {{category.Name}}
+                            <button type="button" class="picker-button btn btn-primary" ng-class="{selected: isSelected(category.Id), 'small-font': category.Name.length > 20}" 
+                                    ng-click="selectCategory(category.Id)">
+                                <span ng-bind="category.Name"></span>
                             </button>
                         </div>
                         <div class="col-md-2 btn-group" uib-dropdown>
-                            <button type="button" class="btn btn-primary dropdown-toggle" ng-class="{selected: isOtherCategorySelected}" ng-click="categoryPopup()">
-                                {{ categoryToggleBtnText }}
-                                <span ng-show="isOtherCategorySelected" style="float: left" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            <button type="button" class="picker-button btn btn-primary dropdown-toggle" 
+                                    ng-class="{selected: isOtherCategorySelected, 'small-font': categoryToggleBtnText.length > 20}" ng-click="categoryPopup()">
+                                <span ng-bind="categoryToggleBtnText"></span>
                                 <span ng-hide="loadingCategories" class="caret" style="float: right; margin-top: 10px"></span>
                                 <img ng-show="loadingCategories" src="../../../icons/loading1.gif" width="20" height="20" style="float: right"/>
                             </button>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using MoneyManager.Business.Interfaces;
 using MoneyManager.Business.Models;
 using MoneyManager.Business.Repository;
 using MoneyManager.Business.Utilities;
@@ -134,7 +133,7 @@ namespace MoneyManager.Business
                     TransactionAggregates budgetAggr = null;
                     if(budgetExpenseAggregates.TryGetValue($"{aggr.Year}-{aggr.Month}", out budgetAggr))
                     {
-                        deviations.Add((aggr.Sum - budgetAggr.Sum) / budgetAggr.Sum);
+                        deviations.Add(100 * (budgetAggr.Sum - aggr.Sum) / budgetAggr.Sum);
                     }
                 }
 
@@ -142,24 +141,66 @@ namespace MoneyManager.Business
             }
         }
 
-        public BudgetTotals GetTotals(int month, int year)
+        public decimal GetCategoryLimits(DateTime dateFrom, DateTime dateTo)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                var budgetRepository = session.GetRepository<IBudgetExpenseRepository>();
-                var expenseRepository = session.GetRepository<IExpenseRepository>();
-             
-                var expense = expenseRepository.GetExpenses(year, month).Select(e => e.Amount).Sum();
+                return session.GetRepository<IBudgetExpenseRepository>().GetExpenses(dateFrom, dateTo).Select(e => e.Amount).Sum();
+            }
+        }
 
-                var totals = new BudgetTotals
+        public decimal GetBudgetLimit(DateTime dateFrom, DateTime dateTo)
+        {
+            using (var session = _unitOfWorkFactory.GetSession())
+            {
+                return session.GetRepository<IBudgetExpenseRepository>().GetExpenses(dateFrom, dateTo).Select(e => e.Amount).Sum();
+            }
+        }
+
+        public decimal GetBudgetDeviation(DateTime dateFrom, DateTime dateTo)
+        {
+            using (var session = _unitOfWorkFactory.GetSession())
+            {
+                var limit = GetBudgetLimit(dateFrom, dateTo);
+                var expense = session.GetRepository<IExpenseRepository>().GetExpenses(dateFrom, dateTo).Select(e => e.Amount).Sum();
+
+                return limit > 0 ? 100 * (limit - expense) / limit : 0;
+            }
+        }
+
+        public decimal GetBudgetBalance(DateTime dateFrom, DateTime dateTo)
+        {
+            using (var session = _unitOfWorkFactory.GetSession())
+            {
+                var limit = GetBudgetLimit(dateFrom, dateTo);
+                var expense = session.GetRepository<IExpenseRepository>().GetExpenses(dateFrom, dateTo).Select(e => e.Amount).Sum();
+
+                return limit - expense;
+            }
+        }
+
+        public IEnumerable<CategoryBalance> GetCategoryBalance(DateTime dateFrom, DateTime dateTo)
+        {
+            using (var session = _unitOfWorkFactory.GetSession())
+            {
+                var result = new List<CategoryBalance>();
+                var categoryLimits = session.GetRepository<IBudgetExpenseRepository>().GetCategoryTotals(dateFrom, dateTo);
+                var categoryExpense = session.GetRepository<IExpenseRepository>().GetCategoryTotals(dateFrom, dateTo);
+
+                var categories = categoryLimits.Select(c => new { Id = c.CategoryId, Name = c.CategoryName }).Concat(categoryExpense.Select(e => new { Id = e.CategoryId, Name = e.CategoryName }).ToList()).Distinct();
+                foreach(var category in categories)
                 {
-                    BudgetLimit = budgetRepository.GetExpenses(year, month).Select(e => e.Amount).Sum(),
-                    AvgDeviaton = GetAvgExpenseDeviation()
-                };
-                totals.BudgetBalance = totals.BudgetLimit - expense;
-                totals.Deviation = totals.BudgetLimit > 0 ? (expense - totals.BudgetLimit) / totals.BudgetLimit : 0;
+                    result.Add(new CategoryBalance
+                    {
+                        CategoryId = category.Id,
+                        CategoryName = category.Name,
+                        Expense = categoryExpense.FirstOrDefault(e => e.CategoryId == category.Id)?.TotalAmount,
+                        Balance = categoryLimits.FirstOrDefault(c => c.CategoryId == category.Id)?.TotalAmount
+                    });
+                }
 
-                return totals;
+                result.Where(r => r.Balance.HasValue).ToList().ForEach(r => r.Balance -= r.Expense ?? 0);
+                return result;
             }
         }
     }

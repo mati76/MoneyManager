@@ -1,9 +1,12 @@
-﻿angular.module('moneyManager.budget').controller('budgetController', ['$scope', 'budgetService', '$stateParams', '$state', 'helperService',
-    function ($scope, budgetService, $stateParams, $state, helperService) {
+﻿angular.module('moneyManager.budget').controller('budgetController', ['$scope', 'budgetService', 'expensePopupService', '$stateParams', '$state', 'helperService', 'messageBoxService',
+    function ($scope, budgetService, expensePopupService, $stateParams, $state, helperService, messageBoxService) {
 
     $scope.$parent.pageName = "BUDGET";
     $scope.$parent.titleBarClass = "title-bar-budget";
-    $scope.$parent.addFunc = null;
+    $scope.$parent.btnAddCaption = "Add Planned Expense";
+    $scope.$parent.addFunc = function () {
+        expensePopupService.expensePopup('add', $scope.reload, budgetService.saveExpense);
+    };
     $scope.chartColours = [];
     $scope.chart = {};
 
@@ -14,7 +17,7 @@
             { title: 'DESCRIPTION', field: 'Comment', headerStyle: { 'padding-left': '40px' }, style: { 'width': '70%', 'padding-left': '40px' } },
             { title: 'CATEGORY', field: 'CategoryName', sortBy: 'Category.Name', headerClass: 'align-right', style: { 'width': '30%', 'text-align': 'right' } }
         ],
-        label: 'TRANSACTIONS:',
+        label: 'PLANNED TRANSACTIONS:',
         noItemsLabel: 'NO TRANSACTIONS',
         singleSelectActions: [
             { label: 'EDIT', css: 'grid-btn-edit', callback: function (item) { $scope.editExpense(item); } },
@@ -70,9 +73,24 @@
         }, { notify: false });
     };
 
+    $scope.editExpense = function (expense) {
+        expensePopupService.expensePopup('edit', $scope.reload, budgetService.saveExpense, expense);
+    };
+
+    $scope.deleteExpense = function (expense) {
+        messageBoxService.showMessage('Are you sure you want to remove selected expense?', 'Delete expense', 'warning')
+        .then(function () {
+            budgetService.removeExpense(expense.Id).then(function () {
+                $scope.reload();
+            }, function (error) {
+
+            });
+        });
+    };
+
     $scope.loadTotals = function () {
         $scope.loadingTotals = true;
-        budgetService.getBudgetTotals().then(function (result) {
+        budgetService.getBudgetTotals($scope.pageParams.DateFrom, $scope.pageParams.DateTo).then(function (result) {
             $scope.loadingTotals = false;
             $scope.totals = result.data;
         }, function (error) {
@@ -80,8 +98,35 @@
         });
     };
 
+    $scope.loadBudgetRealization = function () {
+        $scope.chart.isLoading = true;
+        budgetService.getBudgetRealization($scope.pageParams.DateFrom, $scope.pageParams.DateTo).then(function (result) {
+            $scope.chart.isLoading = false;
+            $scope.chart.labels = [],
+            $scope.chart.noData = result.data.length == 0;
+            $scope.chart.series = ['Spent:', 'Left', 'Over'];
+            $scope.chart.colors = ['#3498DB', '#72C02C', '#DD2321'];
+
+            var series1 = [];
+            var series2 = [];
+            var series3 = [];
+            for (var i = 0; i < result.data.length; i++) {
+                var item = result.data[i];
+                $scope.chart.labels.push(item.CategoryName);
+                series1.push(item.Expense);
+                series2.push(item.Left);
+                series3.push(item.Over);
+            }
+            $scope.chart.data = [series1, series2, series3];
+
+        }, function (error) {
+            $scope.chart.isLoading = false;
+        });
+    };
+
     $scope.reload = function () {
         $scope.loadBudgetExpenses();
+        $scope.loadBudgetRealization();
         $scope.loadTotals();
     };
 

@@ -8,7 +8,7 @@
              data: { requireLogin: true },
              views: {
                  'filters': {
-                     template: '<period-picker selected-option="selectedPeriod" show-month="true" show-year="true"></period-picker>',
+                     template: '<period-picker selected-option="selectedPeriod" show-month="true" show-next-month="true" show-prev-month="true" show-year="true"></period-picker>',
                      controller: function ($scope) { },
                  },
                  'content': {
@@ -32,7 +32,7 @@
             data: { requireLogin: true },
             views: {
                 'filters': {
-                    template: '<period-picker selected-option="selectedPeriod" show-month="true" show-year="true"></period-picker>',
+                    template: '<period-picker selected-option="selectedPeriod" show-month="true" show-next-month="true" show-prev-month="true" show-year="true"></period-picker>',
                     controller: function ($scope) { },
                 },
                 'content': {

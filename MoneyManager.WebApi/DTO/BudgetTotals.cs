@@ -8,6 +8,6 @@
 
         public decimal Deviation { get; set; }
 
-        public decimal AvgDeviaton { get; set; }
+        public decimal AvgDeviation { get; set; }
     }
 }

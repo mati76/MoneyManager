@@ -79,7 +79,6 @@
     <Content Include="app\components\category\categoryController.js" />
     <Content Include="app\components\category\filterTpl.html" />
     <Content Include="app\components\expense\filterTpl.html" />
-    <Content Include="app\components\expense\directives.js" />
     <Content Include="app\components\expense\expense.html" />
     <Content Include="app\components\expense\expenseController.js" />
     <Content Include="app\components\expense\expense.js" />

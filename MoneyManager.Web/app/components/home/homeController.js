@@ -1,5 +1,5 @@
-﻿angular.module('moneyManager.home').controller('homeController', ['$scope', 'expenseService', 'incomeService', '$stateParams', '$state', 'helperService',
-    function ($scope, expenseService, incomeService, $stateParams, $state, helperService) {
+﻿angular.module('moneyManager.home').controller('homeController', ['$scope', 'expenseService', 'incomeService', 'budgetService', '$stateParams', '$state', 'helperService',
+    function ($scope, expenseService, incomeService, budgetService, $stateParams, $state, helperService) {
 
     $scope.$parent.pageName = "DASHBOARD";
     $scope.$parent.addFunc = null;
@@ -46,7 +46,7 @@
 
     $scope.loadBudgets = function (from, to) {
         $scope.chart3.isLoading = true;
-        expenseService.getCategoryTotals(from, to).then(function (result) {
+        budgetService.getBudgetRealization(from, to).then(function (result) {
             $scope.chart3.isLoading = false;
             $scope.chart3.labels = [],
             $scope.chart3.noData = result.data.length == 0;
@@ -59,9 +59,9 @@
             for (var i = 0; i < result.data.length; i++) {
                 var item = result.data[i];
                 $scope.chart3.labels.push(item.CategoryName);
-                series1.push(item.TotalAmount);
-                series2.push(300);
-                series3.push(i % 2 == 0 ? 100 : 0);
+                series1.push(item.Expense);
+                series2.push(item.Left);
+                series3.push(item.Over);
             }
             $scope.chart3.data = [series1, series2, series3];
 

@@ -25,6 +25,12 @@ namespace MoneyManager.DataAccess.Repositories
             return _mapperService.Map<IEnumerable<Expense>>(_dbset.Where(o => o.Date.Year == year));
         }
 
+        public IEnumerable<Expense> GetExpenses(DateTime dateFrom, DateTime dateTo)
+        {
+            return _mapperService.Map<IEnumerable<Expense>>(_dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(dateFrom)
+                && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(dateTo)));
+        }
+
         public IEnumerable<Expense> GetExpensesByCriteria(SearchCriteria criteria)
         {
             var qry = _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(criteria.DateFrom)
@@ -47,6 +53,13 @@ namespace MoneyManager.DataAccess.Repositories
         public IEnumerable<TransactionAggregates> GetExpenseAggregates()
         {
             return _dbset.GroupBy(g => new { g.Date.Year, g.Date.Month }, (key, gr) => new TransactionAggregates { Month = key.Month, Year = key.Year, Sum = gr.Sum(g => g.Amount), Avg = gr.Average(g => g.Amount) }).OrderBy(g => new { g.Year, g.Month });
+        }
+
+        public IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo)
+        {
+            return _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(dateFrom) && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(dateTo)).GroupBy(e => e.Category.Parent,
+                (key, g) => new CategoryTotal { CategoryId = key.Id, CategoryName = key.Name, TotalAmount = g.Sum(c => c.Amount) })
+                .OrderByDescending(c => c.TotalAmount).ToList();
         }
     }
 }

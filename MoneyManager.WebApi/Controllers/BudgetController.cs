@@ -69,10 +69,16 @@ namespace MoneyManager.WebApi.Controllers
             _budgetService.DeleteIncome(id);
         }
 
-        [Route("totals/{year:int:min(1900)}/{month:int:range(1,12)}")]
-        public BudgetTotals GetTotals(int year, int month)
+        [Route("totals/{from:datetime}/{to:datetime}")]
+        public BudgetTotals GetTotals(DateTime from, DateTime to)
         {
-            return _budgetService.GetBudgetTotals(year, month);
+            return _budgetService.GetBudgetTotals(from, to);
+        }
+
+        [Route("realization/{from:datetime}/{to:datetime}")]
+        public IEnumerable<BudgetRealization> GetRealization(DateTime from, DateTime to)
+        {
+            return _budgetService.GetBudgetRealization(from, to);
         }
     }
 }

@@ -30,7 +30,6 @@ namespace MoneyManager.WebApi.Services
             AutoMapper.Mapper.CreateMap<DTO.AccountDTO, AppUser>();
             AutoMapper.Mapper.CreateMap<IdentityResult, ActionResult>();
             AutoMapper.Mapper.CreateMap<AppUser, IdentityUser>();
-            AutoMapper.Mapper.CreateMap<BudgetTotals, DTO.BudgetTotals>();
 
             AutoMapper.Mapper.CreateMap<DAC.ExpenseCategory, BLL.Category>();
             AutoMapper.Mapper.CreateMap<BLL.Category, DAC.ExpenseCategory>();

@@ -95,7 +95,7 @@ namespace MoneyManager.Business
             using (var session = _unitOfWorkFactory.GetSession())
             {
                 var repository = session.GetRepository<IExpenseRepository>();
-                var totals = categoryId > 0 ? repository.GeCategoryTotals(dateFrom, dateTo, categoryId) : repository.GeCategoryTotals(dateFrom, dateTo);
+                var totals = categoryId > 0 ? repository.GetCategoryTotals(dateFrom, dateTo, categoryId) : repository.GetCategoryTotals(dateFrom, dateTo);
                 totals?.ToList().ForEach(i => i.Percent = i.TotalAmount / totals.Sum(t => t.TotalAmount));
                 return totals;
             }

@@ -189,6 +189,7 @@
     <Compile Include="Controllers\ICategoryController.cs" />
     <Compile Include="Controllers\IExpenseController.cs" />
     <Compile Include="DTO\AccountDTO..cs" />
+    <Compile Include="DTO\BudgetRealization.cs" />
     <Compile Include="DTO\BudgetTotals.cs" />
     <Compile Include="DTO\CategoryInfo.cs" />
     <Compile Include="DTO\CategoryTotals.cs" />

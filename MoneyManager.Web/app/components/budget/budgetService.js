@@ -6,7 +6,8 @@
         getExpenses: getExpenses,
         getBudgetTotals: getBudgetTotals,
         saveExpense: saveExpense,
-        removeExpense: removeExpense
+        removeExpense: removeExpense,
+        getBudgetRealization: getBudgetRealization
     };
 
     function getExpense(id) {
@@ -29,7 +30,19 @@
         return $http.delete(uri + '/expense/' + id);
     }
 
-    function getBudgetTotals(year, month) {
-        return $http.get(uri + '/totals/' + year + '/' + month);
+    function getBudgetTotals(dateFrom, dateTo) {
+        return $http.get(uri + '/totals/' + $filter('date')(getMonthStart(dateFrom), 'yyyy-MM-dd') + '/' + $filter('date')(getMonthEnd(dateTo), 'yyyy-MM-dd'));
+    }
+
+    function getBudgetRealization(dateFrom, dateTo) {
+        return $http.get(uri + '/realization/' + $filter('date')(getMonthStart(dateFrom), 'yyyy-MM-dd') + '/' + $filter('date')(getMonthEnd(dateTo), 'yyyy-MM-dd'));
+    }
+
+    function getMonthStart(date) {
+        return new Date(date.getFullYear(), date.getMonth(), 1);
+    }
+
+    function getMonthEnd(date) {
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     }
 }]);

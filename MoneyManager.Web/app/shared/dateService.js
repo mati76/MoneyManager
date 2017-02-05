@@ -2,7 +2,10 @@
     return {
         getWeek: getWeek,
         getMonth: getMonth,
-        getYear: getYear
+        getNextMonth: getNextMonth,
+        getPrevMonth: getPrevMonth,
+        getYear: getYear,
+        isRangeFullMonth, isRangeFullMonth
     };
 
     function getWeek() {
@@ -25,6 +28,35 @@
         };
     }
 
+    function getNextMonth() {
+        var current = new Date();
+        var month = current.getMonth() + 1;
+        var year = current.getFullYear();
+
+        if (month == 12) {
+            month = 0;
+            year++;
+        }
+        return {
+            from: new Date(year, month, 1),
+            to: new Date(year, month, daysInMonth(month, year))
+        };
+    }
+
+    function getPrevMonth() {
+        var current = new Date();
+        var month = current.getMonth() - 1;
+        var year = current.getFullYear();
+        if (month == -1) {
+            month = 11;
+            year--;
+        }
+        return {
+            from: new Date(year, month, 1),
+            to: new Date(year, month, daysInMonth(month, year))
+        };
+    }
+
     function getYear() {
         var year = new Date().getFullYear();
         return {
@@ -33,8 +65,15 @@
         };
     }
 
+    function isRangeFullMonth(from, to) {
+        return from.getMonth() == to.getMonth() && from.getYear() == to.getYear() &&
+            from.getDate() == 1 && to.getDate() == daysInMonth(to.getMonth(), to.getFullYear());
+    }
+
     function daysInMonth(month, year) {
         return new Date(year, month + 1, 0).getDate();
     }
+
+    
 
 }]);
