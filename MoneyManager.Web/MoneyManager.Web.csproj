@@ -93,7 +93,6 @@
     <Content Include="app\components\category\categoriesController.js" />
     <Content Include="app\components\income\incomeController.js" />
     <Content Include="app\components\income\income.html" />
-    <Content Include="app\components\income\filterTpl.html" />
     <Content Include="app\components\income\incomesController.js" />
     <Content Include="app\components\income\income.js" />
     <Content Include="app\components\income\incomes.html" />

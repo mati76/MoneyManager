@@ -48,8 +48,6 @@
             scope.applySelection = function (mode) {
                 scope.showCustom = false;
 
-                scope.selected = {};
-
                 if(mode == 'Custom'){
                     if (scope.customDate['to'] < scope.customDate['from']) {
                         messageBoxService.showMessage("Start date must be less than end date", 'Error', 'error');
@@ -71,9 +69,9 @@
                 } else if (mode == 'NextMonth' || mode == 'PrevMonth') {
                     var dates = {};
                     if (mode == 'NextMonth') {
-                        dates = dateService.getNextMonth();
+                        dates = dateService.getNextMonth(scope.selected.dateTo);
                     } else {
-                        dates = dateService.getPrevMonth();
+                        dates = dateService.getPrevMonth(scope.selected.dateFrom);
                     }
                     
                     scope.title = $filter('date')(dates.from, dateFormat)

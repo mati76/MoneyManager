@@ -4,13 +4,13 @@
             <nothing-to-display ng-show="chart1.noData"></nothing-to-display>
             <loading-panel is-loading="chart1.isLoading" width="50" height="50"></loading-panel>
             <div class="panel panel-default">
-                <div class="row">
-                    <div ng-show="!chart1.noData" style="margin-left: 20px" class="panel-heading panel-title">INCOMES BY CATEGORIES</div>
-                    <div class="col-sm-5" style="width:260px">
+                <div class="row" style="min-height: 300px">
+                    <div style="margin-left: 20px" class="panel-heading panel-title">INCOMES BY CATEGORIES</div>
+                    <div ng-hide="chart1.noData" class="col-sm-5" style="width:260px">
                         <canvas id="bar" class="chart chart-doughnut" height="260" width="260"
                                 chart-data="chart1.data" chart-labels="chart1.labels" chart-options="chartOptions"
                                 chart-colors="chart1.colors" style="padding: 25px"></canvas>
-                        <span ng-show="chart1.total > 0" class="chart-total semi-bold income">{{chart1.total | number:2}}</span>
+                        <span ng-hide="chart1.noData" class="chart-total semi-bold income">{{chart1.total | number:2}}</span>
                     </div>
                     <div class="col-sm-7">
                         <div class="chart-legend-custom">

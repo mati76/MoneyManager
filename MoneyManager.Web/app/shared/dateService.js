@@ -28,10 +28,9 @@
         };
     }
 
-    function getNextMonth() {
-        var current = new Date();
-        var month = current.getMonth() + 1;
-        var year = current.getFullYear();
+    function getNextMonth(date) {
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
 
         if (month == 12) {
             month = 0;
@@ -43,10 +42,9 @@
         };
     }
 
-    function getPrevMonth() {
-        var current = new Date();
-        var month = current.getMonth() - 1;
-        var year = current.getFullYear();
+    function getPrevMonth(date) {
+        var month = date.getMonth() - 1;
+        var year = date.getFullYear();
         if (month == -1) {
             month = 11;
             year--;

@@ -18,13 +18,13 @@
             <nothing-to-display ng-show="chart1.noData"></nothing-to-display>
             <loading-panel is-loading="chart1.isLoading" width="50" height="50"></loading-panel>
             <div class="panel panel-default"s>
-                <div class="row">
-                    <div ng-show="!chart1.noData" style="margin-left: 20px" class="panel-heading panel-title">EXPENSES BY CATEGORIES</div>
+                <div class="row" style="min-height: 300px">
+                    <div style="margin-left: 20px" class="panel-heading panel-title">EXPENSES BY CATEGORIES</div>
                     <div class="col-sm-5">
-                        <canvas id="bar" class="chart chart-doughnut" height="260" width="260"
+                        <canvas ng-hide="chart1.noData" id="bar" class="chart chart-doughnut" height="260" width="260"
                                 chart-data="chart1.data" chart-labels="chart1.labels" chart-options="chartOptions"
                                 chart-colors="chart1.colors" style="padding: 25px"></canvas>
-                        <span ng-show="chart1.total > 0" class="chart-total semi-bold expense">{{chart1.total | number:2}}</span>
+                        <span ng-hide="chart1.noData" class="chart-total semi-bold expense">{{chart1.total | number:2}}</span>
                     </div>
                     <div class="col-sm-7">
                         <div class="chart-legend-custom">
@@ -45,13 +45,13 @@
             <nothing-to-display ng-show="chart2.noData"></nothing-to-display>
             <loading-panel is-loading="chart2.isLoading" width="50" height="50"></loading-panel>
             <div class="panel panel-default">
-                <div class="row">
-                    <div ng-show="!chart2.noData" style="margin-left: 20px" class="panel-heading panel-title">{{detailsChartCategoryName}}</div>
+                <div class="row" style="min-height: 300px">
+                    <div style="margin-left: 20px" class="panel-heading panel-title">{{detailsChartCategoryName}}</div>
                     <div class="col-sm-5">
-                        <canvas id="bar" class="chart chart-doughnut" height="260" width="260"
+                        <canvas ng-hide="chart2.noData" id="bar" class="chart chart-doughnut" height="260" width="260"
                                 chart-data="chart2.data" chart-labels="chart2.labels" chart-options="chartOptions"
                                 chart-colors="chart2.colors" style="padding: 25px"></canvas>
-                        <span ng-show="chart2.total > 0" class="chart-total semi-bold expense">{{chart2.total | number:2}}</span>
+                        <span ng-hide="chart2.noData" class="chart-total semi-bold expense">{{chart2.total | number:2}}</span>
                     </div>
                     <div class="col-sm-7">
                         <div class="chart-legend-custom">
