@@ -12,7 +12,8 @@
     'moneyManager.income',
     'moneyManager.auth',
     'moneyManager.home',
-    'moneyManager.budget'
+    'moneyManager.budget',
+    'infinite-scroll'
 ]);
 
 

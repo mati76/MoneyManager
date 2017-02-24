@@ -2,19 +2,20 @@
 using System.Web.Http;
 using MoneyManager.WebApi.DTO;
 using System;
+using System.Threading.Tasks;
 
 namespace MoneyManager.WebApi.Controllers
 {
     public interface IBudgetController
     {
-        void DeleteExpense(int id);
-        void DeleteIncome(int id);
-        IEnumerable<Expense> GetExpense([FromUri] SearchCriteria criteria);
-        Expense GetExpenseById(int id);
-        IEnumerable<Income> GetIncome([FromUri] SearchCriteria criteria);
-        Income GetIncomeById(int id);
-        void Post([FromBody] Income income);
-        void Post([FromBody] Expense expense);
-        IEnumerable<BudgetRealization> GetRealization(DateTime from, DateTime to);
+        Task DeleteExpense(int id);
+        Task DeleteIncome(int id);
+        Task<IEnumerable<Expense>> GetExpense([FromUri] SearchCriteria criteria);
+        Task<Expense> GetExpenseById(int id);
+        Task<IEnumerable<Income>> GetIncome([FromUri] SearchCriteria criteria);
+        Task<Income> GetIncomeById(int id);
+        Task Post([FromBody] Income income);
+        Task Post([FromBody] Expense expense);
+        Task<IEnumerable<BudgetRealization>> GetRealization(DateTime from, DateTime to);
     }
 }

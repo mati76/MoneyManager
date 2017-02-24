@@ -24,8 +24,8 @@ namespace MoneyManager.Business.Models
 
         public decimal? MaxAmount { get; set; }
 
-        public int? CurrentPage { get; set; }
+        public int? Take { get; set; } = 50;
 
-        public int PageSize { get; set; } = 50;
+        public int? Skip { get; set; } = 0;
     }
 }

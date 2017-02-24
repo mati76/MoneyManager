@@ -1,6 +1,7 @@
 ﻿using System;
 using MoneyManager.Business.Repository;
 using Microsoft.Practices.Unity;
+using System.Threading.Tasks;
 
 namespace MoneyManager.DataAccess.Infrastructure
 {
@@ -16,9 +17,9 @@ namespace MoneyManager.DataAccess.Infrastructure
             _container = container;
         }
 
-        public void Save()
+        public Task SaveAsync()
         {
-            _ctx.SaveChanges();
+            return _ctx.SaveChangesAsync();
         }
       
         public T GetRepository<T>() where T : IRepository

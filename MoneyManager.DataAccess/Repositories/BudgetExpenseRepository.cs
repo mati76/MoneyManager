@@ -8,6 +8,7 @@ using MoneyManager.DataAccess.Infrastructure;
 using System.Collections.Generic;
 using System.Data.Entity;
 using MoneyManager.Business;
+using System.Threading.Tasks;
 
 namespace MoneyManager.DataAccess.Repositories
 {
@@ -15,23 +16,23 @@ namespace MoneyManager.DataAccess.Repositories
     {
         public BudgetExpenseRepository(IMapperService mapperService, IDbContext dbContext) : base(mapperService, dbContext) { }
 
-        public IEnumerable<Expense> GetExpenses(int year, int month)
+        public async Task<IEnumerable<Expense>> GetExpenses(int year, int month)
         {
-            return _mapperService.Map<IEnumerable<Expense>>(_dbset.Where(o => o.Date.Year == year && o.Date.Month == month));
+            return _mapperService.Map<IEnumerable<Expense>>(await _dbset.Where(o => o.Date.Year == year && o.Date.Month == month).ToListAsync());
         }
 
-        public IEnumerable<Expense> GetExpenses(int year)
+        public async Task<IEnumerable<Expense>> GetExpenses(int year)
         {
-            return _mapperService.Map<IEnumerable<Expense>>(_dbset.Where(o => o.Date.Year == year));
+            return _mapperService.Map<IEnumerable<Expense>>(await _dbset.Where(o => o.Date.Year == year).ToListAsync());
         }
 
-        public IEnumerable<Expense> GetExpenses(DateTime dateFrom, DateTime dateTo)
+        public async Task<IEnumerable<Expense>> GetExpenses(DateTime dateFrom, DateTime dateTo)
         {
-            return _mapperService.Map<IEnumerable<Expense>>(_dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(dateFrom)
-                && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(dateTo)));
+            return _mapperService.Map<IEnumerable<Expense>>(await _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(dateFrom)
+                && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(dateTo)).ToListAsync());
         }
 
-        public IEnumerable<Expense> GetExpensesByCriteria(SearchCriteria criteria)
+        public async Task<IEnumerable<Expense>> GetExpensesByCriteria(SearchCriteria criteria)
         {
             var qry = _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(criteria.DateFrom)
                 && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(criteria.DateTo));
@@ -44,22 +45,22 @@ namespace MoneyManager.DataAccess.Repositories
                 qry = qry.Where(o => o.Amount <= criteria.MaxAmount);
             if(!string.IsNullOrEmpty(criteria.SortBy))
                 qry = qry.OrderBy(criteria.SortBy + (criteria.SortAsc == true ? " ascending" : " descending"));
-            if(criteria.CurrentPage.HasValue)
-                qry = qry.Skip(criteria.CurrentPage.Value * criteria.PageSize).Take(criteria.PageSize);
+            if(criteria.Skip.HasValue && criteria.Take.HasValue)
+                qry = qry.Skip(criteria.Skip.Value).Take(criteria.Take.Value);
 
-            return _mapperService.Map<IEnumerable<Expense>>(qry.Include(e => e.Category));
+            return _mapperService.Map<IEnumerable<Expense>>(await qry.ToListAsync());
         }
 
-        public IEnumerable<TransactionAggregates> GetExpenseAggregates()
+        public Task<List<TransactionAggregates>> GetExpenseAggregates()
         {
-            return _dbset.GroupBy(g => new { g.Date.Year, g.Date.Month }, (key, gr) => new TransactionAggregates { Month = key.Month, Year = key.Year, Sum = gr.Sum(g => g.Amount), Avg = gr.Average(g => g.Amount) }).OrderBy(g => new { g.Year, g.Month });
+            return _dbset.GroupBy(g => new { g.Date.Year, g.Date.Month }, (key, gr) => new TransactionAggregates { Month = key.Month, Year = key.Year, Sum = gr.Sum(g => g.Amount), Avg = gr.Average(g => g.Amount) }).OrderBy(g => new { g.Year, g.Month }).ToListAsync();
         }
 
-        public IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo)
+        public Task<List<CategoryTotal>> GetCategoryTotals(DateTime dateFrom, DateTime dateTo)
         {
             return _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(dateFrom) && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(dateTo)).GroupBy(e => e.Category.Parent,
                 (key, g) => new CategoryTotal { CategoryId = key.Id, CategoryName = key.Name, TotalAmount = g.Sum(c => c.Amount) })
-                .OrderByDescending(c => c.TotalAmount).ToList();
+                .OrderByDescending(c => c.TotalAmount).ToListAsync();
         }
     }
 }

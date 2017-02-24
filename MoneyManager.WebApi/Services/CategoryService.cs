@@ -3,6 +3,7 @@ using MoneyManager.Business.Models;
 using MoneyManager.WebApi.Enums;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MoneyManager.WebApi.Services
 {
@@ -19,29 +20,29 @@ namespace MoneyManager.WebApi.Services
             _categoryBusiness = categoryBusiness;
         }
 
-        public IEnumerable<DTO.Category> GetCategories(CategoryTypeEnum categoryType)
+        public async Task<IEnumerable<DTO.Category>> GetCategories(CategoryTypeEnum categoryType)
         {
-            return _mapperService.Map<IEnumerable<DTO.Category>>(categoryType == CategoryTypeEnum.Expense ?_categoryBusiness.GetExpenseCategories() : _categoryBusiness.GetIncomeCategories());
+            return _mapperService.Map<IEnumerable<DTO.Category>>(categoryType == CategoryTypeEnum.Expense ? await _categoryBusiness.GetExpenseCategories() : await _categoryBusiness.GetIncomeCategories());
         }
 
-        public DTO.Category GetCategory(int id)
+        public async Task<DTO.Category> GetCategory(int id)
         {
-            return _mapperService.Map<DTO.Category>(_categoryBusiness.GetCategoryById(id));
+            return _mapperService.Map<DTO.Category>(await _categoryBusiness.GetCategoryById(id));
         }
 
-        public void SaveCategory(DTO.Category category)
+        public Task SaveCategory(DTO.Category category)
         {
-            _categoryBusiness.SaveCategory(_mapperService.Map<Category>(category));
+            return _categoryBusiness.SaveCategory(_mapperService.Map<Category>(category));
         }
 
-        public void DeleteCategory(int id)
+        public Task<int> DeleteCategory(int id)
         {
-            _categoryBusiness.DeleteCategoryById(id);
+            return _categoryBusiness.DeleteCategoryById(id);
         }
 
-        public IEnumerable<DTO.CategoryInfo> GetTopFiveCategories()
+        public async Task<IEnumerable<DTO.CategoryInfo>> GetTopFiveCategories()
         {
-            return _mapperService.Map<IEnumerable<DTO.CategoryInfo>>(_categoryBusiness.GetTopCategories(5));
+            return _mapperService.Map<IEnumerable<DTO.CategoryInfo>>(await _categoryBusiness.GetTopCategories(5));
         }
     }
 }

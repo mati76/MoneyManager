@@ -1,8 +1,8 @@
 ﻿using MoneyManager.Business.Models;
 using MoneyManager.Business.Repository;
-using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MoneyManager.Business
 {
@@ -12,59 +12,59 @@ namespace MoneyManager.Business
         {
         }
 
-        public IEnumerable<Category> GetExpenseCategories()
+        public async Task<ICollection<Category>> GetExpenseCategories()
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<ICategoryRepository>().GetParentCategories();
+                return await session.GetRepository<ICategoryRepository>().GetParentCategories();
             }
         }
 
-        public IEnumerable<Category> GetIncomeCategories()
+        public async Task<IEnumerable<Category>> GetIncomeCategories()
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<IIncomeCategoryRepository>().GetAll();
+                return await session.GetRepository<IIncomeCategoryRepository>().GetAll();
             }
         }
 
-        public Category GetCategoryById(int id)
+        public async Task<Category> GetCategoryById(int id)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<ICategoryRepository>().GetById(id);
+                return await session.GetRepository<ICategoryRepository>().GetById(id);
             }
         }
 
-        public void SaveCategory(Category category)
+        public async Task SaveCategory(Category category)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
                 var repository = session.GetRepository<ICategoryRepository>();
                 repository.AddOrUpdate(category);
-                session.Save();
+                await session.SaveAsync();
             }
         }
 
-        public void DeleteCategoryById(int id)
+        public async Task<int> DeleteCategoryById(int id)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
                 var repo = session.GetRepository<ICategoryRepository>();
-                repo.DeleteByParentId(id);
-                repo.DeleteById(id);
+                await repo.DeleteByParentId(id);
+                return await repo.DeleteById(id);
             }
         }
 
-        public IEnumerable<Category> GetTopCategories(int count)
+        public async Task<IEnumerable<Category>> GetTopCategories(int count)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
                 var repo = session.GetRepository<ICategoryRepository>();
-                var topCategories = repo.GetTopCategories(count);
+                var topCategories = await repo.GetTopCategories(count);
                 if(topCategories.Count != count)
                 {
-                    var allCategories = repo.GetAll();
+                    var allCategories = await repo.GetAll();
                     for(var i = topCategories.Count; i < count; i++)
                     {
                         var cat = allCategories.Where(c => !topCategories.Any(t => t.ParentId == c.Id)).SelectMany(c => c.Categories).First();

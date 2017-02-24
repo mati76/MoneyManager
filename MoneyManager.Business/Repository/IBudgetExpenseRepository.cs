@@ -1,21 +1,22 @@
 ﻿using MoneyManager.Business.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MoneyManager.Business.Repository
 {
     public interface IBudgetExpenseRepository : IRepository<Expense>
     {
-        IEnumerable<Expense> GetExpenses(int year, int month);
+        Task<IEnumerable<Expense>> GetExpenses(int year, int month);
 
-        IEnumerable<Expense> GetExpenses(DateTime dateFrom, DateTime dateTo);
+        Task<IEnumerable<Expense>> GetExpenses(DateTime dateFrom, DateTime dateTo);
 
-        IEnumerable<Expense> GetExpenses(int year);
+        Task<IEnumerable<Expense>> GetExpenses(int year);
 
-        IEnumerable<Expense> GetExpensesByCriteria(SearchCriteria criteria);
+        Task<IEnumerable<Expense>> GetExpensesByCriteria(SearchCriteria criteria);
 
-        IEnumerable<TransactionAggregates> GetExpenseAggregates();
+        Task<List<TransactionAggregates>> GetExpenseAggregates();
 
-        IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
+        Task<List<CategoryTotal>> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
     }
 }

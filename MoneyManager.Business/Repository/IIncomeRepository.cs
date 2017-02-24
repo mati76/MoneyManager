@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using MoneyManager.Business.Models;
+using System.Threading.Tasks;
 
 namespace MoneyManager.Business.Repository
 {
     public interface IIncomeRepository : IRepository<Income>
     {
-        IEnumerable<Income> GetIncome(int year, int month);
+        Task<IEnumerable<Income>> GetIncome(int year, int month);
 
-        IEnumerable<Income> GetIncome(DateTime from, DateTime to);
+        Task<IEnumerable<Income>> GetIncome(DateTime from, DateTime to);
 
-        IEnumerable<Income> GetIncomeByCriteria(SearchCriteria criteria);
+        Task<IEnumerable<Income>> GetIncomeByCriteria(SearchCriteria criteria);
 
-        decimal GetIncomeTotalsFromDates(DateTime from, DateTime to);
+        Task<decimal> GetIncomeTotalsFromDates(DateTime from, DateTime to);
 
-        IEnumerable<CategoryTotal> GeCategoryTotals(DateTime dateFrom, DateTime dateTo);
+        Task<List<CategoryTotal>> GeCategoryTotals(DateTime dateFrom, DateTime dateTo);
     }
 }

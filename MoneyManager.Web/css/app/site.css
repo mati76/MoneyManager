@@ -495,7 +495,10 @@ button.grid-btn:hover {
     text-align: center;
 }
 
-
+.constrained {
+    height:400px;
+    overflow-y:scroll;
+}
 
 
 

@@ -2,6 +2,7 @@
 using MoneyManager.Business.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MoneyManager.WebApi.Services
 {
@@ -18,71 +19,81 @@ namespace MoneyManager.WebApi.Services
             _budgetBusiness = budgetBusiness;
         }
 
-        public IEnumerable<DTO.Expense> GetExpenses(DTO.SearchCriteria criteria)
+        public async Task<IEnumerable<DTO.Expense>> GetExpenses(DTO.SearchCriteria criteria)
         {
-            return _mapperService.Map<IEnumerable<DTO.Expense>>(_budgetBusiness.GetExpenses(_mapperService.Map<SearchCriteria>(criteria)));
+            return _mapperService.Map<IEnumerable<DTO.Expense>>(await _budgetBusiness.GetExpenses(_mapperService.Map<SearchCriteria>(criteria)));
         }
 
-        public IEnumerable<DTO.Expense> GetExpenses(int year, int month)
+        public async Task<IEnumerable<DTO.Expense>> GetExpenses(int year, int month)
         {
-            return _mapperService.Map<IEnumerable<DTO.Expense>>(_budgetBusiness.GetExpenses(year, month));
+            return _mapperService.Map<IEnumerable<DTO.Expense>>(await _budgetBusiness.GetExpenses(year, month));
         }
 
-        public DTO.Expense GetExpense(int id)
+        public async Task<DTO.Expense> GetExpense(int id)
         {
-            return _mapperService.Map<DTO.Expense>(_budgetBusiness.GetExpense(id));
+            return _mapperService.Map<DTO.Expense>(await _budgetBusiness.GetExpense(id));
         }
 
-        public void DeleteExpense(int id)
+        public Task DeleteExpense(int id)
         {
-            _budgetBusiness.DeleteExpense(id);
+            return _budgetBusiness.DeleteExpense(id);
         }
 
-        public void SaveExpense(DTO.Expense expense)
+        public Task SaveExpense(DTO.Expense expense)
         {
-            _budgetBusiness.SaveExpense(_mapperService.Map<Expense>(expense));
+            return _budgetBusiness.SaveExpense(_mapperService.Map<Expense>(expense));
         }
 
-        public IEnumerable<DTO.Income> GetIncome(int year, int month)
+        public async Task<IEnumerable<DTO.Income>> GetIncome(int year, int month)
         {
-            return _mapperService.Map<IEnumerable<DTO.Income>>(_budgetBusiness.GetIncomes(year, month));
+            return _mapperService.Map<IEnumerable<DTO.Income>>(await _budgetBusiness.GetIncomes(year, month));
         }
 
-        public IEnumerable<DTO.Income> GetIncome(DTO.SearchCriteria criteria)
+        public async Task<IEnumerable<DTO.Income>> GetIncome(DTO.SearchCriteria criteria)
         {
-            return _mapperService.Map<IEnumerable<DTO.Income>>(_budgetBusiness.GetIncomes(_mapperService.Map<SearchCriteria>(criteria)));
+            return _mapperService.Map<IEnumerable<DTO.Income>>(await _budgetBusiness.GetIncomes(_mapperService.Map<SearchCriteria>(criteria)));
         }
 
-        public DTO.Income GetIncome(int id)
+        public async Task<DTO.Income> GetIncome(int id)
         {
-            return _mapperService.Map<DTO.Income>(_budgetBusiness.GetIncome(id));
+            return _mapperService.Map<DTO.Income>(await _budgetBusiness.GetIncome(id));
         }
 
-        public void DeleteIncome(int id)
+        public Task DeleteIncome(int id)
         {
-            _budgetBusiness.DeleteIncome(id);
+            return _budgetBusiness.DeleteIncome(id);
         }
 
-        public void SaveIncome(DTO.Income income)
+        public Task SaveIncome(DTO.Income income)
         {
-            _budgetBusiness.SaveIncome(_mapperService.Map<Income>(income));
+            return _budgetBusiness.SaveIncome(_mapperService.Map<Income>(income));
         }
 
-        public DTO.BudgetTotals GetBudgetTotals(DateTime dateFrom, DateTime dateTo)
+        public async Task<DTO.BudgetTotals> GetBudgetTotals(DateTime dateFrom, DateTime dateTo)
         {
+            var tasks = new Task<decimal>[]
+            {
+                _budgetBusiness.GetBudgetLimit(dateFrom, dateTo),
+                _budgetBusiness.GetAvgExpenseDeviation(),
+                _budgetBusiness.GetBudgetBalance(dateFrom, dateTo),
+                _budgetBusiness.GetBudgetDeviation(dateFrom, dateTo)
+            };
+
+            var results = await Task.WhenAll(tasks);
+
             return new DTO.BudgetTotals
             {
-                BudgetLimit = _budgetBusiness.GetBudgetLimit(dateFrom, dateTo),
-                AvgDeviation = _budgetBusiness.GetAvgExpenseDeviation(),
-                BudgetBalance = _budgetBusiness.GetBudgetBalance(dateFrom, dateTo),
-                Deviation = _budgetBusiness.GetBudgetDeviation(dateFrom, dateTo)
+                BudgetLimit = results[0],
+                AvgDeviation = results[1],
+                BudgetBalance = results[2],
+                Deviation = results[3]
             };
         }
 
-        public IEnumerable<DTO.BudgetRealization> GetBudgetRealization(DateTime dateFrom, DateTime dateTo)
+        public async Task<IEnumerable<DTO.BudgetRealization>> GetBudgetRealization(DateTime dateFrom, DateTime dateTo)
         {
             var result = new List<DTO.BudgetRealization>();
-            foreach (var categoryBalance in _budgetBusiness.GetCategoryBalance(dateFrom, dateTo))
+            foreach (var categoryBalance in await _budgetBusiness.GetCategoryBalance(dateFrom, dateTo))
             {
                 result.Add(new DTO.BudgetRealization
                 {

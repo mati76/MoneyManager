@@ -1,18 +1,19 @@
 ﻿using MoneyManager.WebApi.DTO;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MoneyManager.WebApi.Controllers
 {
     public interface ICategoryController
     {
-        IEnumerable<Category> GetExpenseCategories();
+        Task<IEnumerable<Category>> GetExpenseCategories();
 
-        IEnumerable<Category> GetIncomeCategories();
+        Task<IEnumerable<Category>> GetIncomeCategories();
 
-        Category Get(int id);
+        Task<Category> Get(int id);
 
-        void Post(Category category);
+        Task Post(Category category);
 
-        void Delete(int id);
+        Task<int> Delete(int id);
     }
 }

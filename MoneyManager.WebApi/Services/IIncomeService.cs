@@ -1,25 +1,26 @@
 ﻿using MoneyManager.WebApi.DTO;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MoneyManager.WebApi.Services
 {
     public interface IIncomeService
     {
-        IEnumerable<Income> GetIncome(DateTime from, DateTime to);
+        Task<IEnumerable<Income>> GetIncome(DateTime from, DateTime to);
 
-        IEnumerable<Income> GetIncome(int year, int month);
+        Task<IEnumerable<Income>> GetIncome(int year, int month);
 
-        void DeleteIncome(int id);
+        Task DeleteIncome(int id);
 
-        Income GetIncome(int id);
+        Task<Income> GetIncome(int id);
 
-        void SaveIncome(DTO.Income income);
-        
-        IEnumerable<DTO.Income> GetIncome(SearchCriteria criteria);
+        Task SaveIncome(Income income);
 
-        TransactionTotals GetIncomeTotals(DateTime currentDate);
+        Task<IEnumerable<Income>> GetIncome(SearchCriteria criteria);
 
-        IEnumerable<DTO.CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
+        Task<TransactionTotals> GetIncomeTotals(DateTime currentDate);
+
+        Task<IEnumerable<CategoryTotal>> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
     }
 }

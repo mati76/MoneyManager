@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MoneyManager.Business.Repository
 {
@@ -7,10 +8,10 @@ namespace MoneyManager.Business.Repository
     {
         void Add(T entity);
         void Delete(T entity);
-        void DeleteById(int id);
+        Task<int> DeleteById(int id);
         void Update(T entity);
         void AddOrUpdate(T entity);
-        T GetById(int id);
-        IEnumerable<T> GetAll(); 
+        Task<T> GetById(int id);
+        Task<IEnumerable<T>> GetAll(); 
     }
 }

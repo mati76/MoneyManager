@@ -2,6 +2,7 @@
 using MoneyManager.WebApi.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace MoneyManager.WebApi.Controllers
@@ -22,61 +23,61 @@ namespace MoneyManager.WebApi.Controllers
         }
 
         [Route("expense")]
-        public IEnumerable<Expense> GetExpense([FromUri]SearchCriteria criteria)
+        public Task<IEnumerable<Expense>> GetExpense([FromUri]SearchCriteria criteria)
         {
             return _budgetService.GetExpenses(criteria);
         }
 
         [Route("income")]
-        public IEnumerable<Income> GetIncome([FromUri]SearchCriteria criteria)
+        public Task<IEnumerable<Income>> GetIncome([FromUri]SearchCriteria criteria)
         {
             return _budgetService.GetIncome(criteria);
         }
 
         [Route("expense/{id:int}")]
-        public Expense GetExpenseById(int id)
+        public Task<Expense> GetExpenseById(int id)
         {
             return _budgetService.GetExpense(id);
         }
 
         [Route("income/{id:int}")]
-        public Income GetIncomeById(int id)
+        public Task<Income> GetIncomeById(int id)
         {
             return _budgetService.GetIncome(id);
         }
 
         [Route("expense")]
-        public void Post([FromBody]Expense expense)
+        public Task Post([FromBody]Expense expense)
         {
-            _budgetService.SaveExpense(expense);
+            return _budgetService.SaveExpense(expense);
         }
 
         [Route("income")]
-        public void Post([FromBody]Income income)
+        public Task Post([FromBody]Income income)
         {
-            _budgetService.SaveIncome(income);
+            return _budgetService.SaveIncome(income);
         }
 
         [Route("expense/{id:int}")]
-        public void DeleteExpense(int id)
+        public Task DeleteExpense(int id)
         {
-            _budgetService.DeleteExpense(id);
+            return _budgetService.DeleteExpense(id);
         }
 
         [Route("income/{id:int}")]
-        public void DeleteIncome(int id)
+        public Task DeleteIncome(int id)
         {
-            _budgetService.DeleteIncome(id);
+            return _budgetService.DeleteIncome(id);
         }
 
         [Route("totals/{from:datetime}/{to:datetime}")]
-        public BudgetTotals GetTotals(DateTime from, DateTime to)
+        public Task<BudgetTotals> GetTotals(DateTime from, DateTime to)
         {
             return _budgetService.GetBudgetTotals(from, to);
         }
 
         [Route("realization/{from:datetime}/{to:datetime}")]
-        public IEnumerable<BudgetRealization> GetRealization(DateTime from, DateTime to)
+        public Task<IEnumerable<BudgetRealization>> GetRealization(DateTime from, DateTime to)
         {
             return _budgetService.GetBudgetRealization(from, to);
         }

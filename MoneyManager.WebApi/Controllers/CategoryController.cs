@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Http;
 using MoneyManager.WebApi.Services;
 using MoneyManager.WebApi.DTO;
+using System.Threading.Tasks;
 
 namespace MoneyManager.WebApi.Controllers
 {
@@ -22,37 +23,37 @@ namespace MoneyManager.WebApi.Controllers
         }
 
         [Route("expense")]
-        public IEnumerable<Category> GetExpenseCategories()
+        public Task<IEnumerable<Category>> GetExpenseCategories()
         {
             return _categoryService.GetCategories(Enums.CategoryTypeEnum.Expense);
         }
 
         [Route("income")]
-        public IEnumerable<Category> GetIncomeCategories()
+        public Task<IEnumerable<Category>> GetIncomeCategories()
         {
             return _categoryService.GetCategories(Enums.CategoryTypeEnum.Income);
         }
 
         [Route("expense/{id:int}")]
-        public Category Get(int id)
+        public Task<Category> Get(int id)
         {
             return _categoryService.GetCategory(id);
         }
 
         [Route("expense")]
-        public void Post(Category category)
+        public Task Post(Category category)
         {
-            _categoryService.SaveCategory(category);
+            return _categoryService.SaveCategory(category);
         }
 
         [Route("expense")]
-        public void Delete(int id)
+        public Task<int> Delete(int id)
         {
-            _categoryService.DeleteCategory(id);
+            return _categoryService.DeleteCategory(id);
         }
 
         [Route("expense/top")]
-        public IEnumerable<CategoryInfo> GetTopFive()
+        public Task<IEnumerable<CategoryInfo>> GetTopFive()
         {
             return _categoryService.GetTopFiveCategories();
         }

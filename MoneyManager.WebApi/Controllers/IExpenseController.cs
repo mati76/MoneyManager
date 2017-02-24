@@ -1,27 +1,28 @@
 ﻿using MoneyManager.WebApi.DTO;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MoneyManager.WebApi.Controllers
 {
     public interface IExpenseController
     {
-        IEnumerable<Expense> Get(SearchCriteria criteria);
+        Task<IEnumerable<Expense>> Get(SearchCriteria criteria);
 
-        Expense GetById(int id);
+        Task<Expense> GetById(int id);
 
-        IEnumerable<Expense> GetByDate(DateTime date);
+        Task<IEnumerable<Expense>> GetByDate(DateTime date);
 
-        TransactionTotals GetTotals(DateTime date);
+        Task<TransactionTotals> GetTotals(DateTime date);
 
-        IEnumerable<Expense> GetByDate(int year, int month);
+        Task<IEnumerable<Expense>> GetByDate(int year, int month);
 
-        IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
+        Task<IEnumerable<CategoryTotal>> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
 
-        IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId);
+        Task<IEnumerable<CategoryTotal>> GetCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId);
 
-        void Post(Expense expense);
+        Task Post(Expense expense);
 
-        void Delete(int id);
+        Task Delete(int id);
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using MoneyManager.Business.Models;
 using MoneyManager.Business.Repository;
 using MoneyManager.Business.Utilities;
+using System.Threading.Tasks;
 
 namespace MoneyManager.Business
 {
@@ -20,112 +21,112 @@ namespace MoneyManager.Business
             _dateHelper = dateHelper;
         }
 
-        public Expense GetExpense(int id)
+        public async Task<Expense> GetExpense(int id)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<IExpenseRepository>().GetById(id);
+                return await session.GetRepository<IExpenseRepository>().GetById(id);
             }
         }
 
-        public IEnumerable<Expense> GetExpenses(int year, int month)
+        public async Task<IEnumerable<Expense>> GetExpenses(int year, int month)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<IBudgetExpenseRepository>().GetExpenses(year, month);
+                return await session.GetRepository<IBudgetExpenseRepository>().GetExpenses(year, month);
             }
         }
 
-        public IEnumerable<Expense> GetExpenses(int year)
+        public async Task<IEnumerable<Expense>> GetExpenses(int year)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<IBudgetExpenseRepository>().GetExpenses(year);
+                return await session.GetRepository<IBudgetExpenseRepository>().GetExpenses(year);
             }
         }
 
-        public IEnumerable<Expense> GetExpenses(SearchCriteria criteria)
+        public async Task<IEnumerable<Expense>> GetExpenses(SearchCriteria criteria)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<IBudgetExpenseRepository>().GetExpensesByCriteria(criteria);
+                return await session.GetRepository<IBudgetExpenseRepository>().GetExpensesByCriteria(criteria);
             }
         }
 
-        public void DeleteExpense(int id)
+        public async Task DeleteExpense(int id)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                session.GetRepository<IBudgetExpenseRepository>().DeleteById(id);
+                await session.GetRepository<IBudgetExpenseRepository>().DeleteById(id);
             }
         }
 
-        public void SaveExpense(Expense expense)
+        public async Task SaveExpense(Expense expense)
         {
             using (var session =_unitOfWorkFactory.GetSession())
             {
                 var repository = session.GetRepository<IBudgetExpenseRepository>();
                 repository.AddOrUpdate(expense);
-                session.Save();
+                await session.SaveAsync();
             }
         }
 
-        public Income GetIncome(int id)
+        public async Task<Income> GetIncome(int id)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<IBudgetIncomeRepository>().GetById(id);
+                return await session.GetRepository<IBudgetIncomeRepository>().GetById(id);
             }
         }
 
-        public IEnumerable<Income> GetIncomes(int year, int month)
+        public async Task<IEnumerable<Income>> GetIncomes(int year, int month)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<IBudgetIncomeRepository>().GetIncome(year, month);
+                return await session.GetRepository<IBudgetIncomeRepository>().GetIncome(year, month);
             }
         }
 
-        public IEnumerable<Income> GetIncomes(int year)
+        public async Task<IEnumerable<Income>> GetIncomes(int year)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<IBudgetIncomeRepository>().GetIncome(year);
+                return await session.GetRepository<IBudgetIncomeRepository>().GetIncome(year);
             }
         }
 
-        public void DeleteIncome(int id)
+        public async Task DeleteIncome(int id)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                session.GetRepository<IBudgetIncomeRepository>().DeleteById(id);
+                await session.GetRepository<IBudgetIncomeRepository>().DeleteById(id);
             }
         }
 
-        public IEnumerable<Income> GetIncomes(SearchCriteria criteria)
+        public async Task<IEnumerable<Income>> GetIncomes(SearchCriteria criteria)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<IBudgetIncomeRepository>().GetIncomeByCriteria(criteria);
+                return await session.GetRepository<IBudgetIncomeRepository>().GetIncomeByCriteria(criteria);
             }
         }
 
-        public void SaveIncome(Income expense)
+        public async Task SaveIncome(Income expense)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
                 var repository = session.GetRepository<IBudgetIncomeRepository>();
                 repository.AddOrUpdate(expense);
-                session.Save();
+                await session.SaveAsync();
             }
         }
 
-        public decimal GetAvgExpenseDeviation()
+        public async Task<decimal> GetAvgExpenseDeviation()
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                var expenseAggregates = session.GetRepository<IExpenseRepository>().GetExpenseAggregates();
-                var budgetExpenseAggregates = session.GetRepository<IBudgetExpenseRepository>().GetExpenseAggregates().ToDictionary(a => $"{a.Year}-{a.Month}");
+                var expenseAggregates = await session.GetRepository<IExpenseRepository>().GetExpenseAggregates();
+                var budgetExpenseAggregates = (await session.GetRepository<IBudgetExpenseRepository>().GetExpenseAggregates()).ToDictionary(a => $"{a.Year}-{a.Month}");
                 var deviations = new List<decimal>();
 
                 foreach(var aggr in expenseAggregates)
@@ -141,51 +142,52 @@ namespace MoneyManager.Business
             }
         }
 
-        public decimal GetCategoryLimits(DateTime dateFrom, DateTime dateTo)
+        public async Task<decimal> GetCategoryLimits(DateTime dateFrom, DateTime dateTo)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<IBudgetExpenseRepository>().GetExpenses(dateFrom, dateTo).Select(e => e.Amount).Sum();
+                return (await session.GetRepository<IBudgetExpenseRepository>().GetExpenses(dateFrom, dateTo)).Select(e => e.Amount).Sum();
             }
         }
 
-        public decimal GetBudgetLimit(DateTime dateFrom, DateTime dateTo)
+        public async Task<decimal> GetBudgetLimit(DateTime dateFrom, DateTime dateTo)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<IBudgetExpenseRepository>().GetExpenses(dateFrom, dateTo).Select(e => e.Amount).Sum();
+                return (await session.GetRepository<IBudgetExpenseRepository>().GetExpenses(dateFrom, dateTo)).Select(e => e.Amount).Sum();
             }
         }
 
-        public decimal GetBudgetDeviation(DateTime dateFrom, DateTime dateTo)
+        public async Task<decimal> GetBudgetDeviation(DateTime dateFrom, DateTime dateTo)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                var limit = GetBudgetLimit(dateFrom, dateTo);
-                var expense = session.GetRepository<IExpenseRepository>().GetExpenses(dateFrom, dateTo).Select(e => e.Amount).Sum();
+                var limit = await GetBudgetLimit(dateFrom, dateTo);
+                var expense = (await session.GetRepository<IExpenseRepository>().GetExpenses(dateFrom, dateTo)).Select(e => e.Amount).Sum();
 
                 return limit > 0 ? 100 * (limit - expense) / limit : 0;
             }
         }
 
-        public decimal GetBudgetBalance(DateTime dateFrom, DateTime dateTo)
+        public async Task<decimal> GetBudgetBalance(DateTime dateFrom, DateTime dateTo)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                var limit = GetBudgetLimit(dateFrom, dateTo);
-                var expense = session.GetRepository<IExpenseRepository>().GetExpenses(dateFrom, dateTo).Select(e => e.Amount).Sum();
+                var limit = await GetBudgetLimit(dateFrom, dateTo);
+                var expense = (await session.GetRepository<IExpenseRepository>().GetExpenses(dateFrom, dateTo)).Select(e => e.Amount).Sum();
 
                 return limit - expense;
             }
         }
 
-        public IEnumerable<CategoryBalance> GetCategoryBalance(DateTime dateFrom, DateTime dateTo)
+        public async Task<IEnumerable<CategoryBalance>> GetCategoryBalance(DateTime dateFrom, DateTime dateTo)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
                 var result = new List<CategoryBalance>();
-                var categoryLimits = session.GetRepository<IBudgetExpenseRepository>().GetCategoryTotals(dateFrom, dateTo);
-                var categoryExpense = session.GetRepository<IExpenseRepository>().GetCategoryTotals(dateFrom, dateTo);
+
+                var categoryLimits = await session.GetRepository<IBudgetExpenseRepository>().GetCategoryTotals(dateFrom, dateTo);
+                var categoryExpense = await session.GetRepository<IExpenseRepository>().GetCategoryTotals(dateFrom, dateTo);
 
                 var categories = categoryLimits.Select(c => new { Id = c.CategoryId, Name = c.CategoryName }).Concat(categoryExpense.Select(e => new { Id = e.CategoryId, Name = e.CategoryName }).ToList()).Distinct();
                 foreach(var category in categories)

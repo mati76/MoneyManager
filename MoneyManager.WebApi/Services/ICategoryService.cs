@@ -1,15 +1,16 @@
 ﻿using MoneyManager.WebApi.DTO;
 using MoneyManager.WebApi.Enums;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MoneyManager.WebApi.Services
 {
     public interface ICategoryService
     {
-        IEnumerable<Category> GetCategories(CategoryTypeEnum categoryType);
-        Category GetCategory(int id);
-        void SaveCategory(Category category);
-        void DeleteCategory(int id);
-        IEnumerable<CategoryInfo> GetTopFiveCategories();
+        Task<IEnumerable<Category>> GetCategories(CategoryTypeEnum categoryType);
+        Task<Category> GetCategory(int id);
+        Task SaveCategory(Category category);
+        Task<int> DeleteCategory(int id);
+        Task<IEnumerable<CategoryInfo>> GetTopFiveCategories();
     }
 }

@@ -5,6 +5,8 @@ using MoneyManager.Business.Interfaces;
 using MoneyManager.Business.Models;
 using MoneyManager.Business.Repository;
 using MoneyManager.Business.Utilities;
+using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace MoneyManager.Business
 {
@@ -21,57 +23,57 @@ namespace MoneyManager.Business
             _dateHelper = dateHelper;
         }
 
-        public Expense GetExpense(int id)
+        public async Task<Expense> GetExpense(int id)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<IExpenseRepository>().GetById(id);
+                return await session.GetRepository<IExpenseRepository>().GetById(id);
             }
         }
 
-        public IEnumerable<Expense> GetExpenses(DateTime date)
+        public async Task<IEnumerable<Expense>> GetExpenses(DateTime date)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<IExpenseRepository>().GetExpenses(date);
+                return await session.GetRepository<IExpenseRepository>().GetExpenses(date);
             }
         }
 
-        public IEnumerable<Expense> GetExpenses(int year, int month)
+        public async Task<IEnumerable<Expense>> GetExpenses(int year, int month)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<IExpenseRepository>().GetExpenses(year, month);
+                return await session.GetRepository<IExpenseRepository>().GetExpenses(year, month);
             }
         }
 
-        public IEnumerable<Expense> GetExpenses(SearchCriteria criteria)
+        public async Task<IEnumerable<Expense>> GetExpenses(SearchCriteria criteria)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<IExpenseRepository>().GetExpensesByCriteria(criteria);
+                return await session.GetRepository<IExpenseRepository>().GetExpensesByCriteria(criteria);
             }
         }
 
-        public void DeleteExpense(int id)
+        public async Task DeleteExpense(int id)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                session.GetRepository<IExpenseRepository>().DeleteById(id);
+                await session.GetRepository<IExpenseRepository>().DeleteById(id);
             }
         }
 
-        public void SaveExpense(Expense expense)
+        public async Task SaveExpense(Expense expense)
         {
             using (var session =_unitOfWorkFactory.GetSession())
             {
                 var repository = session.GetRepository<IExpenseRepository>();
                 repository.AddOrUpdate(expense);
-                session.Save();
+                await session.SaveAsync();
             }
         }
 
-        public TransactionTotals GetExpenseTotals(DateTime currentDate)
+        public async Task<TransactionTotals> GetExpenseTotals(DateTime currentDate)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
@@ -80,22 +82,22 @@ namespace MoneyManager.Business
                 var currentMonth = _dateHelper.GetMonthBoundaries(currentDate);
                 var currentYear = _dateHelper.GetYearBoundaries(currentDate);
 
-                var totals = new TransactionTotals();
-                totals.Today = repository.GetExpenseTotalsFromDates(currentDate, currentDate.AddHours(23).AddMinutes(59).AddSeconds(59));
-                totals.CurrentWeek = repository.GetExpenseTotalsFromDates(currentWeek.Item1, currentWeek.Item2);
-                totals.CurrentMonth = repository.GetExpenseTotalsFromDates(currentMonth.Item1, currentMonth.Item2);
-                totals.CurrentYear = repository.GetExpenseTotalsFromDates(currentYear.Item1, currentYear.Item2);
-
-                return totals;
+                return new TransactionTotals
+                {
+                    Today = await repository.GetExpenseTotalsFromDates(currentDate, currentDate.AddHours(23).AddMinutes(59).AddSeconds(59)),
+                    CurrentWeek = await repository.GetExpenseTotalsFromDates(currentWeek.Item1, currentWeek.Item2),
+                    CurrentMonth = await repository.GetExpenseTotalsFromDates(currentMonth.Item1, currentMonth.Item2),
+                    CurrentYear = await repository.GetExpenseTotalsFromDates(currentYear.Item1, currentYear.Item2)
+                };
             }
         }
 
-        public IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId)
+        public async Task<IEnumerable<CategoryTotal>> GetCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
                 var repository = session.GetRepository<IExpenseRepository>();
-                var totals = categoryId > 0 ? repository.GetCategoryTotals(dateFrom, dateTo, categoryId) : repository.GetCategoryTotals(dateFrom, dateTo);
+                var totals = categoryId > 0 ? await repository.GetCategoryTotals(dateFrom, dateTo, categoryId) : await repository.GetCategoryTotals(dateFrom, dateTo);
                 totals?.ToList().ForEach(i => i.Percent = i.TotalAmount / totals.Sum(t => t.TotalAmount));
                 return totals;
             }

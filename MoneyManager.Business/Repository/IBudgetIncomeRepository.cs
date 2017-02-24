@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using MoneyManager.Business.Models;
+using System.Threading.Tasks;
 
 namespace MoneyManager.Business.Repository
 {
     public interface IBudgetIncomeRepository : IRepository<Income>
     {
-        IEnumerable<Income> GetIncome(int year, int month);
+        Task<IEnumerable<Income>> GetIncome(int year, int month);
 
-        IEnumerable<Income> GetIncome(int year);
+        Task<IEnumerable<Income>> GetIncome(int year);
 
-        IEnumerable<Income> GetIncomeByCriteria(SearchCriteria criteria);
+        Task<IEnumerable<Income>> GetIncomeByCriteria(SearchCriteria criteria);
     }
 }

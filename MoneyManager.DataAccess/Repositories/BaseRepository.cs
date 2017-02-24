@@ -7,6 +7,7 @@ using DAC = MoneyManager.DataAccess.Models;
 using BLL = MoneyManager.Business.Models;
 using EntityFramework.Extensions;
 using MoneyManager.Business;
+using System.Threading.Tasks;
 
 namespace MoneyManager.DataAccess.Repositories
 {
@@ -46,9 +47,9 @@ namespace MoneyManager.DataAccess.Repositories
             _dbset.Remove(_mapperService.Map<TDAC>(o));
         }
 
-        public virtual void DeleteById(int id)
+        public virtual Task<int> DeleteById(int id)
         {
-            _dbset.Where(o => o.Id == id).Delete();
+            return _dbset.Where(o => o.Id == id).DeleteAsync();
         }
 
         public virtual void Update(TBLL o)
@@ -73,14 +74,14 @@ namespace MoneyManager.DataAccess.Repositories
             }
         }
 
-        public virtual TBLL GetById(int id)
+        public async virtual Task<TBLL> GetById(int id)
         {
-            return _mapperService.Map<TBLL>(_dbset.Find(id));
+            return _mapperService.Map<TBLL>(await _dbset.FindAsync(id));
         }
 
-        public virtual IEnumerable<TBLL> GetAll()
+        public async virtual Task<IEnumerable<TBLL>> GetAll()
         {
-            return _mapperService.Map<IEnumerable<TBLL>>(_dbset);
+            return _mapperService.Map<IEnumerable<TBLL>>(await _dbset.ToListAsync());
         }
 
         public void Dispose()

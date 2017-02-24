@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using MoneyManager.Business.Models;
+using System.Threading.Tasks;
 
 namespace MoneyManager.Business.Repository
 {
     public interface ICategoryRepository : IRepository<Category>
     {
-        ICollection<Category> GetParentCategories();
+        Task<ICollection<Category>> GetParentCategories();
 
-        void DeleteByParentId(int parentId);
+        Task<int> DeleteByParentId(int parentId);
 
-        ICollection<Category> GetTopCategories(int count);
+        Task<ICollection<Category>> GetTopCategories(int count);
     }
 }

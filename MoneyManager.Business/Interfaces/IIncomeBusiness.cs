@@ -1,25 +1,26 @@
 ﻿using MoneyManager.Business.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MoneyManager.Business.Interfaces
 {
     public interface IIncomeBusiness
     {
-        Income GetIncome(int id);
+        Task<Income> GetIncome(int id);
 
-        IEnumerable<Income> GetIncome(int year, int month);
+        Task<IEnumerable<Income>> GetIncome(int year, int month);
 
-        IEnumerable<Income> GetIncome(DateTime from, DateTime to);
+        Task<IEnumerable<Income>> GetIncome(DateTime from, DateTime to);
 
-        IEnumerable<Income> GetIncome(SearchCriteria criteria);
+        Task<IEnumerable<Income>> GetIncome(SearchCriteria criteria);
 
-        void SaveIncome(Income income);
+        Task SaveIncome(Income income);
 
-        void DeleteIncome(int id);
+        Task DeleteIncome(int id);
 
-        TransactionTotals GetIncomeTotals(DateTime currentDate);
+        Task<TransactionTotals> GetIncomeTotals(DateTime currentDate);
 
-        IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
+        Task<IEnumerable<CategoryTotal>> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
     }
 }

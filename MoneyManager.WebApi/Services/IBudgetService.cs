@@ -1,22 +1,23 @@
 ﻿using System.Collections.Generic;
 using MoneyManager.WebApi.DTO;
 using System;
+using System.Threading.Tasks;
 
 namespace MoneyManager.WebApi.Services
 {
     public interface IBudgetService
     {
-        void DeleteExpense(int id);
-        void DeleteIncome(int id);
-        Expense GetExpense(int id);
-        IEnumerable<Expense> GetExpenses(SearchCriteria criteria);
-        IEnumerable<Expense> GetExpenses(int year, int month);
-        IEnumerable<Income> GetIncome(SearchCriteria criteria);
-        Income GetIncome(int id);
-        IEnumerable<Income> GetIncome(int year, int month);
-        void SaveExpense(Expense expense);
-        void SaveIncome(Income income);
-        BudgetTotals GetBudgetTotals(DateTime dateFrom, DateTime dateTo);
-        IEnumerable<BudgetRealization> GetBudgetRealization(DateTime dateFrom, DateTime dateTo);
+        Task DeleteExpense(int id);
+        Task DeleteIncome(int id);
+        Task<Expense> GetExpense(int id);
+        Task<IEnumerable<Expense>> GetExpenses(SearchCriteria criteria);
+        Task<IEnumerable<Expense>> GetExpenses(int year, int month);
+        Task<IEnumerable<Income>> GetIncome(SearchCriteria criteria);
+        Task<Income> GetIncome(int id);
+        Task<IEnumerable<Income>> GetIncome(int year, int month);
+        Task SaveExpense(Expense expense);
+        Task SaveIncome(Income income);
+        Task<BudgetTotals> GetBudgetTotals(DateTime dateFrom, DateTime dateTo);
+        Task<IEnumerable<BudgetRealization>> GetBudgetRealization(DateTime dateFrom, DateTime dateTo);
     }
 }

@@ -1,23 +1,24 @@
 ﻿using MoneyManager.WebApi.DTO;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MoneyManager.WebApi.Controllers
 {
     public interface IIncomeController
     {
-        IEnumerable<Income> Get(SearchCriteria criteria);
+        Task<IEnumerable<Income>> Get(SearchCriteria criteria);
 
-        Income GetById(int id);
+        Task<Income> GetById(int id);
 
-        TransactionTotals GetTotals(DateTime date);
+        Task<TransactionTotals> GetTotals(DateTime date);
 
-        IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
+        Task<IEnumerable<CategoryTotal>> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
 
-        IEnumerable<Income> GetByDate(int year, int month);
+        Task<IEnumerable<Income>> GetByDate(int year, int month);
 
-        void Post(Income income);
+        Task Post(Income income);
 
-        void Delete(int id);
+        Task Delete(int id);
     }
 }

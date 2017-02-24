@@ -5,6 +5,7 @@ using MoneyManager.Business.Models;
 using MoneyManager.Business.Repository;
 using MoneyManager.Business.Utilities;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MoneyManager.Business
 {
@@ -21,58 +22,57 @@ namespace MoneyManager.Business
             _dateHelper = dateHelper;
         }
 
-        public Income GetIncome(int id)
+        public async Task<Income> GetIncome(int id)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<IIncomeRepository>().GetById(id);
+                return await session.GetRepository<IIncomeRepository>().GetById(id);
             }
         }
 
-        public IEnumerable<Income> GetIncome(DateTime from, DateTime to)
+        public async Task<IEnumerable<Income>> GetIncome(DateTime from, DateTime to)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<IIncomeRepository>().GetIncome(from, to);
+                return await session.GetRepository<IIncomeRepository>().GetIncome(from, to);
             }
         }
 
-        public IEnumerable<Income> GetIncome(int year, int month)
+        public async Task<IEnumerable<Income>> GetIncome(int year, int month)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                return session.GetRepository<IIncomeRepository>().GetIncome(year, month);
+                return await session.GetRepository<IIncomeRepository>().GetIncome(year, month);
             }
         }
 
-        public void DeleteIncome(int id)
+        public async Task DeleteIncome(int id)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-                session.GetRepository<IIncomeRepository>().DeleteById(id);
+                await session.GetRepository<IIncomeRepository>().DeleteById(id);
             }
         }
 
-        public IEnumerable<Income> GetIncome(SearchCriteria criteria)
+        public async Task<IEnumerable<Income>> GetIncome(SearchCriteria criteria)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
-
-                return session.GetRepository<IIncomeRepository>().GetIncomeByCriteria(criteria);
+                return await session.GetRepository<IIncomeRepository>().GetIncomeByCriteria(criteria);
             }
         }
 
-        public void SaveIncome(Income expense)
+        public async Task SaveIncome(Income expense)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
                 var repository = session.GetRepository<IIncomeRepository>();
                 repository.AddOrUpdate(expense);
-                session.Save();
+                await session.SaveAsync();
             }
         }
 
-        public TransactionTotals GetIncomeTotals(DateTime currentDate)
+        public async Task<TransactionTotals> GetIncomeTotals(DateTime currentDate)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
@@ -81,23 +81,23 @@ namespace MoneyManager.Business
                 var currentMonth = _dateHelper.GetMonthBoundaries(currentDate);
                 var currentYear = _dateHelper.GetYearBoundaries(currentDate);
 
-                var totals = new TransactionTotals();
-                totals.Today = repository.GetIncomeTotalsFromDates(currentDate, currentDate.AddHours(23).AddMinutes(59).AddSeconds(59));
-                totals.CurrentWeek = repository.GetIncomeTotalsFromDates(currentWeek.Item1, currentWeek.Item2);
-                totals.CurrentMonth = repository.GetIncomeTotalsFromDates(currentMonth.Item1, currentMonth.Item2);
-                totals.CurrentYear = repository.GetIncomeTotalsFromDates(currentYear.Item1, currentYear.Item2);
-
-                return totals;
+                return new TransactionTotals
+                {
+                    Today = await repository.GetIncomeTotalsFromDates(currentDate, currentDate.AddHours(23).AddMinutes(59).AddSeconds(59)),
+                    CurrentWeek = await repository.GetIncomeTotalsFromDates(currentWeek.Item1, currentWeek.Item2),
+                    CurrentMonth = await repository.GetIncomeTotalsFromDates(currentMonth.Item1, currentMonth.Item2),
+                    CurrentYear = await repository.GetIncomeTotalsFromDates(currentYear.Item1, currentYear.Item2)
+                };
             }
         }
 
-        public IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo)
+        public async Task<IEnumerable<CategoryTotal>> GetCategoryTotals(DateTime dateFrom, DateTime dateTo)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
                 var repository = session.GetRepository<IIncomeRepository>();
-                var totals = repository.GeCategoryTotals(dateFrom, dateTo);
-                totals?.ToList().ForEach(i => i.Percent = i.TotalAmount / totals.Sum(t => t.TotalAmount));
+                var totals = await repository.GeCategoryTotals(dateFrom, dateTo);
+                totals?.ForEach(i => i.Percent = i.TotalAmount / totals.Sum(t => t.TotalAmount));
                 return totals;
             }
         }

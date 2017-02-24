@@ -70,7 +70,8 @@
         </div>
     </div>
     <div id="transactions" class="panel panel-default">
-        <grid options="gridOptions" is-loading="loadingTotals" source="expenses" sorted-by="expenseParams" on-sort="sort(e)"></grid>
+        <grid options="gridOptions" is-loading="loadingExpenses" source="expenses" sorted-by="expenseParams" 
+              on-sort="sort(e)" load-next-items="loadNextExpenses(e)"></grid>
     </div>
 </div>
 

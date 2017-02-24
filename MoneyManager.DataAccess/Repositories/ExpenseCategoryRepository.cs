@@ -7,6 +7,7 @@ using DAC = MoneyManager.DataAccess.Models;
 using MoneyManager.DataAccess.Infrastructure;
 using System.Collections.Generic;
 using MoneyManager.Business;
+using System.Threading.Tasks;
 
 namespace MoneyManager.DataAccess.Repositories
 {
@@ -17,21 +18,22 @@ namespace MoneyManager.DataAccess.Repositories
             
         }
 
-        public ICollection<Category> GetParentCategories()
+        public async Task<ICollection<Category>> GetParentCategories()
         {
-            return _mapperService.Map<ICollection<Category>>(_dbset.Where(c => c.Parent == null).Include(c => c.Categories));
+            var categories = await _dbset.Where(c => c.Parent == null).Include(c => c.Categories).ToListAsync();
+            return _mapperService.Map<ICollection<Category>>(categories);
         }
 
-        public ICollection<Category> GetTopCategories(int count)
+        public async Task<ICollection<Category>> GetTopCategories(int count)
         {
-            return _mapperService.Map<ICollection<Category>>(_dbset.Where(c => c.ParentId > 0 && c.Expenses.Any())
+            return _mapperService.Map<ICollection<Category>>(await _dbset.Where(c => c.ParentId > 0 && c.Expenses.Any())
                 .Select(c => new { Category = c, ExpenseItems = c.Expenses.Count() })
-                .OrderByDescending(c => c.ExpenseItems).Select(c => c.Category).Take(count));
+                .OrderByDescending(c => c.ExpenseItems).Select(c => c.Category).Take(count).ToListAsync());
         }
 
-        public void DeleteByParentId(int parentId)
+        public Task<int> DeleteByParentId(int parentId)
         {
-            _dbset.Where(c => c.Parent != null && c.Parent.Id == parentId).Delete();
+            return _dbset.Where(c => c.Parent != null && c.Parent.Id == parentId).DeleteAsync();
         }
     }
 }

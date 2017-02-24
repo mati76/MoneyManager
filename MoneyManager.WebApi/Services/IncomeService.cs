@@ -2,6 +2,7 @@
 using MoneyManager.Business.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MoneyManager.WebApi.Services
 {
@@ -18,44 +19,44 @@ namespace MoneyManager.WebApi.Services
             _incomeBusiness = incomeBusiness;
         }
 
-        public IEnumerable<DTO.Income> GetIncome(DateTime from, DateTime to)
+        public async Task<IEnumerable<DTO.Income>> GetIncome(DateTime from, DateTime to)
         {
-            return _mapperService.Map<IEnumerable<DTO.Income>>(_incomeBusiness.GetIncome(from, to));
+            return _mapperService.Map<IEnumerable<DTO.Income>>(await _incomeBusiness.GetIncome(from, to));
         }
 
-        public IEnumerable<DTO.Income> GetIncome(int year, int month)
+        public async Task<IEnumerable<DTO.Income>> GetIncome(int year, int month)
         {
-            return _mapperService.Map<IEnumerable<DTO.Income>>(_incomeBusiness.GetIncome(year, month));
+            return _mapperService.Map<IEnumerable<DTO.Income>>(await _incomeBusiness.GetIncome(year, month));
         }
 
-        public IEnumerable<DTO.Income> GetIncome(DTO.SearchCriteria criteria)
+        public async Task<IEnumerable<DTO.Income>> GetIncome(DTO.SearchCriteria criteria)
         {
-            return _mapperService.Map<IEnumerable<DTO.Income>>(_incomeBusiness.GetIncome(_mapperService.Map<SearchCriteria>(criteria)));
+            return _mapperService.Map<IEnumerable<DTO.Income>>(await _incomeBusiness.GetIncome(_mapperService.Map<SearchCriteria>(criteria)));
         }
 
-        public DTO.Income GetIncome(int id)
+        public async Task<DTO.Income> GetIncome(int id)
         {
-            return _mapperService.Map<DTO.Income>(_incomeBusiness.GetIncome(id));
+            return _mapperService.Map<DTO.Income>(await _incomeBusiness.GetIncome(id));
         }
 
-        public void DeleteIncome(int id)
+        public Task DeleteIncome(int id)
         {
-            _incomeBusiness.DeleteIncome(id);
+            return _incomeBusiness.DeleteIncome(id);
         }
 
-        public void SaveIncome(DTO.Income income)
+        public Task SaveIncome(DTO.Income income)
         {
-            _incomeBusiness.SaveIncome(_mapperService.Map<Income>(income));
+            return _incomeBusiness.SaveIncome(_mapperService.Map<Income>(income));
         }
 
-        public DTO.TransactionTotals GetIncomeTotals(DateTime currentDate)
+        public async Task<DTO.TransactionTotals> GetIncomeTotals(DateTime currentDate)
         {
-            return _mapperService.Map<DTO.TransactionTotals>(_incomeBusiness.GetIncomeTotals(currentDate));
+            return _mapperService.Map<DTO.TransactionTotals>(await _incomeBusiness.GetIncomeTotals(currentDate));
         }
 
-        public IEnumerable<DTO.CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo)
+        public async Task<IEnumerable<DTO.CategoryTotal>> GetCategoryTotals(DateTime dateFrom, DateTime dateTo)
         {
-            return _mapperService.Map<IEnumerable<DTO.CategoryTotal>>(_incomeBusiness.GetCategoryTotals(dateFrom, dateTo));
+            return _mapperService.Map<IEnumerable<DTO.CategoryTotal>>(await _incomeBusiness.GetCategoryTotals(dateFrom, dateTo));
         }
     }
 }

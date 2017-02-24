@@ -175,14 +175,16 @@ angular.module('moneyManager.shared').directive('grid', function () {
                         '</span>' +
                     '</p>' +
                     '<loading-panel is-loading="isLoading" width="50" height="50"></loading-panel>' +
-                    '<table id="transactions-grid" class="full-width">' +
+                    '<div class="constrained">' +
+                    '<table infinite-scroll="loadNextItems()" infinite-scroll-container=\'".constrained"\' id="transactions-grid" class="full-width">' +
                         '<tr grid-header>' +
-                        '<tr ng-show="source.length > 0" ng-repeat-start="item in source track by item.Id" item="item" fields="options.fields" click="selectItem(e)" />' +
+                        '<tr ng-show="source.length > 0" ng-repeat-start="item in source | limitTo : limit track by item.Id" item="item" fields="options.fields" click="selectItem(e)" />' +
                         '<tr ng-repeat-end="" ng-if="item.isSelected" buttons="options.singleSelectActions" grid-buttons for="item" />' +
                     '</table>' +
+                    '</div>' +
                     '<p class="nothing-label" ng-show="source.length == 0">{{options.noItemsLabel}}</p>' +
                     '</div>',
-        scope: { label: '=', source: '=', options: '=', isLoading: '=', sortedBy: '=', onSort: '&', onButtonClick: '&' },
+        scope: { label: '=', source: '=', options: '=', isLoading: '=', sortedBy: '=', onSort: '&', onButtonClick: '&', loadNextItems: '&' },
         link: function (scope, element, attr) {
             scope.isSortedBy = function (field) {
                 return scope.sortedBy.SortBy == field ? scope.sortedBy.SortAsc : undefined;

@@ -1,25 +1,26 @@
 ﻿using MoneyManager.Business.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MoneyManager.Business.Interfaces
 {
     public interface IExpenseBusiness
     {
-        Expense GetExpense(int id);
+        Task<Expense> GetExpense(int id);
 
-        IEnumerable<Expense> GetExpenses(int year, int month);
+        Task<IEnumerable<Expense>> GetExpenses(int year, int month);
 
-        IEnumerable<Expense> GetExpenses(DateTime date);
+        Task<IEnumerable<Expense>> GetExpenses(DateTime date);
 
-        IEnumerable<Expense> GetExpenses(SearchCriteria criteria);
+        Task<IEnumerable<Expense>> GetExpenses(SearchCriteria criteria);
 
-        void SaveExpense(Expense expense);
+        Task SaveExpense(Expense expense);
 
-        void DeleteExpense(int id);
+        Task DeleteExpense(int id);
 
-        TransactionTotals GetExpenseTotals(DateTime currentDate);
+        Task<TransactionTotals> GetExpenseTotals(DateTime currentDate);
 
-        IEnumerable<CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId);
+        Task<IEnumerable<CategoryTotal>> GetCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId);
     }
 }

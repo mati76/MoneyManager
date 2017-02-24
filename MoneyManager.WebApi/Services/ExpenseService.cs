@@ -2,6 +2,8 @@
 using MoneyManager.Business.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace MoneyManager.WebApi.Services
 {
@@ -18,49 +20,50 @@ namespace MoneyManager.WebApi.Services
             _expenseBusiness = expenseBusiness;
         }
 
-        public IEnumerable<DTO.Expense> GetExpenses(DTO.SearchCriteria criteria)
+        public async Task<IEnumerable<DTO.Expense>> GetExpenses(DTO.SearchCriteria criteria)
         {
-            return _mapperService.Map<IEnumerable<DTO.Expense>>(_expenseBusiness.GetExpenses(_mapperService.Map<SearchCriteria>(criteria)));
+            return _mapperService.Map<IEnumerable<DTO.Expense>>(await _expenseBusiness.GetExpenses(_mapperService.Map<SearchCriteria>(criteria)));
         }
 
-        public IEnumerable<DTO.Expense> GetExpenses(DateTime date)
+        public async Task<IEnumerable<DTO.Expense>> GetExpenses(DateTime date)
         {
-            return _mapperService.Map<IEnumerable<DTO.Expense>>(_expenseBusiness.GetExpenses(date));
+            return _mapperService.Map<IEnumerable<DTO.Expense>>(await _expenseBusiness.GetExpenses(date));
         }
 
-        public IEnumerable<DTO.Expense> GetExpenses(int year, int month)
+        public async Task<DTO.Expense> GetExpense(int id)
         {
-            return _mapperService.Map<IEnumerable<DTO.Expense>>(_expenseBusiness.GetExpenses(year, month));
+            return _mapperService.Map<DTO.Expense>(await _expenseBusiness.GetExpense(id));
         }
 
-        public DTO.Expense GetExpense(int id)
+        public Task DeleteExpense(int id)
         {
-            return _mapperService.Map<DTO.Expense>(_expenseBusiness.GetExpense(id));
+            return _expenseBusiness.DeleteExpense(id);
         }
 
-        public void DeleteExpense(int id)
+        public Task SaveExpense(DTO.Expense expense)
         {
-            _expenseBusiness.DeleteExpense(id);
+            return _expenseBusiness.SaveExpense(_mapperService.Map<Expense>(expense));
         }
 
-        public void SaveExpense(DTO.Expense expense)
+        public async Task<DTO.TransactionTotals> GetExpenseTotals(DateTime currentDate)
         {
-            _expenseBusiness.SaveExpense(_mapperService.Map<Expense>(expense));
+            return _mapperService.Map<DTO.TransactionTotals>(await _expenseBusiness.GetExpenseTotals(currentDate));
         }
 
-        public DTO.TransactionTotals GetExpenseTotals(DateTime currentDate)
-        {
-            return _mapperService.Map<DTO.TransactionTotals>(_expenseBusiness.GetExpenseTotals(currentDate));
-        }
-
-        public IEnumerable<DTO.CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo)
+        public Task<IEnumerable<DTO.CategoryTotal>> GetCategoryTotals(DateTime dateFrom, DateTime dateTo)
         {
             return GetCategoryTotals(dateFrom, dateTo, 0);
         }
 
-        public IEnumerable<DTO.CategoryTotal> GetCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId)
+        public async Task<IEnumerable<DTO.CategoryTotal>> GetCategoryTotals(DateTime dateFrom, DateTime dateTo, int categoryId)
         {
-            return _mapperService.Map<IEnumerable<DTO.CategoryTotal>>(_expenseBusiness.GetCategoryTotals(dateFrom, dateTo, categoryId));
+            return _mapperService.Map<IEnumerable<DTO.CategoryTotal>>(await _expenseBusiness.GetCategoryTotals(dateFrom, dateTo, categoryId));
+        }
+
+        public async Task<IEnumerable<DTO.Expense>> GetExpenses(int year, int month)
+        {
+            var expenses = await _expenseBusiness.GetExpenses(year, month);
+            return _mapperService.Map<List<DTO.Expense>>(expenses);
         }
     }
 }

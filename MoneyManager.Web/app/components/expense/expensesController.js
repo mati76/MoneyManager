@@ -21,6 +21,7 @@
         ]
     };
 
+    $scope.expenses = [];
     $scope.chartColours = [];
     $scope.$parent.pageName = "EXPENSES";
     $scope.$parent.titleBarClass = "title-bar-expense";
@@ -43,9 +44,16 @@
 
     $scope.chart2 = {};
 
+    $scope.loadNextExpenses = function () {
+        $scope.loadExpenses();
+        $scope.expenseParams.Skip += $scope.expenseParams.Take;
+    };
+
     $scope.sort = function (args) {
         $scope.expenseParams.SortBy = args.f;
         $scope.expenseParams.SortAsc = args.e;
+        $scope.expenseParams.Skip = 0;
+        $scope.expenses = [];
         $scope.loadExpenses();
 
         $state.go($state.$current.name, {
@@ -96,7 +104,7 @@
     $scope.loadExpenses = function () {
         $scope.loadingExpenses = true;
         expenseService.getExpenses($scope.expenseParams).then(function (result) {
-            $scope.expenses = result.data;
+            Array.prototype.push.apply($scope.expenses, result.data);
             $scope.loadingExpenses = false;
         }, function (error) {
             $scope.loadingExpenses = false;
@@ -156,9 +164,12 @@
             DateFrom: from,
             DateTo: to,
             SortBy: $stateParams.sort,
-            SortAsc: $stateParams.asc == 'asc'
+            SortAsc: $stateParams.asc == 'asc',
+            Take: 50,
+            Skip: 0
         };
 
-        $scope.reload();
+        $scope.loadTotals();
+        $scope.loadCategoryTotals($scope.chart1);
     })();
 }]);
