@@ -23,19 +23,19 @@ namespace MoneyManager.WebApi.Controllers
             _expenseService = expenseService;
         }
 
-        public async Task<IEnumerable<Expense>> Get([FromUri]SearchCriteria criteria)
+        public async Task<TransactionCollection> Get([FromUri]SearchCriteria criteria)
         {
             return await _expenseService.GetExpenses(criteria);
         }
 
         [Route("{id:int}")]
-        public Task<Expense> GetById(int id)
+        public Task<Transaction> GetById(int id)
         {
             return _expenseService.GetExpense(id);
         }
 
         [Route("{date:datetime}")]
-        public Task<IEnumerable<Expense>> GetByDate(DateTime date)
+        public Task<IEnumerable<Transaction>> GetByDate(DateTime date)
         {
             return _expenseService.GetExpenses(date);
         }
@@ -59,12 +59,12 @@ namespace MoneyManager.WebApi.Controllers
         }
 
         [Route("{year:int:min(1900)}/{month:int:range(1,12)}")]
-        public async Task<IEnumerable<Expense>> GetByDate(int year, int month)
+        public async Task<IEnumerable<Transaction>> GetByDate(int year, int month)
         {
             return await _expenseService.GetExpenses(year, month);
         }
 
-        public Task Post([FromBody]Expense expense)
+        public Task Post([FromBody]Transaction expense)
         {
             return _expenseService.SaveExpense(expense);
         }

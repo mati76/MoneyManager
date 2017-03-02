@@ -7,15 +7,15 @@ namespace MoneyManager.Business.Interfaces
 {
     public interface IIncomeBusiness
     {
-        Task<Income> GetIncome(int id);
+        Task<Transaction> GetIncome(int id);
 
-        Task<IEnumerable<Income>> GetIncome(int year, int month);
+        Task<IEnumerable<Transaction>> GetIncome(int year, int month);
 
-        Task<IEnumerable<Income>> GetIncome(DateTime from, DateTime to);
+        Task<IEnumerable<Transaction>> GetIncome(DateTime from, DateTime to);
 
-        Task<IEnumerable<Income>> GetIncome(SearchCriteria criteria);
+        Task<IEnumerable<Transaction>> GetIncome(SearchCriteria criteria);
 
-        Task SaveIncome(Income income);
+        Task SaveIncome(Transaction income);
 
         Task DeleteIncome(int id);
 

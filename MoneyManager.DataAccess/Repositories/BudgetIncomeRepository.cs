@@ -12,21 +12,21 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.DataAccess.Repositories
 {
-    public class BudgetIncomeRepository : BaseRepository<DAC.BudgetIncome, Income>, IBudgetIncomeRepository
+    public class BudgetIncomeRepository : BaseRepository<DAC.BudgetIncome, Transaction>, IBudgetIncomeRepository
     {
         public BudgetIncomeRepository(IMapperService mapperService, IDbContext dbContext) : base(mapperService, dbContext) { }
 
-        public async Task<IEnumerable<Income>> GetIncome(int year, int month)
+        public async Task<IEnumerable<Transaction>> GetIncome(int year, int month)
         {
-            return _mapperService.Map<IEnumerable<Income>>(await _dbset.Where(o => o.Date.Year == year && o.Date.Month == month).ToListAsync());
+            return _mapperService.Map<IEnumerable<Transaction>>(await _dbset.Where(o => o.Date.Year == year && o.Date.Month == month).ToListAsync());
         }
 
-        public async Task<IEnumerable<Income>> GetIncome(int year)
+        public async Task<IEnumerable<Transaction>> GetIncome(int year)
         {
-            return _mapperService.Map<IEnumerable<Income>>(await _dbset.Where(o => o.Date.Year == year).ToListAsync());
+            return _mapperService.Map<IEnumerable<Transaction>>(await _dbset.Where(o => o.Date.Year == year).ToListAsync());
         }
 
-        public async Task<IEnumerable<Income>> GetIncomeByCriteria(SearchCriteria criteria)
+        public async Task<IEnumerable<Transaction>> GetIncomeByCriteria(SearchCriteria criteria)
         {
             var qry = _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(criteria.DateFrom)
                 && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(criteria.DateTo));
@@ -42,7 +42,7 @@ namespace MoneyManager.DataAccess.Repositories
             if (criteria.Skip.HasValue && criteria.Take.HasValue)
                 qry = qry.Skip(criteria.Skip.Value).Take(criteria.Take.Value);
 
-            return _mapperService.Map<IEnumerable<Income>>(await qry.Include(e => e.Category).ToListAsync());
+            return _mapperService.Map<IEnumerable<Transaction>>(await qry.Include(e => e.Category).ToListAsync());
         }
     }
 }

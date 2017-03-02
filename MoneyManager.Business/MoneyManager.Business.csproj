@@ -60,10 +60,10 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryBalance.cs" />
     <Compile Include="Models\CategoryTotal.cs" />
-    <Compile Include="Models\Expense.cs" />
-    <Compile Include="Models\Income.cs" />
+    <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\SearchCriteria.cs" />
     <Compile Include="Models\TransactionAggregates.cs" />
+    <Compile Include="Models\TransactionCollection.cs" />
     <Compile Include="Models\TransactionTotals.cs" />
     <Compile Include="Repository\IBudgetExpenseRepository.cs" />
     <Compile Include="Repository\IIncomeCategoryRepository.cs" />

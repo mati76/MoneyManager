@@ -9,14 +9,14 @@ namespace MoneyManager.WebApi.Services
     {
         Task DeleteExpense(int id);
         Task DeleteIncome(int id);
-        Task<Expense> GetExpense(int id);
-        Task<IEnumerable<Expense>> GetExpenses(SearchCriteria criteria);
-        Task<IEnumerable<Expense>> GetExpenses(int year, int month);
-        Task<IEnumerable<Income>> GetIncome(SearchCriteria criteria);
-        Task<Income> GetIncome(int id);
-        Task<IEnumerable<Income>> GetIncome(int year, int month);
-        Task SaveExpense(Expense expense);
-        Task SaveIncome(Income income);
+        Task<Transaction> GetExpense(int id);
+        Task<IEnumerable<Transaction>> GetExpenses(SearchCriteria criteria);
+        Task<IEnumerable<Transaction>> GetExpenses(int year, int month);
+        Task<IEnumerable<Transaction>> GetIncome(SearchCriteria criteria);
+        Task<Transaction> GetIncome(int id);
+        Task<IEnumerable<Transaction>> GetIncome(int year, int month);
+        Task SaveExpense(Transaction expense);
+        Task SaveIncome(Transaction income);
         Task<BudgetTotals> GetBudgetTotals(DateTime dateFrom, DateTime dateTo);
         Task<IEnumerable<BudgetRealization>> GetBudgetRealization(DateTime dateFrom, DateTime dateTo);
     }

@@ -7,28 +7,24 @@ namespace MoneyManager.Business
 {
     public interface IBudgetBusiness
     {
-        Task<Expense> GetExpense(int id);
+        Task<Transaction> GetExpense(int id);
 
-        Task<IEnumerable<Expense>> GetExpenses(int year, int month);
+        Task<IEnumerable<Transaction>> GetExpenses(int year, int month);
 
-        Task<IEnumerable<Expense>> GetExpenses(int year);
+        Task<IEnumerable<Transaction>> GetExpenses(SearchCriteria criteria);
 
-        Task<IEnumerable<Expense>> GetExpenses(SearchCriteria criteria);
-
-        Task SaveExpense(Expense expense);
+        Task SaveExpense(Transaction expense);
 
         Task DeleteExpense(int id);
 
 
-        Task<Income> GetIncome(int id);
+        Task<Transaction> GetIncome(int id);
 
-        Task<IEnumerable<Income>> GetIncomes(int year, int month);
+        Task<IEnumerable<Transaction>> GetIncome(int year, int month);
 
-        Task<IEnumerable<Income>> GetIncomes(int year);
+        Task<IEnumerable<Transaction>> GetIncome(SearchCriteria criteria);
 
-        Task<IEnumerable<Income>> GetIncomes(SearchCriteria criteria);
-
-        Task SaveIncome(Income expense);
+        Task SaveIncome(Transaction income);
 
         Task DeleteIncome(int id);
 

@@ -2,10 +2,10 @@
 
     $scope.gridOptions = {
         fields: [
-            { title: 'DATE', field: 'Date', filter: 'date', headerClass: 'align-left', headerStyle: {'width': '120px'} },
-            { title: 'AMOUNT', field: 'Amount', filter: 'currency', headerClass: 'align-right', class: 'expense align-right', headerStyle: {'width': '100px'} },
-            { title: 'DESCRIPTION', field: 'Comment', headerStyle: { 'padding-left': '40px' }, style: { 'width': '70%', 'padding-left': '40px' }},
-            { title: 'CATEGORY', field: 'CategoryName', sortBy: 'Category.Name', headerClass: 'align-right', style: { 'width': '30%', 'text-align': 'right' } }
+            { title: 'DATE', field: 'Date', sortBy: 'Date', filter: 'date', headerClass: 'align-left', headerStyle: { 'width': '120px' } },
+            { title: 'AMOUNT', field: 'Amount', sortBy: 'Amount', filter: 'currency', headerClass: 'align-right', class: 'expense align-right', headerStyle: { 'width': '100px' } },
+            { title: 'DESCRIPTION', field: 'Comment', sortBy: 'Comment', headerStyle: { 'padding-left': '40px' }, style: { 'width': '70%', 'padding-left': '40px' } },
+            { title: 'CATEGORY', field: 'CategoryName', sortBy: 'Category.Name', headerClass: 'align-right', class: 'align-right', headerStyle: { 'width': '30%' } }
         ],
         label: 'TRANSACTIONS:',
         noItemsLabel: 'NO TRANSACTIONS',
@@ -21,7 +21,9 @@
         ]
     };
 
+    $scope.categoryFilterItems = [];
     $scope.expenses = [];
+    $scope.canLoadNextExpenses = true;
     $scope.chartColours = [];
     $scope.$parent.pageName = "EXPENSES";
     $scope.$parent.titleBarClass = "title-bar-expense";
@@ -45,11 +47,13 @@
     $scope.chart2 = {};
 
     $scope.loadNextExpenses = function () {
-        $scope.loadExpenses();
-        $scope.expenseParams.Skip += $scope.expenseParams.Take;
+        if ($scope.canLoadNextExpenses) {
+            $scope.loadExpenses();
+        }
     };
 
     $scope.sort = function (args) {
+        $scope.canLoadNextExpenses = true;
         $scope.expenseParams.SortBy = args.f;
         $scope.expenseParams.SortAsc = args.e;
         $scope.expenseParams.Skip = 0;
@@ -96,15 +100,25 @@
     };
 
     $scope.reload = function () {
+        $scope.expenseParams.Skip = 0;
+        $scope.canLoadNextExpenses = true;
         $scope.loadExpenses();
         $scope.loadTotals();
         $scope.loadCategoryTotals($scope.chart1);
     };
 
     $scope.loadExpenses = function () {
+        $scope.canLoadNextExpenses = false;
         $scope.loadingExpenses = true;
         expenseService.getExpenses($scope.expenseParams).then(function (result) {
-            Array.prototype.push.apply($scope.expenses, result.data);
+            $scope.categoryFilterItems = result.data.Categories;
+            $scope.canLoadNextExpenses = result.data.Transactions.length == $scope.expenseParams.Take;
+            if ($scope.expenseParams.Skip == 0) {
+                $scope.expenses = result.data.Transactions;
+            } else {
+                Array.prototype.push.apply($scope.expenses, result.data.Transactions);
+            }
+            $scope.expenseParams.Skip += $scope.expenseParams.Take;
             $scope.loadingExpenses = false;
         }, function (error) {
             $scope.loadingExpenses = false;

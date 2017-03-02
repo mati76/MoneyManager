@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Business.Repository
 {
-    public interface IIncomeRepository : IRepository<Income>
+    public interface IIncomeRepository : IRepository<Transaction>
     {
-        Task<IEnumerable<Income>> GetIncome(int year, int month);
+        Task<IEnumerable<Transaction>> GetIncome(int year, int month);
 
-        Task<IEnumerable<Income>> GetIncome(DateTime from, DateTime to);
+        Task<IEnumerable<Transaction>> GetIncome(DateTime from, DateTime to);
 
-        Task<IEnumerable<Income>> GetIncomeByCriteria(SearchCriteria criteria);
+        Task<IEnumerable<Transaction>> GetIncomeByCriteria(SearchCriteria criteria);
 
         Task<decimal> GetIncomeTotalsFromDates(DateTime from, DateTime to);
 

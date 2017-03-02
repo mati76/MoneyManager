@@ -12,27 +12,27 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.DataAccess.Repositories
 {
-    public class BudgetExpenseRepository : BaseRepository<DAC.BudgetExpense, Expense>, IBudgetExpenseRepository
+    public class BudgetExpenseRepository : BaseRepository<DAC.BudgetExpense, Transaction>, IBudgetExpenseRepository
     {
         public BudgetExpenseRepository(IMapperService mapperService, IDbContext dbContext) : base(mapperService, dbContext) { }
 
-        public async Task<IEnumerable<Expense>> GetExpenses(int year, int month)
+        public async Task<IEnumerable<Transaction>> GetExpenses(int year, int month)
         {
-            return _mapperService.Map<IEnumerable<Expense>>(await _dbset.Where(o => o.Date.Year == year && o.Date.Month == month).ToListAsync());
+            return _mapperService.Map<IEnumerable<Transaction>>(await _dbset.Where(o => o.Date.Year == year && o.Date.Month == month).ToListAsync());
         }
 
-        public async Task<IEnumerable<Expense>> GetExpenses(int year)
+        public async Task<IEnumerable<Transaction>> GetExpenses(int year)
         {
-            return _mapperService.Map<IEnumerable<Expense>>(await _dbset.Where(o => o.Date.Year == year).ToListAsync());
+            return _mapperService.Map<IEnumerable<Transaction>>(await _dbset.Where(o => o.Date.Year == year).ToListAsync());
         }
 
-        public async Task<IEnumerable<Expense>> GetExpenses(DateTime dateFrom, DateTime dateTo)
+        public async Task<IEnumerable<Transaction>> GetExpenses(DateTime dateFrom, DateTime dateTo)
         {
-            return _mapperService.Map<IEnumerable<Expense>>(await _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(dateFrom)
+            return _mapperService.Map<IEnumerable<Transaction>>(await _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(dateFrom)
                 && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(dateTo)).ToListAsync());
         }
 
-        public async Task<IEnumerable<Expense>> GetExpensesByCriteria(SearchCriteria criteria)
+        public async Task<IEnumerable<Transaction>> GetExpensesByCriteria(SearchCriteria criteria)
         {
             var qry = _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(criteria.DateFrom)
                 && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(criteria.DateTo));
@@ -48,7 +48,7 @@ namespace MoneyManager.DataAccess.Repositories
             if(criteria.Skip.HasValue && criteria.Take.HasValue)
                 qry = qry.Skip(criteria.Skip.Value).Take(criteria.Take.Value);
 
-            return _mapperService.Map<IEnumerable<Expense>>(await qry.ToListAsync());
+            return _mapperService.Map<IEnumerable<Transaction>>(await qry.ToListAsync());
         }
 
         public Task<List<TransactionAggregates>> GetExpenseAggregates()

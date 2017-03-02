@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Business.Repository
 {
-    public interface IExpenseRepository : IRepository<Expense>
+    public interface IExpenseRepository : IRepository<Transaction>
     {
-        Task<IEnumerable<Expense>> GetExpenses(int year, int month);
+        Task<IEnumerable<Transaction>> GetExpenses(int year, int month);
 
-        Task<IEnumerable<Expense>> GetExpenses(DateTime date);
+        Task<IEnumerable<Transaction>> GetExpenses(DateTime date);
 
-        Task<IEnumerable<Expense>> GetExpenses(DateTime dateFrom, DateTime dateTo);
+        Task<IEnumerable<Transaction>> GetExpenses(DateTime dateFrom, DateTime dateTo);
 
-        Task<IEnumerable<Expense>> GetExpensesByCriteria(SearchCriteria criteria);
+        Task<TransactionCollection> GetExpensesByCriteria(SearchCriteria criteria);
 
         Task<decimal> GetExpenseTotalsFromDates(DateTime from, DateTime to);
 

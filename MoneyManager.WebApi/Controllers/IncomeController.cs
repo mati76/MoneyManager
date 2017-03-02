@@ -22,13 +22,13 @@ namespace MoneyManager.WebApi.Controllers
             _incomeService = incomeService;
         }
 
-        public Task<IEnumerable<Income>> Get([FromUri]SearchCriteria criteria)
+        public Task<IEnumerable<Transaction>> Get([FromUri]SearchCriteria criteria)
         {
             return _incomeService.GetIncome(criteria);
         }
 
         [Route("{id:int}")]
-        public Task<Income> GetById(int id)
+        public Task<Transaction> GetById(int id)
         {
             return _incomeService.GetIncome(id);
         }
@@ -46,12 +46,12 @@ namespace MoneyManager.WebApi.Controllers
         }
 
         [Route("{year:int:min(1900)}/{month:int:range(1,12)}")]
-        public Task<IEnumerable<Income>> GetByDate(int year, int month)
+        public Task<IEnumerable<Transaction>> GetByDate(int year, int month)
         {
             return _incomeService.GetIncome(year, month);
         }
 
-        public Task Post([FromBody]Income income)
+        public Task Post([FromBody]Transaction income)
         {
             return _incomeService.SaveIncome(income);
         }

@@ -23,7 +23,7 @@ namespace MoneyManager.Business
             _dateHelper = dateHelper;
         }
 
-        public async Task<Expense> GetExpense(int id)
+        public async Task<Transaction> GetExpense(int id)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
@@ -31,7 +31,7 @@ namespace MoneyManager.Business
             }
         }
 
-        public async Task<IEnumerable<Expense>> GetExpenses(DateTime date)
+        public async Task<IEnumerable<Transaction>> GetExpenses(DateTime date)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
@@ -39,7 +39,7 @@ namespace MoneyManager.Business
             }
         }
 
-        public async Task<IEnumerable<Expense>> GetExpenses(int year, int month)
+        public async Task<IEnumerable<Transaction>> GetExpenses(int year, int month)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
@@ -47,7 +47,7 @@ namespace MoneyManager.Business
             }
         }
 
-        public async Task<IEnumerable<Expense>> GetExpenses(SearchCriteria criteria)
+        public async Task<TransactionCollection> GetExpenses(SearchCriteria criteria)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
@@ -63,7 +63,7 @@ namespace MoneyManager.Business
             }
         }
 
-        public async Task SaveExpense(Expense expense)
+        public async Task SaveExpense(Transaction expense)
         {
             using (var session =_unitOfWorkFactory.GetSession())
             {

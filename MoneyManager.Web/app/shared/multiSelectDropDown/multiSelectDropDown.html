@@ -1,0 +1,12 @@
+﻿<div uib-dropdown is-open="status.isopen" class="float-right" style="display: inline-block; margin-right: 10px; min-width: 300px">
+    <span class="unselectable float-right" uib-dropdown-toggle>
+        {{ title }}
+        <i class="caret"></i>
+    </span>
+    <div class="dropdown-menu" style="float: none" uib-dropdown-menu role="menu" ng-click="$event.stopPropagation()">
+        <ul class="list">
+            <li ng-repeat="item in items"><check-box style="margin-left: 10px"></check-box>{{item.Name}}</li>
+        </ul>
+        <button style="margin-right: 10px" class="float-right btn btn-default" ng-click="toggleDropdown($event)">Ok</button>
+    </div>
+</div>

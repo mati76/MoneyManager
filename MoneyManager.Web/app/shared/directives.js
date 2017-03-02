@@ -41,13 +41,13 @@
 
 angular.module('moneyManager.shared').directive('checkBox', function () {
     return {
-        template: '<div class="check-box" ng-class="{\'glyphicon glyphicon-ok\': isChecked == true }" aria-hidden="true" ng-click="onclick()"/>',
+        template: '<div class="check-box" ng-class="{\'glyphicon glyphicon-ok\': isChecked == true }" aria-hidden="true" ng-click="$event.stopPropagation(); onclick();"/>',
         restrict: 'E',
         scope: { disabled: '=', isChecked: '=', click: '&' },
         link: function(scope, element, attrs) {
             scope.title = attrs.title;
-
             scope.onclick = function () {
+
                 if (scope.disabled != true) {
                     scope.isChecked = !scope.isChecked;
                     scope.click({ checked: scope.isChecked });
@@ -123,7 +123,7 @@ angular.module('moneyManager.shared').directive('gridHeader', function () {
                 '<th width = "10px"></th>' +
                 '<th width = "60px"><check-box disabled="source.length == 0 || isLoading === true" is-checked=\"checkedAll\" click="checkAll({ isChecked: checked})"></th>' +
                 '<th ng-repeat="field in options.fields" class="unselectable" ng-class="field.headerClass" ng-style="field.headerStyle">' +
-                    '<sorting-header disabled="source.length == 0 || isLoading === true" sorted="{{ isSortedBy(field.field) }}" on-sort = "sort({f: field.sortBy != null ? field.sortBy : field.field, e: asc})">{{field.title}}</sorting-header></th>' +
+                    '<sorting-header disabled="source.length == 0 || isLoading === true" sorted="{{ isSortedBy(field.sortBy) }}" on-sort = "sort({f: field.sortBy != null ? field.sortBy : field.field, e: asc})">{{field.title}}</sorting-header></th>' +
                 '<th width = "60px"/>' +
                 '</tr>',
         scope: false
@@ -136,12 +136,12 @@ angular.module('moneyManager.shared').directive('item', function () {
         replace: true,
         template: '<tr class="grid-row" ng-class="{\'cursor-hand\': showHand && !override, \'grid-row-expanded\': item.isSelected}" ng-click="click({e: item})" ' +
             ' ng-mouseover="showHand = true" ng-mouseleave="showHand = false"> ' +
-            '<td/>' +
-            '<td ng-click="$event.stopPropagation()" ng-mouseover="override = true" ng-mouseleave="override = false"> ' +
+            '<td width = "10px"/>' +
+            '<td width = "60px" ng-click="$event.stopPropagation()" ng-mouseover="override = true" ng-mouseleave="override = false"> ' +
                 '<check-box is-checked="item.checked"/>' +
             '</td>' +
-            '<td ng-repeat="field in fields" ng-style="field.style" ng-class="field.class"</td>{{item[field.field] | dynamicFilter: field.filter }} ' +
-            '<td/>' +
+            '<td ng-style="field.headerStyle" ng-repeat="field in fields" ng-style="field.style" ng-class="field.class"</td>{{item[field.field] | dynamicFilter: field.filter }} ' +
+            '<td width = "60px"/>' +
             '</tr>',
         scope: { item: '=', fields: '=', click: '&' },
         link: function (scope) {
@@ -173,18 +173,21 @@ angular.module('moneyManager.shared').directive('grid', function () {
                         '<span id="transactions-grid-buttons" ng-show="multipleChecked()">' +
                             '<button ng-repeat="btn in options.multiSelectActions" style="display: inline !important" class="grid-btn" ng-class="btn.css" ng-bind="btn.label" ng-click="btn.callback()"></button>' +
                         '</span>' +
+                        '<multi-drop-down items="filterItems" title="filterLabel"></multi-drop-down>' +
                     '</p>' +
                     '<loading-panel is-loading="isLoading" width="50" height="50"></loading-panel>' +
+                    '<table class="full-width">' +
+                        '<tr grid-header></tr>' +
+                    '</table>' +
                     '<div class="constrained">' +
                     '<table infinite-scroll="loadNextItems()" infinite-scroll-container=\'".constrained"\' id="transactions-grid" class="full-width">' +
-                        '<tr grid-header>' +
-                        '<tr ng-show="source.length > 0" ng-repeat-start="item in source | limitTo : limit track by item.Id" item="item" fields="options.fields" click="selectItem(e)" />' +
+                        '<tr ng-show="source.length > 0" ng-repeat-start="item in source track by item.Id" item="item" fields="options.fields" click="selectItem(e)" />' +
                         '<tr ng-repeat-end="" ng-if="item.isSelected" buttons="options.singleSelectActions" grid-buttons for="item" />' +
                     '</table>' +
                     '</div>' +
-                    '<p class="nothing-label" ng-show="source.length == 0">{{options.noItemsLabel}}</p>' +
+                    '<p class="nothing-label" ng-show="!isLoading && source.length == 0">{{options.noItemsLabel}}</p>' +
                     '</div>',
-        scope: { label: '=', source: '=', options: '=', isLoading: '=', sortedBy: '=', onSort: '&', onButtonClick: '&', loadNextItems: '&' },
+        scope: { label: '=', source: '=', options: '=', isLoading: '=', sortedBy: '=', onSort: '&', onButtonClick: '&', loadNextItems: '&', filterLabel: '=', filterItems: '=' },
         link: function (scope, element, attr) {
             scope.isSortedBy = function (field) {
                 return scope.sortedBy.SortBy == field ? scope.sortedBy.SortAsc : undefined;

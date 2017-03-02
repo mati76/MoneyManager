@@ -19,24 +19,24 @@ namespace MoneyManager.WebApi.Services
             _incomeBusiness = incomeBusiness;
         }
 
-        public async Task<IEnumerable<DTO.Income>> GetIncome(DateTime from, DateTime to)
+        public async Task<IEnumerable<DTO.Transaction>> GetIncome(DateTime from, DateTime to)
         {
-            return _mapperService.Map<IEnumerable<DTO.Income>>(await _incomeBusiness.GetIncome(from, to));
+            return _mapperService.Map<IEnumerable<DTO.Transaction>>(await _incomeBusiness.GetIncome(from, to));
         }
 
-        public async Task<IEnumerable<DTO.Income>> GetIncome(int year, int month)
+        public async Task<IEnumerable<DTO.Transaction>> GetIncome(int year, int month)
         {
-            return _mapperService.Map<IEnumerable<DTO.Income>>(await _incomeBusiness.GetIncome(year, month));
+            return _mapperService.Map<IEnumerable<DTO.Transaction>>(await _incomeBusiness.GetIncome(year, month));
         }
 
-        public async Task<IEnumerable<DTO.Income>> GetIncome(DTO.SearchCriteria criteria)
+        public async Task<IEnumerable<DTO.Transaction>> GetIncome(DTO.SearchCriteria criteria)
         {
-            return _mapperService.Map<IEnumerable<DTO.Income>>(await _incomeBusiness.GetIncome(_mapperService.Map<SearchCriteria>(criteria)));
+            return _mapperService.Map<IEnumerable<DTO.Transaction>>(await _incomeBusiness.GetIncome(_mapperService.Map<SearchCriteria>(criteria)));
         }
 
-        public async Task<DTO.Income> GetIncome(int id)
+        public async Task<DTO.Transaction> GetIncome(int id)
         {
-            return _mapperService.Map<DTO.Income>(await _incomeBusiness.GetIncome(id));
+            return _mapperService.Map<DTO.Transaction>(await _incomeBusiness.GetIncome(id));
         }
 
         public Task DeleteIncome(int id)
@@ -44,9 +44,9 @@ namespace MoneyManager.WebApi.Services
             return _incomeBusiness.DeleteIncome(id);
         }
 
-        public Task SaveIncome(DTO.Income income)
+        public Task SaveIncome(DTO.Transaction income)
         {
-            return _incomeBusiness.SaveIncome(_mapperService.Map<Income>(income));
+            return _incomeBusiness.SaveIncome(_mapperService.Map<Transaction>(income));
         }
 
         public async Task<DTO.TransactionTotals> GetIncomeTotals(DateTime currentDate)

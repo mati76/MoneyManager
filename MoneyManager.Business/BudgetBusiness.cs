@@ -21,7 +21,7 @@ namespace MoneyManager.Business
             _dateHelper = dateHelper;
         }
 
-        public async Task<Expense> GetExpense(int id)
+        public async Task<Transaction> GetExpense(int id)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
@@ -29,7 +29,7 @@ namespace MoneyManager.Business
             }
         }
 
-        public async Task<IEnumerable<Expense>> GetExpenses(int year, int month)
+        public async Task<IEnumerable<Transaction>> GetExpenses(int year, int month)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
@@ -37,7 +37,7 @@ namespace MoneyManager.Business
             }
         }
 
-        public async Task<IEnumerable<Expense>> GetExpenses(int year)
+        public async Task<IEnumerable<Transaction>> GetExpenses(int year)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
@@ -45,7 +45,7 @@ namespace MoneyManager.Business
             }
         }
 
-        public async Task<IEnumerable<Expense>> GetExpenses(SearchCriteria criteria)
+        public async Task<IEnumerable<Transaction>> GetExpenses(SearchCriteria criteria)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
@@ -61,7 +61,7 @@ namespace MoneyManager.Business
             }
         }
 
-        public async Task SaveExpense(Expense expense)
+        public async Task SaveExpense(Transaction expense)
         {
             using (var session =_unitOfWorkFactory.GetSession())
             {
@@ -71,7 +71,7 @@ namespace MoneyManager.Business
             }
         }
 
-        public async Task<Income> GetIncome(int id)
+        public async Task<Transaction> GetIncome(int id)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
@@ -79,19 +79,11 @@ namespace MoneyManager.Business
             }
         }
 
-        public async Task<IEnumerable<Income>> GetIncomes(int year, int month)
+        public async Task<IEnumerable<Transaction>> GetIncome(int year, int month)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
                 return await session.GetRepository<IBudgetIncomeRepository>().GetIncome(year, month);
-            }
-        }
-
-        public async Task<IEnumerable<Income>> GetIncomes(int year)
-        {
-            using (var session = _unitOfWorkFactory.GetSession())
-            {
-                return await session.GetRepository<IBudgetIncomeRepository>().GetIncome(year);
             }
         }
 
@@ -103,7 +95,7 @@ namespace MoneyManager.Business
             }
         }
 
-        public async Task<IEnumerable<Income>> GetIncomes(SearchCriteria criteria)
+        public async Task<IEnumerable<Transaction>> GetIncome(SearchCriteria criteria)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
@@ -111,12 +103,12 @@ namespace MoneyManager.Business
             }
         }
 
-        public async Task SaveIncome(Income expense)
+        public async Task SaveIncome(Transaction income)
         {
             using (var session = _unitOfWorkFactory.GetSession())
             {
                 var repository = session.GetRepository<IBudgetIncomeRepository>();
-                repository.AddOrUpdate(expense);
+                repository.AddOrUpdate(income);
                 await session.SaveAsync();
             }
         }

@@ -7,15 +7,15 @@ namespace MoneyManager.Business.Interfaces
 {
     public interface IExpenseBusiness
     {
-        Task<Expense> GetExpense(int id);
+        Task<Transaction> GetExpense(int id);
 
-        Task<IEnumerable<Expense>> GetExpenses(int year, int month);
+        Task<IEnumerable<Transaction>> GetExpenses(int year, int month);
 
-        Task<IEnumerable<Expense>> GetExpenses(DateTime date);
+        Task<IEnumerable<Transaction>> GetExpenses(DateTime date);
 
-        Task<IEnumerable<Expense>> GetExpenses(SearchCriteria criteria);
+        Task<TransactionCollection> GetExpenses(SearchCriteria criteria);
 
-        Task SaveExpense(Expense expense);
+        Task SaveExpense(Transaction expense);
 
         Task DeleteExpense(int id);
 

@@ -7,17 +7,17 @@ namespace MoneyManager.WebApi.Services
 {
     public interface IExpenseService
     {
-        Task<IEnumerable<Expense>> GetExpenses(SearchCriteria criteria);
+        Task<TransactionCollection> GetExpenses(SearchCriteria criteria);
 
-        Task<IEnumerable<Expense>> GetExpenses(DateTime date);
+        Task<IEnumerable<Transaction>> GetExpenses(DateTime date);
 
-        Task<IEnumerable<Expense>> GetExpenses(int year, int month);
+        Task<IEnumerable<Transaction>> GetExpenses(int year, int month);
 
         Task DeleteExpense(int id);
 
-        Task<Expense> GetExpense(int id);
+        Task<Transaction> GetExpense(int id);
 
-        Task SaveExpense(Expense expense);
+        Task SaveExpense(Transaction expense);
 
         Task<TransactionTotals> GetExpenseTotals(DateTime currentDate);
 

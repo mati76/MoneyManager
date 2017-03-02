@@ -19,19 +19,19 @@ namespace MoneyManager.WebApi.Services
             _budgetBusiness = budgetBusiness;
         }
 
-        public async Task<IEnumerable<DTO.Expense>> GetExpenses(DTO.SearchCriteria criteria)
+        public async Task<IEnumerable<DTO.Transaction>> GetExpenses(DTO.SearchCriteria criteria)
         {
-            return _mapperService.Map<IEnumerable<DTO.Expense>>(await _budgetBusiness.GetExpenses(_mapperService.Map<SearchCriteria>(criteria)));
+            return _mapperService.Map<IEnumerable<DTO.Transaction>>(await _budgetBusiness.GetExpenses(_mapperService.Map<SearchCriteria>(criteria)));
         }
 
-        public async Task<IEnumerable<DTO.Expense>> GetExpenses(int year, int month)
+        public async Task<IEnumerable<DTO.Transaction>> GetExpenses(int year, int month)
         {
-            return _mapperService.Map<IEnumerable<DTO.Expense>>(await _budgetBusiness.GetExpenses(year, month));
+            return _mapperService.Map<IEnumerable<DTO.Transaction>>(await _budgetBusiness.GetExpenses(year, month));
         }
 
-        public async Task<DTO.Expense> GetExpense(int id)
+        public async Task<DTO.Transaction> GetExpense(int id)
         {
-            return _mapperService.Map<DTO.Expense>(await _budgetBusiness.GetExpense(id));
+            return _mapperService.Map<DTO.Transaction>(await _budgetBusiness.GetExpense(id));
         }
 
         public Task DeleteExpense(int id)
@@ -39,24 +39,24 @@ namespace MoneyManager.WebApi.Services
             return _budgetBusiness.DeleteExpense(id);
         }
 
-        public Task SaveExpense(DTO.Expense expense)
+        public Task SaveExpense(DTO.Transaction expense)
         {
-            return _budgetBusiness.SaveExpense(_mapperService.Map<Expense>(expense));
+            return _budgetBusiness.SaveExpense(_mapperService.Map<Transaction>(expense));
         }
 
-        public async Task<IEnumerable<DTO.Income>> GetIncome(int year, int month)
+        public async Task<IEnumerable<DTO.Transaction>> GetIncome(int year, int month)
         {
-            return _mapperService.Map<IEnumerable<DTO.Income>>(await _budgetBusiness.GetIncomes(year, month));
+            return _mapperService.Map<IEnumerable<DTO.Transaction>>(await _budgetBusiness.GetIncome(year, month));
         }
 
-        public async Task<IEnumerable<DTO.Income>> GetIncome(DTO.SearchCriteria criteria)
+        public async Task<IEnumerable<DTO.Transaction>> GetIncome(DTO.SearchCriteria criteria)
         {
-            return _mapperService.Map<IEnumerable<DTO.Income>>(await _budgetBusiness.GetIncomes(_mapperService.Map<SearchCriteria>(criteria)));
+            return _mapperService.Map<IEnumerable<DTO.Transaction>>(await _budgetBusiness.GetIncome(_mapperService.Map<SearchCriteria>(criteria)));
         }
 
-        public async Task<DTO.Income> GetIncome(int id)
+        public async Task<DTO.Transaction> GetIncome(int id)
         {
-            return _mapperService.Map<DTO.Income>(await _budgetBusiness.GetIncome(id));
+            return _mapperService.Map<DTO.Transaction>(await _budgetBusiness.GetIncome(id));
         }
 
         public Task DeleteIncome(int id)
@@ -64,9 +64,9 @@ namespace MoneyManager.WebApi.Services
             return _budgetBusiness.DeleteIncome(id);
         }
 
-        public Task SaveIncome(DTO.Income income)
+        public Task SaveIncome(DTO.Transaction income)
         {
-            return _budgetBusiness.SaveIncome(_mapperService.Map<Income>(income));
+            return _budgetBusiness.SaveIncome(_mapperService.Map<Transaction>(income));
         }
 
         public async Task<DTO.BudgetTotals> GetBudgetTotals(DateTime dateFrom, DateTime dateTo)

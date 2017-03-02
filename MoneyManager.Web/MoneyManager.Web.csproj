@@ -112,6 +112,8 @@
     <Content Include="app\shared\messageBox\messageBox.html" />
     <Content Include="app\shared\messageBox\messageBoxController.js" />
     <Content Include="app\shared\messageBox\messageBoxService.js" />
+    <Content Include="app\shared\multiSelectDropDown\multiSelectDropDown.html" />
+    <Content Include="app\shared\multiSelectDropDown\multiSelectDropDown.js" />
     <Content Include="app\shared\periodPicker\periodPicker.html" />
     <Content Include="app\shared\periodPicker\periodPicker.js" />
     <Content Include="app\shared\shared.js" />

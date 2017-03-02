@@ -23,37 +23,37 @@ namespace MoneyManager.WebApi.Controllers
         }
 
         [Route("expense")]
-        public Task<IEnumerable<Expense>> GetExpense([FromUri]SearchCriteria criteria)
+        public Task<IEnumerable<Transaction>> GetExpense([FromUri]SearchCriteria criteria)
         {
             return _budgetService.GetExpenses(criteria);
         }
 
         [Route("income")]
-        public Task<IEnumerable<Income>> GetIncome([FromUri]SearchCriteria criteria)
+        public Task<IEnumerable<Transaction>> GetIncome([FromUri]SearchCriteria criteria)
         {
             return _budgetService.GetIncome(criteria);
         }
 
         [Route("expense/{id:int}")]
-        public Task<Expense> GetExpenseById(int id)
+        public Task<Transaction> GetExpenseById(int id)
         {
             return _budgetService.GetExpense(id);
         }
 
         [Route("income/{id:int}")]
-        public Task<Income> GetIncomeById(int id)
+        public Task<Transaction> GetIncomeById(int id)
         {
             return _budgetService.GetIncome(id);
         }
 
         [Route("expense")]
-        public Task Post([FromBody]Expense expense)
+        public Task PostExpense([FromBody]Transaction expense)
         {
             return _budgetService.SaveExpense(expense);
         }
 
         [Route("income")]
-        public Task Post([FromBody]Income income)
+        public Task PostIncome([FromBody]Transaction income)
         {
             return _budgetService.SaveIncome(income);
         }

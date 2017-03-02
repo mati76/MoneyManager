@@ -23,28 +23,29 @@ namespace MoneyManager.WebApi.Services
                 cfg.CreateMap<Category, DTO.Category>().PreserveReferences();
                 cfg.CreateMap<Category, DTO.CategoryInfo>().PreserveReferences();
                 cfg.CreateMap<DTO.CategoryInfo, Category>().PreserveReferences();
-                cfg.CreateMap<Expense, DTO.Expense>().AfterMap((bll, dto) => dto.CategoryName = bll.Category?.Name);
-                cfg.CreateMap<DTO.Expense, Expense>().AfterMap((dto, bll) => { bll.CategoryId = dto.CategoryId; bll.Category = null; });
-                cfg.CreateMap<Income, DTO.Income>().AfterMap((bll, dto) => dto.CategoryName = bll.Category?.Name);
-                cfg.CreateMap<DTO.Income, Income>().AfterMap((dto, bll) => { bll.CategoryId = dto.CategoryId; bll.Category = null; });
+                cfg.CreateMap<Transaction, DTO.Transaction>().AfterMap((bll, dto) => dto.CategoryName = bll.Category?.Name);
+                cfg.CreateMap<DTO.Transaction, Transaction>().AfterMap((dto, bll) => { bll.CategoryId = dto.CategoryId; bll.Category = null; });
+                cfg.CreateMap<Transaction, DTO.Transaction>().AfterMap((bll, dto) => dto.CategoryName = bll.Category?.Name);
+                cfg.CreateMap<DTO.Transaction, Transaction>().AfterMap((dto, bll) => { bll.CategoryId = dto.CategoryId; bll.Category = null; });
                 cfg.CreateMap<DTO.SearchCriteria, SearchCriteria>();
                 cfg.CreateMap<TransactionTotals, DTO.TransactionTotals>();
+                cfg.CreateMap<TransactionCollection, DTO.TransactionCollection>();
                 cfg.CreateMap<CategoryTotal, DTO.CategoryTotal>();
                 cfg.CreateMap<DTO.AccountDTO, AppUser>();
                 cfg.CreateMap<IdentityResult, ActionResult>();
                 cfg.CreateMap<AppUser, IdentityUser>();
 
-                cfg.CreateMap<DAC.ExpenseCategory, BLL.Category>().PreserveReferences();
+                cfg.CreateMap<DAC.ExpenseCategory, Category>().PreserveReferences();
                 cfg.CreateMap<BLL.Category, DAC.ExpenseCategory>().PreserveReferences();
-                cfg.CreateMap<DAC.IncomeCategory, BLL.Category>().PreserveReferences();
+                cfg.CreateMap<DAC.IncomeCategory, Category>().PreserveReferences();
                 cfg.CreateMap<BLL.Category, DAC.IncomeCategory>().PreserveReferences();
-                cfg.CreateMap<DAC.Expense, BLL.Expense>();
-                cfg.CreateMap<BLL.Expense, DAC.Expense>();
-                cfg.CreateMap<DAC.Income, BLL.Income>();
-                cfg.CreateMap<BLL.Expense, DAC.Expense>();
-                cfg.CreateMap<BLL.Income, DAC.Income>();
-                cfg.CreateMap<DAC.BudgetExpense, BLL.Expense>();
-                cfg.CreateMap<BLL.Expense, DAC.BudgetExpense>();
+                cfg.CreateMap<DAC.Expense, Transaction>();
+                cfg.CreateMap<BLL.Transaction, DAC.Expense>();
+                cfg.CreateMap<DAC.Income, Transaction>();
+                cfg.CreateMap<BLL.Transaction, DAC.Expense>();
+                cfg.CreateMap<BLL.Transaction, DAC.Income>();
+                cfg.CreateMap<DAC.BudgetExpense, Transaction>();
+                cfg.CreateMap<BLL.Transaction, DAC.BudgetExpense>();
             });
         }
     }

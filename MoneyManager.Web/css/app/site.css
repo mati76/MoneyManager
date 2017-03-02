@@ -90,13 +90,16 @@ ul.list{
     vertical-align: middle;
 }
 
+ul.list >  li{
+    margin: 10px 10px 10px 10px;
+}
+
 ul.list > li.list-item{
     height: 50px;
     color: black;
     line-height: 50px;
     vertical-align: middle;
     background-color: white;
-    margin: 10px 10px 10px 10px;
     padding-left: 10px;
     border-radius: 5px;
     border: solid 2px powderblue;

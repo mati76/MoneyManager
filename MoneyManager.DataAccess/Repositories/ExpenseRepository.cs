@@ -14,43 +14,48 @@ using System.Diagnostics;
 
 namespace MoneyManager.DataAccess.Repositories
 {
-    public class ExpenseRepository : BaseRepository<DAC.Expense, Expense>, IExpenseRepository
+    public class ExpenseRepository : BaseRepository<DAC.Expense, Transaction>, IExpenseRepository
     {
         public ExpenseRepository(IMapperService mapperService, IDbContext dbContext) : base(mapperService, dbContext) { }
 
-        public async Task<IEnumerable<Expense>> GetExpenses(DateTime date)
+        public async Task<IEnumerable<Transaction>> GetExpenses(DateTime date)
         {
-            return _mapperService.Map<IEnumerable<Expense>>(await _dbset.Where(o => DbFunctions.TruncateTime(o.Date) == date).Include(o => o.Category).ToListAsync());
+            return _mapperService.Map<IEnumerable<Transaction>>(await _dbset.Where(o => DbFunctions.TruncateTime(o.Date) == date).Include(o => o.Category).ToListAsync());
         }
 
-        public async Task<IEnumerable<Expense>> GetExpenses(DateTime dateFrom, DateTime dateTo)
+        public async Task<IEnumerable<Transaction>> GetExpenses(DateTime dateFrom, DateTime dateTo)
         {
-            return _mapperService.Map<IEnumerable<Expense>>(await _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(dateFrom)
+            return _mapperService.Map<IEnumerable<Transaction>>(await _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(dateFrom)
                 && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(dateTo)).ToListAsync());
         }
 
-        public async Task<IEnumerable<Expense>> GetExpenses(int year, int month)
+        public async Task<IEnumerable<Transaction>> GetExpenses(int year, int month)
         {
-            return _mapperService.Map<IEnumerable<Expense>>(await _dbset.Where(o => o.Date.Year == year && o.Date.Month == month).ToListAsync());
+            return _mapperService.Map<IEnumerable<Transaction>>(await _dbset.Where(o => o.Date.Year == year && o.Date.Month == month).ToListAsync());
         }
 
-        public async Task<IEnumerable<Expense>> GetExpensesByCriteria(SearchCriteria criteria)
+        public async Task<TransactionCollection> GetExpensesByCriteria(SearchCriteria criteria)
         {
+            var result = new TransactionCollection();
+
             var qry = _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(criteria.DateFrom)
                 && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(criteria.DateTo));
-
-            if (criteria.Categories.Any())
-                qry = qry.Where(o => criteria.Categories.Select(c => c.Id).Contains(o.Id));
             if (criteria.MinAmount.HasValue)
                 qry = qry.Where(o => o.Amount >= criteria.MinAmount);
             if (criteria.MaxAmount.HasValue)
                 qry = qry.Where(o => o.Amount <= criteria.MaxAmount);
-            if(!string.IsNullOrEmpty(criteria.SortBy))
+
+            result.Categories = _mapperService.Map<IEnumerable<Category>>(await qry.Select(o => o.Category).Distinct().ToListAsync());
+
+            if (criteria.Categories.Any())
+                qry = qry.Where(o => criteria.Categories.Select(c => c.Id).Contains(o.Id));
+            if (!string.IsNullOrEmpty(criteria.SortBy))
                 qry = qry.OrderBy(criteria.SortBy + (criteria.SortAsc == true ? " ascending" : " descending"));
-            if(criteria.Skip.HasValue && criteria.Take.HasValue)
+            if (criteria.Skip.HasValue && criteria.Take.HasValue)
                 qry = qry.Skip(criteria.Skip.Value).Take(criteria.Take.Value);
 
-            return _mapperService.Map<IEnumerable<Expense>>(await qry.Include(e => e.Category).ToListAsync());
+            result.Transactions = _mapperService.Map<IEnumerable<Transaction>>(await qry.Include(e => e.Category).ToListAsync());
+            return result;
         }
 
         public Task<decimal> GetExpenseTotalsFromDates(DateTime from, DateTime to)

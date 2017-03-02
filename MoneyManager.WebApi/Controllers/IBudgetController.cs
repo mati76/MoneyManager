@@ -10,12 +10,12 @@ namespace MoneyManager.WebApi.Controllers
     {
         Task DeleteExpense(int id);
         Task DeleteIncome(int id);
-        Task<IEnumerable<Expense>> GetExpense([FromUri] SearchCriteria criteria);
-        Task<Expense> GetExpenseById(int id);
-        Task<IEnumerable<Income>> GetIncome([FromUri] SearchCriteria criteria);
-        Task<Income> GetIncomeById(int id);
-        Task Post([FromBody] Income income);
-        Task Post([FromBody] Expense expense);
+        Task<IEnumerable<Transaction>> GetExpense([FromUri] SearchCriteria criteria);
+        Task<Transaction> GetExpenseById(int id);
+        Task<IEnumerable<Transaction>> GetIncome([FromUri] SearchCriteria criteria);
+        Task<Transaction> GetIncomeById(int id);
+        Task PostIncome([FromBody] Transaction income);
+        Task PostExpense([FromBody] Transaction expense);
         Task<IEnumerable<BudgetRealization>> GetRealization(DateTime from, DateTime to);
     }
 }

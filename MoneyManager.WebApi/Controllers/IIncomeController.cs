@@ -7,17 +7,17 @@ namespace MoneyManager.WebApi.Controllers
 {
     public interface IIncomeController
     {
-        Task<IEnumerable<Income>> Get(SearchCriteria criteria);
+        Task<IEnumerable<Transaction>> Get(SearchCriteria criteria);
 
-        Task<Income> GetById(int id);
+        Task<Transaction> GetById(int id);
 
         Task<TransactionTotals> GetTotals(DateTime date);
 
         Task<IEnumerable<CategoryTotal>> GetCategoryTotals(DateTime dateFrom, DateTime dateTo);
 
-        Task<IEnumerable<Income>> GetByDate(int year, int month);
+        Task<IEnumerable<Transaction>> GetByDate(int year, int month);
 
-        Task Post(Income income);
+        Task Post(Transaction income);
 
         Task Delete(int id);
     }

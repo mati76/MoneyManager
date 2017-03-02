@@ -12,21 +12,21 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.DataAccess.Repositories
 {
-    public class IncomeRepository : BaseRepository<DAC.Income, Income>, IIncomeRepository
+    public class IncomeRepository : BaseRepository<DAC.Income, Transaction>, IIncomeRepository
     {
         public IncomeRepository(IMapperService mapperService, IDbContext dbContext) : base(mapperService, dbContext) { }
 
-        public async Task<IEnumerable<Income>> GetIncome(DateTime from, DateTime to)
+        public async Task<IEnumerable<Transaction>> GetIncome(DateTime from, DateTime to)
         {
-            return _mapperService.Map<IEnumerable<Income>>(await _dbset.Where(o => DbFunctions.TruncateTime(o.Date) >= from && DbFunctions.TruncateTime(o.Date) <= to).ToListAsync());
+            return _mapperService.Map<IEnumerable<Transaction>>(await _dbset.Where(o => DbFunctions.TruncateTime(o.Date) >= from && DbFunctions.TruncateTime(o.Date) <= to).ToListAsync());
         }
 
-        public async Task<IEnumerable<Income>> GetIncome(int year, int month)
+        public async Task<IEnumerable<Transaction>> GetIncome(int year, int month)
         {
-            return _mapperService.Map<IEnumerable<Income>>(await _dbset.Where(o => o.Date.Year == year && o.Date.Month == month).ToListAsync());
+            return _mapperService.Map<IEnumerable<Transaction>>(await _dbset.Where(o => o.Date.Year == year && o.Date.Month == month).ToListAsync());
         }
 
-        public async Task<IEnumerable<Income>> GetIncomeByCriteria(SearchCriteria criteria)
+        public async Task<IEnumerable<Transaction>> GetIncomeByCriteria(SearchCriteria criteria)
         {
             var qry = _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(criteria.DateFrom)
                 && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(criteria.DateTo));
@@ -42,7 +42,7 @@ namespace MoneyManager.DataAccess.Repositories
             if (criteria.Skip.HasValue && criteria.Take.HasValue)
                 qry = qry.Skip(criteria.Skip.Value).Take(criteria.Take.Value);
 
-            return _mapperService.Map<IEnumerable<Income>>(await qry.Include(e => e.Category).ToListAsync());
+            return _mapperService.Map<IEnumerable<Transaction>>(await qry.Include(e => e.Category).ToListAsync());
         }
 
         public async Task<decimal> GetIncomeTotalsFromDates(DateTime from, DateTime to)
