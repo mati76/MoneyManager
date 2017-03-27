@@ -37,8 +37,8 @@ namespace MoneyManager.DataAccess.Repositories
             var qry = _dbset.Where(e => DbFunctions.TruncateTime(e.Date) >= DbFunctions.TruncateTime(criteria.DateFrom)
                 && DbFunctions.TruncateTime(e.Date) <= DbFunctions.TruncateTime(criteria.DateTo));
 
-            if (criteria.Categories.Any())
-                qry = qry.Where(o => criteria.Categories.Select(c => c.Id).Contains(o.Id));
+            if (criteria.CategoryIDs.Any())
+                qry = qry.Where(o => criteria.CategoryIDs.Contains(o.CategoryId));
             if (criteria.MinAmount.HasValue)
                 qry = qry.Where(o => o.Amount >= criteria.MinAmount);
             if (criteria.MaxAmount.HasValue)

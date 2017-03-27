@@ -5,7 +5,8 @@
         getNextMonth: getNextMonth,
         getPrevMonth: getPrevMonth,
         getYear: getYear,
-        isRangeFullMonth, isRangeFullMonth
+        isRangeFullMonth, isRangeFullMonth,
+        getCalendar: getCalendar
     };
 
     function getWeek() {
@@ -72,6 +73,65 @@
         return new Date(year, month + 1, 0).getDate();
     }
 
-    
+    function isFirstDayOfMonth(date) {
+        return date.getDate() == 1;
+    }
 
+    function isFirstMonthOfYear(date) {
+        return date.getMonth() == 0;
+    }
+
+    function isLastDayOfMonth(date) {
+        return date.getDate() == daysInMonth(date.getMonth(), date.getFullYear());
+    }
+
+    function isLastMonthOfYear(date) {
+        return date.getMonth() == 11;
+    }
+
+    function getPrevDay(date) {
+        if (isFirstDayOfMonth(date)) {
+            if (isFirstMonthOfYear(date)) {
+                return new Date(date.getFullYear() -1, 11, 30);
+            }
+            return new Date(date.getFullYear(), date.getMonth() - 1, daysInMonth(date.getMonth() - 1, date.getFullYear()));
+        }
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
+    }
+
+    function getNextDay(date){
+        if (isLastDayOfMonth(date)) {
+            if (isLastMonthOfYear(date)) {
+                return new Date(date.getFullYear() + 1, 1, 1);
+            }
+            return new Date(date.getFullYear(), date.getMonth() + 1, 1);
+        }
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+    }
+
+    function getCalendar(year, month) {
+        var days = [];
+        
+        var noDaysInMonth = daysInMonth(month, year);
+        var firstDay = new Date(year, month, 1);
+        var lastDay = new Date(year, month, noDaysInMonth);
+
+        var totalDays = firstDay.getDay() + noDaysInMonth + 6 - lastDay.getDay();
+        var weeks = totalDays / 7;
+
+        var day = firstDay;
+        for (var i = 0; i < firstDay.getDay() ; i++) {
+            day = getPrevDay(day);
+        }
+        
+        for(var i = 0; i < weeks; i++){
+            var week = [];
+            for(var j = 0; j < 7; j++){
+                week.push(day);
+                day = getNextDay(day);
+            }
+            days.push(week.slice());
+        }
+        return days;
+    }
 }]);

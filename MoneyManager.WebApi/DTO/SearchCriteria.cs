@@ -5,7 +5,7 @@ namespace MoneyManager.WebApi.DTO
 {
     public class SearchCriteria : BaseDTO
     {
-        public IEnumerable<Category> Categories { get; set; }
+        public IEnumerable<int> CategoryIDs { get; set; }
 
         public DateTime? DateFrom { get; set; }
 

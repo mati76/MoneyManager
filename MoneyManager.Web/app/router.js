@@ -114,6 +114,30 @@
                 }
             }
         })
+        .state('calendar', {
+            url: '/calendar?from&to',
+            data: { requireLogin: true },
+            views: {
+                'filters': {
+                    template: '<period-picker selected-option="selectedPeriod" show-month="true" show-next-month="true" show-prev-month="true"></period-picker>',
+                    controller: function ($scope) { },
+                },
+                'content': {
+                    controller: 'calendarController',
+                    templateUrl: 'app/components/calendar/calendar.html'
+                }
+            },
+            params: {
+                from: {
+                    value: new Date(new Date().setDate(1)).yyyymmdd(),
+                    squash: true
+                },
+                to: {
+                    value: new Date(new Date().setDate(new Date(new Date().getYear(), new Date().getMonth() + 1, 0).getDate())).yyyymmdd(),
+                    squash: true
+                }
+            }
+        })
         .state('expenses', {
             url: '/expenses?from&to&page&sort&asc',
             data: { requireLogin: true },

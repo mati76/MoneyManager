@@ -1,0 +1,21 @@
+﻿<div class="full-height">
+    <table class="full-width" style="table-layout: fixed">
+        <tr>
+            <th style="border: solid 1px #d5d6d7; height: 30px" ng-repeat="day in days">
+                <span style="margin-left: 5px">{{day}}</span>
+            </th>
+        </tr>
+        <tr ng-repeat="row in calendar">
+            <td style="border: solid 1px #d5d6d7; height: 150px" ng-repeat="cell in row">
+                <div class="full-height">
+                    <div style="font-size: 12px; margin: 3px">{{cell | date : 'd MMM'}}</div>
+                    <div style="color: black" class="full-width full-height">
+                        <ul class="list">
+                            <li><a style="font-size: 16px" class="link">1st item</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -43,13 +43,14 @@ angular.module('moneyManager.shared').directive('checkBox', function () {
     return {
         template: '<div class="check-box" ng-class="{\'glyphicon glyphicon-ok\': isChecked == true }" aria-hidden="true" ng-click="$event.stopPropagation(); onclick();"/>',
         restrict: 'E',
-        scope: { disabled: '=', isChecked: '=', click: '&' },
+        scope: { disabled: '=', isChecked: '=', isDirty: '=', click: '&' },
         link: function(scope, element, attrs) {
             scope.title = attrs.title;
             scope.onclick = function () {
 
                 if (scope.disabled != true) {
                     scope.isChecked = !scope.isChecked;
+                    scope.isDirty = true;
                     scope.click({ checked: scope.isChecked });
                 }
             };
@@ -173,7 +174,7 @@ angular.module('moneyManager.shared').directive('grid', function () {
                         '<span id="transactions-grid-buttons" ng-show="multipleChecked()">' +
                             '<button ng-repeat="btn in options.multiSelectActions" style="display: inline !important" class="grid-btn" ng-class="btn.css" ng-bind="btn.label" ng-click="btn.callback()"></button>' +
                         '</span>' +
-                        '<multi-drop-down items="filterItems" title="filterLabel"></multi-drop-down>' +
+                        '<multi-drop-down ng-hide="multipleChecked()" class="float-right" items="filterItems" title="filterLabel" apply-changes="applyFilter()"></multi-drop-down>' +
                     '</p>' +
                     '<loading-panel is-loading="isLoading" width="50" height="50"></loading-panel>' +
                     '<table class="full-width">' +
@@ -187,7 +188,10 @@ angular.module('moneyManager.shared').directive('grid', function () {
                     '</div>' +
                     '<p class="nothing-label" ng-show="!isLoading && source.length == 0">{{options.noItemsLabel}}</p>' +
                     '</div>',
-        scope: { label: '=', source: '=', options: '=', isLoading: '=', sortedBy: '=', onSort: '&', onButtonClick: '&', loadNextItems: '&', filterLabel: '=', filterItems: '=' },
+        scope: {
+            label: '=', source: '=', options: '=', isLoading: '=', sortedBy: '=', onSort: '&', onButtonClick: '&',
+            loadNextItems: '&', filterLabel: '=', filterItems: '=', applyFilter: '&'
+        },
         link: function (scope, element, attr) {
             scope.isSortedBy = function (field) {
                 return scope.sortedBy.SortBy == field ? scope.sortedBy.SortAsc : undefined;
@@ -207,7 +211,7 @@ angular.module('moneyManager.shared').directive('grid', function () {
                         return true;
                     }
                 });
-                scope.checkedAll = cnt == scope.source.length;
+                scope.checkedAll = cnt > 0 && cnt == scope.source.length;
                 return cnt > 1;
             };
 

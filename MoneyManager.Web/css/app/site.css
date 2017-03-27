@@ -48,6 +48,10 @@ span.title-bar-category{
     background-image: url('../../icons/icon-tagsTitle.png');
 }
 
+span.title-bar-calendar{
+    background-image: url('../../icons/icon-remindersTitle.png');
+}
+
 .widget{
     border: solid 1px #d5d6d7;
     margin: 20px;
@@ -389,6 +393,11 @@ button.grid-btn-repeat{
     background-image: url('../../icons/repeat.png');
 }
 
+button.grid-btn-filter{
+    background-image: url('../../icons/filter.png');
+    width: 230px;
+}
+
 button.grid-btn-disabled{
     background-color: #FAFAFA;
     color: #DFDFDF;
@@ -461,10 +470,12 @@ button.grid-btn:hover {
     font-size: 18px;
 }
 
+.label-grey,
 .chart-legend-custom tr > td:nth-child(3){
     color: #7c7c7c;
 }
 
+a.link,
 .chart-legend-custom a{
     color: black;
     cursor: pointer;

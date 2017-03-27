@@ -1,0 +1,9 @@
+﻿<div class="btn-group" uib-dropdown>
+    <button type="button" class="btn btn-primary" ng-style="{'width': width}">{{caption}}</button>
+    <button type="button" class="btn btn-primary" uib-dropdown-toggle>
+        <span class="caret"></span>
+    </button>
+    <ul ng-style="css" style="min-width: 0; overflow: auto" class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <li ng-repeat="item in items" role="menuitem"><a ng-click="select(item)" href="#">{{item}}</a></li>
+    </ul>
+</div>

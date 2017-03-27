@@ -70,8 +70,8 @@
     cursor: pointer;
 }
 
-.dropdown-menu{
-    width: 300px;
+.dropdown-menu-fixed{
+    width: 300px !important;
 }
 
 .menu-item-dashboard{
@@ -112,6 +112,14 @@
 
 .menu-item-categories:hover, .menu-item-categories.selected{
     background-image: url(/icons/icon-tagsActive.png);
+}
+
+.menu-item-calendar{
+    background-image: url(/icons/icon-remindersNormal.png);
+}
+
+.menu-item-calendar:hover, .menu-item-calendar.selected{
+    background-image: url(/icons/icon-remindersActive.png);
 }
 
 li.selected .menu-item-container{

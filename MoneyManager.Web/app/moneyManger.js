@@ -10,6 +10,7 @@
     'moneyManager.configuration',
     'moneyManager.expense',
     'moneyManager.income',
+    'moneyManager.calendar',
     'moneyManager.auth',
     'moneyManager.home',
     'moneyManager.budget',

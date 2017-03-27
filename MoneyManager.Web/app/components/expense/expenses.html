@@ -70,8 +70,8 @@
         </div>
     </div>
     <div id="transactions" class="panel panel-default">
-        <grid options="gridOptions" is-loading="loadingExpenses" source="expenses" sorted-by="expenseParams" 
-              filter-items="categoryFilterItems" filter-label="'Filter By Categories:'" on-sort="sort(e)" load-next-items="loadNextExpenses(e)"></grid>
+        <grid options="gridOptions" is-loading="loadingExpenses" source="expenses" sorted-by="expenseParams" apply-filter="applyFilter()"
+              filter-items="categoryFilterItems" filter-label="'CATEGORY FILTER'" on-sort="sort(e)" load-next-items="loadNextExpenses(e)"></grid>
     </div>
 </div>
 

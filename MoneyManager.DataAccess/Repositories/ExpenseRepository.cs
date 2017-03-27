@@ -47,8 +47,8 @@ namespace MoneyManager.DataAccess.Repositories
 
             result.Categories = _mapperService.Map<IEnumerable<Category>>(await qry.Select(o => o.Category).Distinct().ToListAsync());
 
-            if (criteria.Categories.Any())
-                qry = qry.Where(o => criteria.Categories.Select(c => c.Id).Contains(o.Id));
+            if (criteria.CategoryIDs.Any())
+                qry = qry.Where(o => criteria.CategoryIDs.Contains(o.CategoryId));
             if (!string.IsNullOrEmpty(criteria.SortBy))
                 qry = qry.OrderBy(criteria.SortBy + (criteria.SortAsc == true ? " ascending" : " descending"));
             if (criteria.Skip.HasValue && criteria.Take.HasValue)

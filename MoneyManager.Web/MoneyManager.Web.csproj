@@ -85,7 +85,12 @@
     <Content Include="app\components\expense\expenses.html" />
     <Content Include="app\components\expense\expensesController.js" />
     <Content Include="app\components\expense\expenseService.js" />
-    <Content Include="app\components\expense\expensePopupService.js" />
+    <Content Include="app\components\calendar\calendar.js" />
+    <Content Include="app\components\calendar\calendar.html" />
+    <Content Include="app\components\calendar\calendarController.js" />
+    <Content Include="app\shared\dropDown\dropDown.html" />
+    <Content Include="app\shared\dropDown\dropDown.js" />
+    <Content Include="app\shared\popup\popupService.js" />
     <Content Include="app\components\home\home.html" />
     <Content Include="app\components\home\home.js" />
     <Content Include="app\components\home\homeController.js" />
@@ -97,7 +102,6 @@
     <Content Include="app\components\income\income.js" />
     <Content Include="app\components\income\incomes.html" />
     <Content Include="app\components\income\incomeService.js" />
-    <Content Include="app\components\income\incomePopupService.js" />
     <Content Include="app\components\login\login.html" />
     <Content Include="app\components\login\login.js" />
     <Content Include="app\components\login\loginController.js" />
@@ -116,6 +120,8 @@
     <Content Include="app\shared\multiSelectDropDown\multiSelectDropDown.js" />
     <Content Include="app\shared\periodPicker\periodPicker.html" />
     <Content Include="app\shared\periodPicker\periodPicker.js" />
+    <Content Include="app\components\calendar\repeat.html" />
+    <Content Include="app\components\calendar\repeatController.js" />
     <Content Include="app\shared\shared.js" />
     <Content Include="configuration\configuration.js" />
     <Content Include="css\ag-grid\ag-grid.css" />
@@ -133,6 +139,7 @@
     <Content Include="icons\copy.png" />
     <Content Include="icons\delete.png" />
     <Content Include="icons\edit.png" />
+    <Content Include="icons\filter.png" />
     <Content Include="icons\icon-budgetsActive.png" />
     <Content Include="icons\icon-budgetsNormal.png" />
     <Content Include="icons\icon-calendar.png" />
@@ -143,6 +150,9 @@
     <Content Include="icons\icon-expensesActive.png" />
     <Content Include="icons\icon-incomesActive.png" />
     <Content Include="icons\icon-IncomesNormal.png" />
+    <Content Include="icons\icon-remindersActive.png" />
+    <Content Include="icons\icon-remindersNormal.png" />
+    <Content Include="icons\icon-remindersTitle.png" />
     <Content Include="icons\Icon-reportsActive2.png" />
     <Content Include="icons\Icon-reportsNormal2.png" />
     <Content Include="icons\icon-tagsActive.png" />
@@ -200,6 +210,7 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -1,4 +1,4 @@
-﻿angular.module('moneyManager.expense').controller('expensesController', ['$scope', '$state', '$stateParams', 'expenseService', 'messageBoxService', 'expensePopupService', 'eventAggregatorService', 'helperService', function ($scope, $state, $stateParams, expenseService, messageBoxService, expensePopupService, eventAggregatorService, helperService) {
+﻿angular.module('moneyManager.expense').controller('expensesController', ['$scope', '$state', '$stateParams', 'expenseService', 'messageBoxService', 'popupService', 'eventAggregatorService', 'helperService', function ($scope, $state, $stateParams, expenseService, messageBoxService, popupService, eventAggregatorService, helperService) {
 
     $scope.gridOptions = {
         fields: [
@@ -12,7 +12,7 @@
         singleSelectActions: [
             { label: 'EDIT', css: 'grid-btn-edit', callback: function (item) { $scope.editExpense(item); } },
             { label: 'SPLIT', css: 'grid-btn-split', callback: function (item) { alert("SPLIT: " + item.Id); } },
-            { label: 'REPEAT', css: 'grid-btn-repeat', callback: function (item) { alert("REPEAT: " + item.Id); } },
+            { label: 'REPEAT', css: 'grid-btn-repeat', callback: function (item) { $scope.repeatExpense(item) } },
             { label: 'DELETE', css: 'grid-btn-delete', callback: function (item) { $scope.deleteExpense(item); } }
         ],
         multiSelectActions: [
@@ -29,7 +29,13 @@
     $scope.$parent.titleBarClass = "title-bar-expense";
     $scope.$parent.btnAddCaption = "Add Expense";
     $scope.$parent.addFunc = function () {
-        expensePopupService.expensePopup('add', $scope.reload, expenseService.saveExpense);
+        popupService.popup('add', { 
+            callback: $scope.reload, 
+            windowClass: 'expence-modal',
+            templateUrl: '/app/components/expense/expense.html',
+            controller: 'expenseController',
+            saveFunc: expenseService.saveExpense
+        })
     };
 
     $scope.chartOptions = {
@@ -50,6 +56,19 @@
         if ($scope.canLoadNextExpenses) {
             $scope.loadExpenses();
         }
+    };
+
+    $scope.applyFilter = function () {
+        $scope.expenseParams.CategoryIDs = [];
+        angular.forEach($scope.categoryFilterItems, function (item) {
+            if (item.isSelected) {
+                $scope.expenseParams.CategoryIDs.push(item.Id);
+            }
+        });
+
+        $scope.expenseParams.Skip = 0;
+        $scope.expenses = [];
+        $scope.loadExpenses();
     };
 
     $scope.sort = function (args) {
@@ -73,9 +92,25 @@
         $scope.detailsChartCategoryName = legendItem.label.toUpperCase();
         $scope.loadCategoryTotals($scope.chart2, legendItem.categoryId);
     };
+
+    $scope.repeatExpense = function (expense) {
+        popupService.popup('edit', {
+            windowClass: 'expence-modal',
+            templateUrl: '/app/components/calendar/repeat.html',
+            controller: 'repeatController',
+            saveFunc: null,
+            title: 'REPEAT EXPENSE'
+        }, expense)
+    };
    
     $scope.editExpense = function (expense) {
-        expensePopupService.expensePopup('edit', $scope.reload, expenseService.saveExpense, expense);
+        popupService.popup('edit', {
+            callback: $scope.reload, 
+            windowClass: 'expence-modal',
+            templateUrl: '/app/components/expense/expense.html',
+            controller: 'expenseController',
+            saveFunc: expenseService.saveExpense
+        }, expense)
     };
 
     $scope.deleteExpense = function (expense) {
@@ -112,6 +147,14 @@
         $scope.loadingExpenses = true;
         expenseService.getExpenses($scope.expenseParams).then(function (result) {
             $scope.categoryFilterItems = result.data.Categories;
+            angular.forEach($scope.expenseParams.CategoryIDs, function (categoryId) {
+                angular.forEach($scope.categoryFilterItems, function (item) {
+                    if (item.Id == categoryId) {
+                        item.isSelected = true;
+                    }
+                });
+            });
+
             $scope.canLoadNextExpenses = result.data.Transactions.length == $scope.expenseParams.Take;
             if ($scope.expenseParams.Skip == 0) {
                 $scope.expenses = result.data.Transactions;

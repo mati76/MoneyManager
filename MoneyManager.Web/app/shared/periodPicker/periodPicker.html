@@ -3,7 +3,7 @@
         {{ title }}
         <i class="caret"></i>
     </span>
-    <div class="dropdown-menu" uib-dropdown-menu role="menu">
+    <div class="dropdown-menu dropdown-menu-fixed" uib-dropdown-menu role="menu">
         <ul class="list">
             <li ng-show="showToday" ng-class="selected.mode == 'Today' && !showCustom ? 'menu-item menu-item-selected' : 'menu-item'" role="menuitem" ng-click="applySelection('Today')">Today</li>
             <li ng-show="showWeek" ng-class="selected.mode == 'Week' && !showCustom ? 'menu-item menu-item-selected' : 'menu-item'" role="menuitem" ng-click="applySelection('Week')">This Week</li>

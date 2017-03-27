@@ -125,11 +125,11 @@
             $scope.model.Date = new Date();
             $scope.label = 'ADD EXPENSE';
         } else {
-            $scope.model.Amount = params.expense.Amount;
-            $scope.model.Comment = params.expense.Comment;
-            $scope.model.Date = Date.parse(params.expense.Date);
-            $scope.model.Id = params.expense.Id;
-            $scope.model.CategoryId = params.expense.CategoryId;
+            $scope.model.Amount = params.model.Amount;
+            $scope.model.Comment = params.model.Comment;
+            $scope.model.Date = Date.parse(params.model.Date);
+            $scope.model.Id = params.model.Id;
+            $scope.model.CategoryId = params.model.CategoryId;
             $scope.label = 'EDIT EXPENSE';
         }
     })();

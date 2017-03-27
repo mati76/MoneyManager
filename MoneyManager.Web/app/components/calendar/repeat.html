@@ -1,0 +1,105 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title}}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <form name="form">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group" ng-class="{'has-error': form.name.$invalid && form.name.$dirty}">
+                            <label for="name">Name:</label>
+                            <input class="form-control" width="20" maxlength="20" type="text" name="name" id="name" ng-model="model.Name" required />
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{'has-error': form.amount.$invalid && form.amount.$dirty}">
+                            <label for="amount">Amount:</label>
+                            <input class="form-control" type="number" name="amount" id="amount" ng-model="model.Amount" required />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="form-group" ng-class="{'has-error': form.date.$invalid && form.date.$dirty}">
+                                <label for="date">Start Date:</label>
+                                <p class="input-group">
+                                    <input type="text" id="date" name="date" class="form-control" uib-datepicker-popup="{{format}}" ng-model="model.Date" is-open="pickerPopup.opened"
+                                            datepicker-options="dateOptions" popup-placement="bottom-left" show-button-bar="false" close-text="Close" alt-input-formats="altInputFormats" required />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="openPicker('date')"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Category:</label>
+                            <p class="input-group">
+                                <input class="form-control" name="category" ng-model="model.CategoryName" disabled />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="categoryPopup()"><i class="glyphicon glyphicon-menu-down"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="repeat">Repeat:</label>
+                                    <p class="input-group">
+                                        <drop-down width="40" css="{'max-height': '160px'}" items="repeatDays"></drop-down>&emsp;
+                                        <drop-down width="80" css="{'max-height': '160px'}" items="repeatPeriods"></drop-down>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="repeat">Until:</label>
+                                    <p class="input-group">
+                                        <input type="text" name="until" class="form-control" uib-datepicker-popup="{{format}}" ng-model="model.Until" is-open="pickerPopup1.opened"
+                                                datepicker-options="dateOptions" popup-placement="left" show-button-bar="false" close-text="Close" alt-input-formats="altInputFormats" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openPicker('until')"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="comment">Comment:</label>
+                            <input class="form-control" name="comment" id="comment" ng-model="model.Comment" />
+                        </div>
+                    </div>
+                </div>
+                <div ng-messages="form.name.$error" ng-if="form.name.$dirty">
+                    <div class="alert alert-warning" role="alert" ng-message="required">Please enter name of expense</div>
+                </div>
+                <div ng-messages="form.amount.$error" ng-if="form.amount.$dirty">
+                    <div class="alert alert-warning" role="alert" ng-message="required">Please enter an amount</div>
+                </div>
+                <div ng-messages="form.date.$error" ng-if="form.date.$dirty" style="color:maroon" role="alert">
+                    <div class="alert alert-warning" role="alert" ng-message="required">Please enter a valid date</div>
+                </div>
+                <div ng-messages="form.category.$error" ng-if="form.category.$dirty" style="color:maroon" role="alert">
+                    <div class="alert alert-warning" role="alert" ng-message="required">Please select category</div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="save()">Ok</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</div>

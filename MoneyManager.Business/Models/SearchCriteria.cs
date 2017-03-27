@@ -5,16 +5,11 @@ namespace MoneyManager.Business.Models
 {
     public class SearchCriteria
     {
-        public SearchCriteria()
-        {
-            Categories = new List<Category>();
-        }
-
         public DateTime DateFrom{ get; set; }
 
         public DateTime DateTo { get; set; }
 
-        public IEnumerable<Category> Categories { get; set; }
+        public IEnumerable<int> CategoryIDs { get; set; } = new List<int>();
 
         public bool? SortAsc { get; set; }
 
