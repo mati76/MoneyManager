@@ -23,10 +23,8 @@ namespace MoneyManager.WebApi.Services
                 cfg.CreateMap<Category, DTO.Category>().PreserveReferences();
                 cfg.CreateMap<Category, DTO.CategoryInfo>().PreserveReferences();
                 cfg.CreateMap<DTO.CategoryInfo, Category>().PreserveReferences();
-                cfg.CreateMap<Transaction, DTO.Transaction>().AfterMap((bll, dto) => dto.CategoryName = bll.Category?.Name);
                 cfg.CreateMap<DTO.Transaction, Transaction>().AfterMap((dto, bll) => { bll.CategoryId = dto.CategoryId; bll.Category = null; });
                 cfg.CreateMap<Transaction, DTO.Transaction>().AfterMap((bll, dto) => dto.CategoryName = bll.Category?.Name);
-                cfg.CreateMap<DTO.Transaction, Transaction>().AfterMap((dto, bll) => { bll.CategoryId = dto.CategoryId; bll.Category = null; });
                 cfg.CreateMap<DTO.SearchCriteria, SearchCriteria>();
                 cfg.CreateMap<TransactionTotals, DTO.TransactionTotals>();
                 cfg.CreateMap<TransactionCollection, DTO.TransactionCollection>();

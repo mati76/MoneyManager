@@ -1,11 +1,17 @@
-﻿angular.module('moneyManager.budget').controller('budgetController', ['$scope', 'budgetService', 'expensePopupService', '$stateParams', '$state', 'helperService', 'messageBoxService',
-    function ($scope, budgetService, expensePopupService, $stateParams, $state, helperService, messageBoxService) {
+﻿angular.module('moneyManager.budget').controller('budgetController', ['$scope', 'budgetService', 'popupService', '$stateParams', '$state', 'helperService', 'messageBoxService',
+    function ($scope, budgetService, popupService, $stateParams, $state, helperService, messageBoxService) {
 
     $scope.$parent.pageName = "BUDGET";
     $scope.$parent.titleBarClass = "title-bar-budget";
     $scope.$parent.btnAddCaption = "Add Planned Expense";
     $scope.$parent.addFunc = function () {
-        expensePopupService.expensePopup('add', $scope.reload, budgetService.saveExpense);
+        popupService.popup('add', {
+            callback: $scope.reload,
+            windowClass: 'expence-modal',
+            templateUrl: '/app/components/expense/expense.html',
+            controller: 'expenseController',
+            saveFunc: budgetService.saveExpense
+        })
     };
     $scope.chartColours = [];
     $scope.chart = {};
@@ -15,7 +21,7 @@
             { title: 'DATE', field: 'Date', filter: 'date', headerClass: 'align-left', headerStyle: { 'width': '120px' } },
             { title: 'AMOUNT', field: 'Amount', filter: 'currency', headerClass: 'align-right', class: 'expense align-right', headerStyle: { 'width': '100px' } },
             { title: 'DESCRIPTION', field: 'Comment', headerStyle: { 'padding-left': '40px' }, style: { 'width': '70%', 'padding-left': '40px' } },
-            { title: 'CATEGORY', field: 'CategoryName', sortBy: 'Category.Name', headerClass: 'align-right', style: { 'width': '30%', 'text-align': 'right' } }
+            { title: 'CATEGORY', field: 'CategoryName', sortBy: 'CategoryName', headerClass: 'align-right', class: 'align-right', style: { 'width': '30%', 'text-align': 'right' } }
         ],
         label: 'PLANNED TRANSACTIONS:',
         noItemsLabel: 'NO TRANSACTIONS',
@@ -63,7 +69,6 @@
     $scope.sort = function (args) {
         $scope.pageParams.SortBy = args.f;
         $scope.pageParams.SortAsc = args.e;
-        $scope.loadExpenses();
 
         $state.go($state.$current.name, {
             from: $scope.pageParams.DateFrom.yyyymmdd(),
@@ -74,7 +79,13 @@
     };
 
     $scope.editExpense = function (expense) {
-        expensePopupService.expensePopup('edit', $scope.reload, budgetService.saveExpense, expense);
+        popupService.popup('edit', {
+            callback: $scope.reload,
+            windowClass: 'expence-modal',
+            templateUrl: '/app/components/expense/expense.html',
+            controller: 'expenseController',
+            saveFunc: budgetService.saveExpense
+        }, expense)
     };
 
     $scope.deleteExpense = function (expense) {

@@ -48,7 +48,7 @@ namespace MoneyManager.DataAccess.Repositories
             if(criteria.Skip.HasValue && criteria.Take.HasValue)
                 qry = qry.Skip(criteria.Skip.Value).Take(criteria.Take.Value);
 
-            return _mapperService.Map<IEnumerable<Transaction>>(await qry.ToListAsync());
+            return _mapperService.Map<IEnumerable<Transaction>>(await qry.Include(o => o.Category).ToListAsync());
         }
 
         public Task<List<TransactionAggregates>> GetExpenseAggregates()

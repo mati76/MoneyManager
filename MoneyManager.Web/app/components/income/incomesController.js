@@ -1,4 +1,5 @@
-﻿angular.module('moneyManager.income').controller('incomesController', ['$scope', '$state', '$stateParams', 'incomeService', 'messageBoxService', 'incomePopupService', 'eventAggregatorService', 'helperService', function ($scope, $state, $stateParams, incomeService, messageBoxService, incomePopupService, eventAggregatorService, helperService) {
+﻿angular.module('moneyManager.income').controller('incomesController', ['$scope', '$state', '$stateParams', 'incomeService', 'messageBoxService', 'popupService', 'eventAggregatorService', 'helperService',
+    function ($scope, $state, $stateParams, incomeService, messageBoxService, popupService, eventAggregatorService, helperService) {
     $scope.$parent.pageName = "INCOMES";
 
     $scope.gridOptions = {
@@ -6,7 +7,7 @@
             { title: 'DATE', field: 'Date', filter: 'date', headerClass: 'align-left', headerStyle: { 'width': '120px' } },
             { title: 'AMOUNT', field: 'Amount', filter: 'currency', headerClass: 'align-right', class: 'income align-right', headerStyle: { 'width': '100px' } },
             { title: 'DESCRIPTION', field: 'Comment', headerStyle: { 'padding-left': '40px' }, style: { 'width': '70%', 'padding-left': '40px' } },
-            { title: 'CATEGORY', field: 'CategoryName', sortBy: 'Category.Name', headerClass: 'align-right', style: { 'width': '30%', 'text-align': 'right' } }
+            { title: 'CATEGORY', field: 'CategoryName', sortBy: 'Category.Name', headerClass: 'align-right', class: 'align-right', style: { 'width': '30%', 'text-align': 'right' } }
         ],
         noItemsLabel: 'NO TRANSACTIONS'
     };
@@ -28,7 +29,13 @@
     $scope.$parent.titleBarClass = "title-bar-income";
     $scope.$parent.btnAddCaption = "Add Income";
     $scope.$parent.addFunc = function () {
-        incomePopupService.incomePopup('add', $scope.reload);
+        popupService.popup('add', {
+            callback: $scope.reload,
+            windowClass: 'income-modal',
+            templateUrl: '/app/components/income/income.html',
+            controller: 'incomeController',
+            saveFunc: incomeService.saveIncome
+        })
     };
 
     $scope.sort = function (args) {
@@ -53,7 +60,13 @@
     $scope.incomeAction = function (e) {
         switch (e.action) {
             case 'edit':
-                incomePopupService.incomePopup('edit', $scope.reload, e.income);
+                popupService.popup('edit', {
+                    callback: $scope.reload,
+                    windowClass: 'income-modal',
+                    templateUrl: '/app/components/income/income.html',
+                    controller: 'incomeController',
+                    saveFunc: incomeService.saveIncome
+                }, e.income)
                 break;
             case 'split':
                 break;
@@ -72,7 +85,6 @@
 
     $scope.reload = function () {
         $scope.loadIncomes();
-        $scope.loadTotals();
         $scope.loadCategoryTotals($scope.chart1);
     };
 
