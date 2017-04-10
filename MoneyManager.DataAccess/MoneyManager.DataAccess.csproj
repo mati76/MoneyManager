@@ -81,6 +81,16 @@
     <Compile Include="EF\Mappings\BudgetIncomeConfig.cs" />
     <Compile Include="EF\Mappings\IncomeConfig.cs" />
     <Compile Include="EF\Mappings\ExpenseConfig.cs" />
+    <Compile Include="EF\Mappings\RepeatTransactionConfig.cs" />
+    <Compile Include="Migrations\201701312040445_InitialCreate.cs" />
+    <Compile Include="Migrations\201701312040445_InitialCreate.Designer.cs">
+      <DependentUpon>201701312040445_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703301940384_AddRepeatTransaction.cs" />
+    <Compile Include="Migrations\201703301940384_AddRepeatTransaction.Designer.cs">
+      <DependentUpon>201703301940384_AddRepeatTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\BudgetExpense.cs" />
     <Compile Include="Models\BudgetIncome.cs" />
@@ -88,6 +98,7 @@
     <Compile Include="Models\ExpenseCategory.cs" />
     <Compile Include="Models\Expense.cs" />
     <Compile Include="Models\Income.cs" />
+    <Compile Include="Models\RepeatTransaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\BudgetExpenseRepository.cs" />
@@ -109,7 +120,14 @@
       <Name>MoneyManager.Business</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201701312040445_InitialCreate.resx">
+      <DependentUpon>201701312040445_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703301940384_AddRepeatTransaction.resx">
+      <DependentUpon>201703301940384_AddRepeatTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,0 +1,17 @@
+{
+	"version": "1.0.0",
+	"name": "MoneyManager",
+  "private": true,
+  "scripts": {
+    "webpack": "webpack -w"
+  },
+  "dependencies": {
+    "react": "15.4.2",
+    "react-dom": "15.4.2"
+  },
+  "devDependencies": {
+    "webpack": "2.2.0",
+    "ts-loader": "2.0.3",
+    "typescript": "2.2.2"
+  }
+}

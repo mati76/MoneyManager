@@ -1,6 +1,9 @@
-﻿angular.module('moneyManager.shared').directive('periodPicker', function (dateService, messageBoxService, $filter, $state, $stateParams) {
+﻿'use strict';
+
+periodPicker.$inject = ['dateService', 'messageBoxService', '$filter', '$state', '$stateParams'];
+ function periodPicker(dateService, messageBoxService, $filter, $state, $stateParams) {
     return {
-        templateUrl: '/app/shared/periodPicker/periodPicker.html',
+        templateUrl: '/app/shared/directives/periodPicker/periodPicker.html',
         restrict: 'E',
         scope: { showToday: '=', showWeek: '=', showMonth: '=', showNextMonth: '=', showPrevMonth: '=', showYear: '=', showCustomDates: '=', onPeriodChanged: '&', selectedOption: '=' },
         link: function (scope, element, attr) {
@@ -88,4 +91,6 @@
             };
         }
     }
-});
+ }
+
+ module.exports = periodPicker;

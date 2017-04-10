@@ -1,5 +1,9 @@
-﻿angular.module('moneyManager.income').controller('incomesController', ['$scope', '$state', '$stateParams', 'incomeService', 'messageBoxService', 'popupService', 'eventAggregatorService', 'helperService',
-    function ($scope, $state, $stateParams, incomeService, messageBoxService, popupService, eventAggregatorService, helperService) {
+﻿'use strict';
+//angular.module('moneyManager.income').controller('incomesController', ['$scope', '$state', '$stateParams', 'incomeService', 'messageBoxService', 'popupService', 'eventAggregatorService', 'helperService',
+
+incomesController.$inject = ['$scope', '$state', '$stateParams', 'incomeService', 'messageBoxService', 'popupService', 'eventAggregatorService', 'helperService'];
+
+function incomesController($scope, $state, $stateParams, incomeService, messageBoxService, popupService, eventAggregatorService, helperService) {
     $scope.$parent.pageName = "INCOMES";
 
     $scope.gridOptions = {
@@ -157,4 +161,6 @@
         $scope.loadIncomes();
         $scope.loadCategoryTotals($scope.chart1);
     })();
-}]);
+}//]);
+
+module.exports = incomesController;

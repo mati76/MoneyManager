@@ -1,4 +1,10 @@
-﻿angular.module('moneyManager.expense').factory('budgetService', ['$http', '$filter', 'API_END_POINT', function ($http, $filter, API_END_POINT) {
+﻿'use strict';
+
+//angular.module('moneyManager.expense').factory('budgetService', ['$http', '$filter', 'API_END_POINT', function ($http, $filter, API_END_POINT) {
+
+budgetService.$inject = ['$http', '$filter', 'API_END_POINT'];
+
+function budgetService($http, $filter, API_END_POINT){
     var uri = API_END_POINT + '/api/budget';
 
     return {
@@ -45,4 +51,6 @@
     function getMonthEnd(date) {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     }
-}]);
+}
+
+module.exports = budgetService;

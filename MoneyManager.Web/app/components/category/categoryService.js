@@ -1,4 +1,9 @@
-﻿angular.module('moneyManager.category').factory('categoryService', ['$http', 'API_END_POINT', function ($http, API_END_POINT) {
+﻿'use strict';
+
+//angular.module('moneyManager.category').factory('categoryService', ['$http', 'API_END_POINT', function ($http, API_END_POINT) {
+categoryService.$inject = ['$http', 'API_END_POINT'];
+
+function categoryService($http, API_END_POINT) {
     var uri = API_END_POINT + '/api/category';
 
     return {
@@ -28,4 +33,6 @@
     function getTopExpenseCategories() {
         return $http.get(uri + '/expense/top');
     }
-}]);
+}//]);
+
+module.exports = categoryService;

@@ -1,4 +1,9 @@
-﻿angular.module('moneyManager.calendar').controller('calendarController', ['$scope', 'dateService', '$state', '$stateParams', 'popupService', function ($scope, dateService, $state, $stateParams, popupService) {
+﻿'use strict';
+
+calendarController.$inject = ['$scope', 'dateService', '$state', '$stateParams', 'popupService'];
+
+//angular.module('moneyManager.calendar').controller('calendarController', ['$scope', 'dateService', '$state', '$stateParams', 'popupService', function ($scope, dateService, $state, $stateParams, popupService) {
+function calendarController($scope, dateService, $state, $stateParams, popupService) {
 
     $scope.$parent.btnAddCaption = "Add Expense";
     $scope.$parent.pageName = "CALENDAR";
@@ -21,4 +26,6 @@
     var from = $stateParams.from;
     from = new Date(from.substring(0, 4), from.substring(4, 6) - 1, from.substring(6, 8));
     $scope.calendar = dateService.getCalendar(from.getFullYear(), from.getMonth());
-}]);
+}//]);
+
+module.exports = calendarController;

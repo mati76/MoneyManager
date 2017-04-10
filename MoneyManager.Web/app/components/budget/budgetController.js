@@ -1,5 +1,9 @@
-﻿angular.module('moneyManager.budget').controller('budgetController', ['$scope', 'budgetService', 'popupService', '$stateParams', '$state', 'helperService', 'messageBoxService',
-    function ($scope, budgetService, popupService, $stateParams, $state, helperService, messageBoxService) {
+﻿'use strict';
+
+//angular.module('moneyManager.budget').controller('budgetController', ['$scope', 'budgetService', 'popupService', '$stateParams', '$state', 'helperService', 'messageBoxService',
+budgetController.$inject = ['$scope', 'budgetService', 'popupService', '$stateParams', '$state', 'helperService', 'messageBoxService'];
+
+function budgetController($scope, budgetService, popupService, $stateParams, $state, helperService, messageBoxService) {
 
     $scope.$parent.pageName = "BUDGET";
     $scope.$parent.titleBarClass = "title-bar-budget";
@@ -167,4 +171,6 @@
         $scope.reload();
     })();
 
-}]);
+}//]);
+
+module.exports = budgetController;

@@ -1,4 +1,8 @@
-﻿angular.module('moneyManager.category').controller('categoriesController', ['$scope', '$uibModal', 'categoryService', 'messageBoxService', 'eventAggregatorService', function ($scope, $uibModal, categoryService, messageBoxService, eventAggregatorService) {
+﻿'use strict';
+//angular.module('moneyManager.category').controller('categoriesController', ['$scope', '$uibModal', 'categoryService', 'messageBoxService', 'eventAggregatorService', function ($scope, $uibModal, categoryService, messageBoxService, eventAggregatorService) {
+
+categoriesController.$inject = ['$scope', '$uibModal', 'categoryService', 'messageBoxService', 'eventAggregatorService'];
+function categoriesController($scope, $uibModal, categoryService, messageBoxService, eventAggregatorService){
    
     $scope.$parent.pageName = "CATEGORIES";
     $scope.$parent.titleBarClass = "title-bar-category";
@@ -68,4 +72,6 @@
     (function () {
         reload();
     })();
-}]);
+}//]);
+
+module.exports = categoriesController;

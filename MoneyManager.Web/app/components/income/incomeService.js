@@ -1,4 +1,10 @@
-﻿angular.module('moneyManager.income').factory('incomeService', ['$http', '$filter', 'API_END_POINT', function ($http, $filter, API_END_POINT) {
+﻿'use strict';
+
+//angular.module('moneyManager.income').factory('incomeService', ['$http', '$filter', 'API_END_POINT', function ($http, $filter, API_END_POINT) {
+
+incomeService.$inject = ['$http', '$filter', 'API_END_POINT'];
+
+function incomeService($http, $filter, API_END_POINT){
     var uri = API_END_POINT + '/api/income';
 
     return {
@@ -38,4 +44,6 @@
     function getIncomeTotals() {
         return $http.get(uri + '/totals/' + $filter('date')(new Date(), 'yyyy-MM-dd'));
     }
-}]);
+}//]);
+
+module.exports = incomeService;

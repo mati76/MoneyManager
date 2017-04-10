@@ -1,4 +1,6 @@
-﻿angular.module('moneyManager.shared').factory('helperService', [function () {
+﻿'use strict';
+
+function helperService() {
 
     var colors = ['#72C02C', '#3498DB', '#717984', '#FFAAAA', '#F1C40F', '#ea5d4b', '#8642f4', '#f4ad42', '#d4f4eb'];
 
@@ -21,4 +23,6 @@
         }
         return color;
     }
-}]);
+}
+
+module.exports = helperService;

@@ -1,5 +1,10 @@
-﻿angular.module('moneyManager.expense').controller('expensesController', ['$scope', '$state', '$stateParams', 'expenseService', 'messageBoxService', 'popupService', 'eventAggregatorService', 'helperService', function ($scope, $state, $stateParams, expenseService, messageBoxService, popupService, eventAggregatorService, helperService) {
+﻿'use strict';
 
+//angular.module('moneyManager.expense').controller('expensesController', ['$scope', '$state', '$stateParams', 'expenseService', 'messageBoxService', 'popupService', 'eventAggregatorService', 'helperService', function ($scope, $state, $stateParams, expenseService, messageBoxService, popupService, eventAggregatorService, helperService) {
+
+expensesController.$inject = ['$scope', '$state', '$stateParams', 'expenseService', 'messageBoxService', 'popupService', 'eventAggregatorService', 'helperService'];
+
+function expensesController($scope, $state, $stateParams, expenseService, messageBoxService, popupService, eventAggregatorService, helperService){
     $scope.gridOptions = {
         fields: [
             { title: 'DATE', field: 'Date', sortBy: 'Date', filter: 'date', headerClass: 'align-left', headerStyle: { 'width': '120px' } },
@@ -229,4 +234,6 @@
         $scope.loadTotals();
         $scope.loadCategoryTotals($scope.chart1);
     })();
-}]);
+}//]);
+
+module.exports = expensesController;

@@ -4,6 +4,7 @@ using MoneyManager.DataAccess.Models;
 using MoneyManager.DataAccess.Infrastructure;
 using System.ComponentModel.DataAnnotations.Schema;
 using MoneyManager.DataAccess.EF.Mappings;
+using MoneyManager.DataAccess.Migrations;
 
 namespace MoneyManager.DataAccess.EF
 {
@@ -13,6 +14,8 @@ namespace MoneyManager.DataAccess.EF
             : base("name=MoneyManager")
         {
             Database.SetInitializer<MoneyManagerContext>(new DbInitializer());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MoneyManagerContext, Configuration>());
+
             Configuration.LazyLoadingEnabled = false;
         }
 
@@ -37,5 +40,6 @@ namespace MoneyManager.DataAccess.EF
         public DbSet<Income> Income { get; set; }
         public DbSet<BudgetExpense> BudgetExpense { get; set; }
         public DbSet<BudgetIncome> BudgetIncome { get; set; }
+        public DbSet<RepeatTransaction> RepeatTransaction { get; set; }
     }
 }

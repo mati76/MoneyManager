@@ -1,4 +1,6 @@
-angular.module('moneyManager.shared').factory('eventAggregatorService', [function () {
+'use strict';
+
+function eventAggregatorService() {
     var events = [];
 
     var eventNames = {
@@ -57,4 +59,6 @@ angular.module('moneyManager.shared').factory('eventAggregatorService', [functio
             }
         });
     }
-}]);
+}
+
+module.exports = eventAggregatorService;

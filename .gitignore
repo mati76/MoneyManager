@@ -12,3 +12,13 @@
 /MoneyManager.Auth/bin/Debug
 /MoneyManager.Auth/obj/Debug
 /MoneyManager.Auth/Properties
+/MoneyManager.Web/node_modules
+/MoneyManager.Web/dist/budget.entry.js
+/MoneyManager.Web/dist/auth.entry.js
+/MoneyManager.Web/dist/shared.entry.js
+/MoneyManager.Web/dist/login.entry.js
+/MoneyManager.Web/dist/income.entry.js
+/MoneyManager.Web/dist/home.entry.js
+/MoneyManager.Web/dist/expense.entry.js
+/MoneyManager.Web/dist/category.entry.js
+/MoneyManager.Web/dist/calendar.entry.js

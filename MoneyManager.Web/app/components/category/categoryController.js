@@ -1,4 +1,10 @@
-﻿angular.module('moneyManager.category').controller('categoryController', ['$scope', '$uibModalInstance', 'params', 'categoryService', function ($scope, $uibModalInstance, params, categoryService) {
+﻿'use strict';
+
+//angular.module('moneyManager.category').controller('categoryController', ['$scope', '$uibModalInstance', 'params', 'categoryService', function ($scope, $uibModalInstance, params, categoryService) {
+
+categoryController.$inject = ['$scope', '$uibModalInstance', 'params', 'categoryService'];
+
+function categoryController($scope, $uibModalInstance, params, categoryService){
     var mode = {
         add: 'Add New ',
         edit: 'Edit '
@@ -38,4 +44,6 @@
             $scope.model.Id = params.category.Id;
         }
     })();
-}]);
+}//]);
+
+module.exports = categoryController;

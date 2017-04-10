@@ -1,7 +1,9 @@
-﻿angular.module('moneyManager.shared').directive('dropDown', function () {
+﻿'use strict';
+
+function dropDown() {
     return {
         restrict: 'E',
-        templateUrl: '/app/shared/dropDown/dropDown.html',
+        templateUrl: '/app/shared/directives/dropDown/dropDown.html',
         scope: { items: '=', css: '=' },
         link: function (scope, element, attr) {
             if (scope.items.length > 0) {
@@ -15,4 +17,6 @@
             };
         }
     };
-});
+}
+
+module.exports = dropDown;

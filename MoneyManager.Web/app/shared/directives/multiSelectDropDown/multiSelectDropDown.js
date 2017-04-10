@@ -1,6 +1,9 @@
-﻿angular.module('moneyManager.shared').directive('multiDropDown', function (dateService, messageBoxService, $filter, $state, $stateParams) {
+﻿'use strict';
+
+multiDropDown.$inject = ['dateService', '$filter', '$state', '$stateParams'];
+function multiDropDown(dateService, $filter, $state, $stateParams) {
     return {
-        templateUrl: '/app/shared/multiSelectDropDown/multiSelectDropDown.html',
+        templateUrl: '/app/shared/directives/multiSelectDropDown/multiSelectDropDown.html',
         restrict: 'E',
         scope: { title: '=', items: '=', applyChanges: '&' },
         link: function (scope, element, attr) {
@@ -35,4 +38,6 @@
             };
         }
     }
-});
+}
+
+module.exports = multiDropDown;

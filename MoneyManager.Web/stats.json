@@ -1,0 +1,132 @@
+{
+  "errors": [],
+  "warnings": [],
+  "version": "2.2.0",
+  "hash": "fbae6e69d70da93a3d60",
+  "time": 675,
+  "publicPath": "",
+  "assetsByChunkName": {
+    "main": "bundle.js"
+  },
+  "assets": [
+    {
+      "name": "bundle.js",
+      "size": 845,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "main"
+      ],
+      "emitted": true
+    }
+  ],
+  "entrypoints": {
+    "main": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "bundle.js"
+      ]
+    }
+  },
+  "chunks": [
+    {
+      "id": 0,
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "extraAsync": false,
+      "size": 850,
+      "names": [
+        "main"
+      ],
+      "files": [
+        "bundle.js"
+      ],
+      "hash": "fafe56c790c80213e5be",
+      "parents": [],
+      "modules": [
+        {
+          "id": 0,
+          "identifier": "C:\\Users\\Marcin\\node_modules\\babel-loader\\lib\\index.js!C:\\Users\\Marcin\\Documents\\Visual Studio 2015\\Projects\\MoneyManager\\MoneyManager.Web\\app\\moneyManger.js",
+          "name": "./app/moneyManger.js",
+          "index": 0,
+          "index2": 0,
+          "size": 850,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "assets": [],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "profile": {
+            "factory": 27,
+            "building": 555
+          },
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "reasons": [],
+          "usedExports": true,
+          "providedExports": null,
+          "depth": 0,
+          "source": "angular.module('moneyManager', ['ui.router', 'ngMessages', 'ngStorage', 'ui.bootstrap', 'chart.js', 'moneyManager.login', 'moneyManager.shared', 'moneyManager.category', 'moneyManager.configuration', 'moneyManager.expense', 'moneyManager.income', 'moneyManager.calendar', 'moneyManager.auth', 'moneyManager.home', 'moneyManager.budget', 'infinite-scroll']);\n\n//require('../configuration/configuration');\n//require('./router');\n//require('./prototypes');\n//require('./moneyManagerController');\n//require('./shared/shared');\n//require('./components/auth/auth');\n//require('./components/calendar/calendar');\n//require('./components/category/category');\n//require('./components/expense/expense');\n//require('./components/home/home');\n//require('./components/income/income');\n//require('./components/budget/budget');\n//require('./components/login/login');"
+        }
+      ],
+      "filteredModules": 0,
+      "origins": [
+        {
+          "moduleId": 0,
+          "module": "C:\\Users\\Marcin\\node_modules\\babel-loader\\lib\\index.js!C:\\Users\\Marcin\\Documents\\Visual Studio 2015\\Projects\\MoneyManager\\MoneyManager.Web\\app\\moneyManger.js",
+          "moduleIdentifier": "C:\\Users\\Marcin\\node_modules\\babel-loader\\lib\\index.js!C:\\Users\\Marcin\\Documents\\Visual Studio 2015\\Projects\\MoneyManager\\MoneyManager.Web\\app\\moneyManger.js",
+          "moduleName": "./app/moneyManger.js",
+          "loc": "",
+          "name": "main",
+          "reasons": []
+        }
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": 0,
+      "identifier": "C:\\Users\\Marcin\\node_modules\\babel-loader\\lib\\index.js!C:\\Users\\Marcin\\Documents\\Visual Studio 2015\\Projects\\MoneyManager\\MoneyManager.Web\\app\\moneyManger.js",
+      "name": "./app/moneyManger.js",
+      "index": 0,
+      "index2": 0,
+      "size": 850,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "assets": [],
+      "issuer": null,
+      "issuerId": null,
+      "issuerName": null,
+      "profile": {
+        "factory": 27,
+        "building": 555
+      },
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "reasons": [],
+      "usedExports": true,
+      "providedExports": null,
+      "depth": 0,
+      "source": "angular.module('moneyManager', ['ui.router', 'ngMessages', 'ngStorage', 'ui.bootstrap', 'chart.js', 'moneyManager.login', 'moneyManager.shared', 'moneyManager.category', 'moneyManager.configuration', 'moneyManager.expense', 'moneyManager.income', 'moneyManager.calendar', 'moneyManager.auth', 'moneyManager.home', 'moneyManager.budget', 'infinite-scroll']);\n\n//require('../configuration/configuration');\n//require('./router');\n//require('./prototypes');\n//require('./moneyManagerController');\n//require('./shared/shared');\n//require('./components/auth/auth');\n//require('./components/calendar/calendar');\n//require('./components/category/category');\n//require('./components/expense/expense');\n//require('./components/home/home');\n//require('./components/income/income');\n//require('./components/budget/budget');\n//require('./components/login/login');"
+    }
+  ],
+  "filteredModules": 0,
+  "children": []
+}

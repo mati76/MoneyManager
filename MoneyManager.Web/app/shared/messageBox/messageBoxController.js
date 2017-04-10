@@ -1,4 +1,8 @@
-﻿angular.module('moneyManager.shared').controller('messageBoxController', ['$scope', 'params', '$uibModalInstance', function ($scope, params, $uibModalInstance) {
+﻿'use strict';
+
+messageBoxController.$inject = ['$scope', 'params', '$uibModalInstance'];
+
+function messageBoxController($scope, params, $uibModalInstance){
 
     $scope.message = params.message;
     $scope.title = params.title;
@@ -11,4 +15,6 @@
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
-}]);
+}
+
+module.exports = messageBoxController;

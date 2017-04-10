@@ -1,5 +1,9 @@
-﻿angular.module('moneyManager.home').controller('homeController', ['$scope', 'expenseService', 'incomeService', 'budgetService', '$stateParams', '$state', 'helperService',
-    function ($scope, expenseService, incomeService, budgetService, $stateParams, $state, helperService) {
+﻿'use strict';
+
+//angular.module('moneyManager.home').controller('homeController', ['$scope', 'expenseService', 'incomeService', 'budgetService', '$stateParams', '$state', 'helperService',
+
+homeController.$inject = ['$scope', 'expenseService', 'incomeService', 'budgetService', '$stateParams', '$state', 'helperService'];
+function homeController($scope, expenseService, incomeService, budgetService, $stateParams, $state, helperService) {
 
     $scope.$parent.pageName = "DASHBOARD";
     $scope.$parent.addFunc = null;
@@ -109,4 +113,6 @@
         $scope.loadTotals($scope.chart2, from, to, incomeService);
         $scope.loadBudgets(from, to);
     })();
-}]);
+}//]);
+
+module.exports = homeController;

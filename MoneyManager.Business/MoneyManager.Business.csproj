@@ -60,6 +60,8 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryBalance.cs" />
     <Compile Include="Models\CategoryTotal.cs" />
+    <Compile Include="Models\Enums\RepeatPeriod.cs" />
+    <Compile Include="Models\RepeatTransaction.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\SearchCriteria.cs" />
     <Compile Include="Models\TransactionAggregates.cs" />

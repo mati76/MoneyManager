@@ -1,5 +1,10 @@
-﻿angular.module('moneyManager.login').controller('loginController', ['$scope', '$state', 'authService', function ($scope, $state, authService) {
+﻿'use strict';
 
+//angular.module('moneyManager.login').controller('loginController', ['$scope', '$state', 'authService', function ($scope, $state, authService) {
+
+loginController.$inject = ['$scope', '$state', 'authService'];
+
+function loginController($scope, $state, authService) {
     $scope.credentials = {};
 
     $scope.register = function () {
@@ -19,4 +24,6 @@
         });
     };
 
-}]);
+}//]);
+
+module.exports = loginController;

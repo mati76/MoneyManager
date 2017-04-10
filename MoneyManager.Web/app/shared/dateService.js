@@ -1,4 +1,6 @@
-﻿angular.module('moneyManager.shared').factory('dateService', [function () {
+﻿'use strict';
+
+function dateService(){
     return {
         getWeek: getWeek,
         getMonth: getMonth,
@@ -134,4 +136,6 @@
         }
         return days;
     }
-}]);
+}
+
+module.exports = dateService;

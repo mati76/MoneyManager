@@ -1,4 +1,7 @@
-﻿angular.module('moneyManager').factory('authInterceptorService', ['$q', '$location', '$sessionStorage', function ($q, $location, $sessionStorage) {
+﻿'use strict';
+
+authInterceptorService.$inject = ['$q', '$location', '$sessionStorage'];
+function authInterceptorService($q, $location, $sessionStorage) {
 
     var authInterceptorServiceFactory = {};
 
@@ -27,8 +30,7 @@
     authInterceptorServiceFactory.responseError = _responseError;
 
     return authInterceptorServiceFactory;
-}]);
+}
 
-angular.module('moneyManager').config(function ($httpProvider) {
-    $httpProvider.interceptors.push('authInterceptorService');
-});
+module.exports = authInterceptorService;
+

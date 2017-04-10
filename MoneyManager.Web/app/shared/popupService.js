@@ -1,4 +1,7 @@
-﻿angular.module('moneyManager.shared').factory('popupService', ['$uibModal', function ($uibModal) {
+﻿'use strict';
+
+popupService.$inject = ['$uibModal'];
+function popupService($uibModal) {
 
     return { popup: popup };
 
@@ -18,5 +21,6 @@
             callback();
         });
     }
+}
 
-}]);
+module.exports = popupService;

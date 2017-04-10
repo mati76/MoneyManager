@@ -1,5 +1,11 @@
-﻿angular.module('moneyManager.auth').factory('authService', ['$http', '$q', '$sessionStorage', 'API_END_POINT', function ($http, $q, $sessionStorage, API_END_POINT) {
-    var uri = API_END_POINT + '/auth';
+﻿'use strict';
+
+//angular.module('moneyManager.auth').factory('authService', ['$http', '$q', '$sessionStorage', 'API_END_POINT', function ($http, $q, $sessionStorage, API_END_POINT) {
+authService.$inject = ['$http', '$q', '$sessionStorage', 'API_END_POINT'];
+
+function authService($http, $q, $sessionStorage, API_END_POINT){
+
+var uri = API_END_POINT + '/auth';
 
     var _loggedInUser = {
         userName: ''
@@ -39,4 +45,6 @@
         $sessionStorage.authorizationData = null;
     }
 
-}]);
+}//]);
+
+module.exports = authService;

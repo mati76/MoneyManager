@@ -1,5 +1,9 @@
-﻿angular.module('moneyManager.expense').controller('expenseController', ['$scope', '$uibModal', '$uibModalInstance', 'params', 'categoryService',
-    function ($scope, $uibModal, $uibModalInstance, params, categoryService) {
+﻿'use strict';
+
+//angular.module('moneyManager.expense').controller('expenseController', ['$scope', '$uibModal', '$uibModalInstance', 'params', 'categoryService',
+expenseController.$inject = ['$scope', '$uibModal', '$uibModalInstance', 'params', 'categoryService'];
+
+function expenseController($scope, $uibModal, $uibModalInstance, params, categoryService) {
 
     var mode = {
         add: 'Add New ',
@@ -141,4 +145,6 @@
     $scope.openPicker = function () {
         $scope.pickerPopup.opened = true;
     }
-}]);
+}//]);
+
+module.exports = expenseController;

@@ -1,4 +1,7 @@
-﻿angular.module('moneyManager.shared').factory('messageBoxService', ['$uibModal', function ($uibModal) {
+﻿'use script';
+
+messageBoxService.$inject = ['$uibModal'];
+function messageBoxService($uibModal) {
 
     return {
         showMessage: showMessage
@@ -21,4 +24,6 @@
         });
         return modalInstance.result;
     }
-}]);
+}
+
+module.exports = messageBoxService;

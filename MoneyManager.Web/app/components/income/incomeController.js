@@ -1,5 +1,9 @@
-﻿angular.module('moneyManager.income').controller('incomeController', ['$scope', '$uibModal', '$uibModalInstance', 'params', 'incomeService', 'categoryService',
-    function ($scope, $uibModal, $uibModalInstance, params, incomeService, categoryService) {
+﻿'use strict';
+
+//angular.module('moneyManager.income').controller('incomeController', ['$scope', '$uibModal', '$uibModalInstance', 'params', 'incomeService', 'categoryService',
+
+incomeController.$inject = ['$scope', '$uibModal', '$uibModalInstance', 'params', 'incomeService', 'categoryService'];
+function incomeController($scope, $uibModal, $uibModalInstance, params, incomeService, categoryService) {
 
     var mode = {
         add: 'Add New ',
@@ -78,4 +82,6 @@
     $scope.openPicker = function () {
         $scope.pickerPopup.opened = true;
     }
-}]);
+}//]);
+
+module.exports = incomeController;

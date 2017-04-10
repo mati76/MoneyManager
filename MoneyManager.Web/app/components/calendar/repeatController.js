@@ -1,5 +1,10 @@
-﻿angular.module('moneyManager.calendar').controller('repeatController', ['$scope', 'params', '$uibModal', '$uibModalInstance', 'categoryService', function ($scope, params, $uibModal, $uibModalInstance, categoryService) {
+﻿//angular.module('moneyManager.calendar').controller('repeatController', ['$scope', 'params', '$uibModal', '$uibModalInstance', 'categoryService', function ($scope, params, $uibModal, $uibModalInstance, categoryService) {
 
+'use strict';
+
+repeatController.$inject = ['$scope', 'params', '$uibModal', '$uibModalInstance', 'categoryService'];
+
+function repeatController($scope, params, $uibModal, $uibModalInstance, categoryService) {
     $scope.title = params.title;
     $scope.model = params.model;
     $scope.model.Date = Date.parse(params.model.Date);
@@ -94,4 +99,6 @@
         }
     }
 
-}]);
+}//]);
+
+module.exports = repeatController;
