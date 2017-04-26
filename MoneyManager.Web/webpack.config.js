@@ -5,29 +5,26 @@ var webpack = require('webpack');
 var PROD = (process.env.NODE_ENV === 'production');
 
 module.exports = {
-    //entry: {
-    //    //js: glob.sync("./app/components/**/*.js")
-    //    calendar: './app/components/calendar/calendar.js',
-    //    auth: './app/components/auth/auth.js',
-    //    category: './app/components/category/category.js',
-    //    login: './app/components/login/login.js',
-    //    expense: './app/components/expense/expense.js',
-    //    income: './app/components/income/income.js',
-    //    home: './app/components/home/home.js',
-    //    budget: './app/components/budget/budget.js',
-    //    shared: './app/shared/shared.js'
-    //},
-    entry: './app/moneyManager.js',
+    devtool: "source-map",
+    entry: {
+        //vendor: glob.sync("./libs/**/*.js"),
+        app: './app/moneyManager.js'
+    },
+    //entry: './app/moneyManager.js',
     output: {
+        devtoolLineToLine: true,
+        sourceMapFilename: "./app.js.map",
         path: './dist',
         //filename: "[name].entry.js"
-        filename: PROD ? 'bundle.min.js' : 'bundle.js'
+        filename: PROD ? 'app.min.js' : 'app.js'
     },
     plugins: PROD ? [
     new webpack.optimize.UglifyJsPlugin({
         compress: { warnings: false }
     })
-    ] : [],
+    ] : [
+        
+    ],
     devServer: {
         contentBase: ".",
         host: "localhost",

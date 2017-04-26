@@ -21,9 +21,9 @@ angular.module('moneyManager', [
 
 angular.module('moneyManager').factory('authInterceptorService', require('./interceptors/authInterceptor'));
 
-angular.module('moneyManager').config(function ($httpProvider) {
+angular.module('moneyManager').config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
-});
+}]);
 
 require('../configuration/configuration');
 require('./router');

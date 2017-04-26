@@ -8,7 +8,7 @@ function grid() {
                         '<span id="transactions-grid-buttons" ng-show="multipleChecked()">' +
                             '<button ng-repeat="btn in options.multiSelectActions" style="display: inline !important" class="grid-btn" ng-class="btn.css" ng-bind="btn.label" ng-click="btn.callback()"></button>' +
                         '</span>' +
-                        '<multi-drop-down ng-hide="multipleChecked()" class="float-right" items="filterItems" title="filterLabel" apply-changes="applyFilter()"></multi-drop-down>' +
+                        '<multi-select-drop-down ng-hide="multipleChecked()" class="float-right" items="filterItems" title="filterLabel" apply-changes="applyFilter()"></multi-drop-down>' +
                     '</p>' +
                     '<loading-panel is-loading="isLoading" width="50" height="50"></loading-panel>' +
                     '<table class="full-width">' +

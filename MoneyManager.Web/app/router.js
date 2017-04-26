@@ -1,4 +1,4 @@
-﻿angular.module('moneyManager').config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+﻿angular.module('moneyManager').config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise('/dashboard');
     $locationProvider.html5Mode(true);
 
@@ -9,7 +9,7 @@
              views: {
                  'filters': {
                      template: '<period-picker selected-option="selectedPeriod" show-month="true" show-next-month="true" show-prev-month="true" show-year="true"></period-picker>',
-                     controller: function ($scope) { },
+                     controller: function () { },
                  },
                  'content': {
                      controller: 'homeController',
@@ -33,7 +33,7 @@
             views: {
                 'filters': {
                     template: '<period-picker selected-option="selectedPeriod" show-month="true" show-next-month="true" show-prev-month="true" show-year="true"></period-picker>',
-                    controller: function ($scope) { },
+                    controller: function () { },
                 },
                 'content': {
                     controller: 'budgetController',
@@ -55,7 +55,7 @@
             url: '/login',
             views: {
                 'filters': {
-                    controller: function ($scope) { },
+                    controller: function () { },
                     templateUrl: 'app/components/category/filterTpl.html',
                 },
                 'content': {
@@ -70,7 +70,7 @@
             views: {
                 'filters': {
                     templateUrl: 'app/components/category/filterTpl.html',
-                    controller: function ($scope) { },
+                    controller: function () { },
                 },
                 'content': {
                     controller: 'categoriesController',
@@ -84,7 +84,7 @@
             views: {
                 'filters': {
                     template: '<period-picker selected-option="selectedPeriod" show-month="true" show-next-month="true" show-prev-month="true" show-year="true"></period-picker>',
-                    controller: function ($scope) { },
+                    controller: function () { },
                 },
                 'content': {
                     controller: 'incomesController',
@@ -120,7 +120,7 @@
             views: {
                 'filters': {
                     template: '<period-picker selected-option="selectedPeriod" show-month="true" show-next-month="true" show-prev-month="true"></period-picker>',
-                    controller: function ($scope) { },
+                    controller: function () { },
                 },
                 'content': {
                     controller: 'calendarController',
@@ -144,7 +144,7 @@
             views: {
                 'filters': {
                     templateUrl: 'app/components/expense/filterTpl.html',
-                    controller: function ($scope) { },
+                    controller: function () { },
                 },
                 'content': {
                     controller: 'expensesController',
@@ -174,9 +174,9 @@
                 }
             }
         });
-});
+}]);
 
-angular.module('moneyManager').run(function ($rootScope, $state, $location, authService) {
+angular.module('moneyManager').run(['$rootScope', '$state', '$location', 'authService', function ($rootScope, $state, $location, authService) {
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {
 
@@ -201,4 +201,4 @@ angular.module('moneyManager').run(function ($rootScope, $state, $location, auth
         //    return;
         //}
     });
-});
+}]);

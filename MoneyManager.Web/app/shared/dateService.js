@@ -7,7 +7,7 @@ function dateService(){
         getNextMonth: getNextMonth,
         getPrevMonth: getPrevMonth,
         getYear: getYear,
-        isRangeFullMonth, isRangeFullMonth,
+        isRangeFullMonth: isRangeFullMonth,
         getCalendar: getCalendar
     };
 

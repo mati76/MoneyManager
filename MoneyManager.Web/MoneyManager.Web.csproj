@@ -21,7 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
-    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -91,13 +91,13 @@
     <Content Include="app\shared\directives\checkBox.js" />
     <Content Include="app\shared\directives\dropDown\dropDown.html" />
     <Content Include="app\shared\directives\dropDown\dropDown.js" />
-    <Content Include="app\shared\directives\grid.js" />
-    <Content Include="app\shared\directives\gridButtons.js" />
-    <Content Include="app\shared\directives\gridHeader.js" />
-    <Content Include="app\shared\directives\item.js" />
+    <Content Include="app\shared\directives\grid\grid.js" />
+    <Content Include="app\shared\directives\grid\gridButtons.js" />
+    <Content Include="app\shared\directives\grid\gridHeader.js" />
+    <Content Include="app\shared\directives\grid\item.js" />
     <Content Include="app\shared\directives\loadingPanel.js" />
     <Content Include="app\shared\directives\nothingToDisplay.js" />
-    <Content Include="app\shared\directives\sortingHeader.js" />
+    <Content Include="app\shared\directives\grid\sortingHeader.js" />
     <Content Include="app\shared\directives\totalsLabel.js" />
     <Content Include="app\shared\filters\dynamicFilter.js" />
     <Content Include="app\shared\filters\percentage.js" />
@@ -143,17 +143,7 @@
     <Content Include="css\app\site.css" />
     <Content Include="css\app\menu.css" />
     <Content Include="css\bootstrap\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="dist\auth.entry.js" />
-    <Content Include="dist\budget.entry.js" />
-    <Content Include="dist\bundle.js" />
-    <Content Include="dist\bundle.min.js" />
-    <Content Include="dist\calendar.entry.js" />
-    <Content Include="dist\category.entry.js" />
-    <Content Include="dist\expense.entry.js" />
-    <Content Include="dist\home.entry.js" />
-    <Content Include="dist\income.entry.js" />
-    <Content Include="dist\login.entry.js" />
-    <Content Include="dist\shared.entry.js" />
+    <Content Include="dist\app.js" />
     <Content Include="icons\arrow-Active.png" />
     <Content Include="icons\arrow-Normal.png" />
     <Content Include="icons\copy.png" />
@@ -206,10 +196,8 @@
   <ItemGroup>
     <Content Include="libs\angular\infinite-scroll.js" />
     <Content Include="libs\angular\ngStorage.min.js" />
-    <Content Include="libs\charts\angular-chart.js" />
     <Content Include="libs\charts\angular-chart.min.js" />
-    <Content Include="libs\charts\Chart.js" />
-    <Content Include="libs\charts\Chart.min.js" />
+    <Content Include="libs\charts\chart.min.js" />
     <Content Include="libs\jquery-3.1.1.min.js" />
     <Content Include="libs\ui-bootstrap\ui-bootstrap-tpls-2.4.0.min.js" />
     <Content Include="web.config" />

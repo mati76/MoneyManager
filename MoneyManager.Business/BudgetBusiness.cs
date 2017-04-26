@@ -14,11 +14,7 @@ namespace MoneyManager.Business
 
         public BudgetBusiness(IUnitOfWorkFactory unitOfWorkFactory, IDateHelper dateHelper) : base(unitOfWorkFactory)
         {
-            if (dateHelper == null)
-            {
-                throw new ArgumentNullException(nameof(dateHelper));
-            }
-            _dateHelper = dateHelper;
+            _dateHelper = dateHelper ?? throw new ArgumentNullException(nameof(dateHelper));
         }
 
         public async Task<Transaction> GetExpense(int id)

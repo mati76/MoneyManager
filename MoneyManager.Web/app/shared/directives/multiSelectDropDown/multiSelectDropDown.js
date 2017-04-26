@@ -1,7 +1,7 @@
 ﻿'use strict';
 
-multiDropDown.$inject = ['dateService', '$filter', '$state', '$stateParams'];
-function multiDropDown(dateService, $filter, $state, $stateParams) {
+multiSelectDropDown.$inject = ['dateService', '$filter', '$state', '$stateParams'];
+function multiSelectDropDown(dateService, $filter, $state, $stateParams) {
     return {
         templateUrl: '/app/shared/directives/multiSelectDropDown/multiSelectDropDown.html',
         restrict: 'E',
@@ -40,4 +40,4 @@ function multiDropDown(dateService, $filter, $state, $stateParams) {
     }
 }
 
-module.exports = multiDropDown;
+module.exports = multiSelectDropDown;
