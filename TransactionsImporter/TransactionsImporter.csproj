@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Icons\cancel-button.png" />
+    <None Remove="Icons\edit.png" />
+    <None Remove="Icons\list-icon.png" />
+    <None Remove="Icons\remove-icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MoneyManager.CSV\MoneyManager.Integrations.CSV.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\cancel-button.png" />
+    <Resource Include="Icons\edit.png" />
+    <Resource Include="Icons\list-icon.png" />
+    <Resource Include="Icons\remove-icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>
