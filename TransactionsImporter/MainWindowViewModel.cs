@@ -61,7 +61,7 @@ namespace TransactionsImporter
                 {
                     _loadTransactionsCommand = new Command(async o =>
                     {
-                        if (_windowService.SaveFileDialog(out string fileName))
+                        if (_windowService.OpenFileDialog(out string fileName))
                         {
                             try
                             {

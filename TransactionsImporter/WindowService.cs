@@ -8,7 +8,7 @@ namespace TransactionsImporter
 		public bool OpenFileDialog(out string fileName)
 		{
 			fileName = string.Empty;
-			var dialog = new OpenFileDialog { Title = "Save transactions to .csv file", Filter = "csv files (*.csv)|*.csv" };
+			var dialog = new OpenFileDialog { Title = "Pick transactions .csv file", Filter = "csv files (*.csv)|*.csv" };
 			if (dialog.ShowDialog() == true)
 			{
 				fileName = dialog.FileName;
@@ -20,7 +20,7 @@ namespace TransactionsImporter
 		public bool SaveFileDialog(out string fileName)
 		{
 			fileName = string.Empty;
-			var dialog = new OpenFileDialog { Title = "Pick transactions .csv file", Filter = "csv files (*.csv)|*.csv" };
+			var dialog = new SaveFileDialog { Title = "Save transactions to .csv file", Filter = "csv files (*.csv)|*.csv" };
 			if (dialog.ShowDialog() == true)
 			{ 
 				fileName = dialog.FileName;

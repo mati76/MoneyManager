@@ -21,7 +21,7 @@
         <DataTemplate x:Key="removeItemTemplate">
             <Button Background="Transparent" BorderBrush="Transparent"
                 Command="{Binding DataContext.RemoveTransactionCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CommandParameter="{Binding}">
-                <Image Height="20" Source="cancel-button.png">
+                <Image Height="20" Source="\Icons\cancel-button.png">
                     <Image.Style>
                         <Style TargetType="{x:Type Image}">
                             <Style.Triggers>
