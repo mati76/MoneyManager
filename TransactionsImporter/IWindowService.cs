@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using TransactionsImporter.Model;
+﻿using TransactionsImporter.Model;
 
 namespace TransactionsImporter
 {

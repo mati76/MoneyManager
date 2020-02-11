@@ -19,6 +19,8 @@ namespace TransactionsImporter
         private readonly IWindowService _windowService;
         private readonly IAppService _appService;
         private ICommand _copyToClipboardCommand;
+        private ICommand _cancelSplitCommand;
+        private ICommand _applySplitCommand;
         private ICommand _openFileCommand;
         private ICommand _deleteTransactionCommand;
         private ICommand _onCheckCommand;
@@ -29,8 +31,9 @@ namespace TransactionsImporter
         private ICommand _clearCommand;
         private ICommand _loadTransactionsCommand;
         private ICommand _saveTransactionsCommand;
+        private ICommand _splitCommand;
+        private ICommand _roundAmountCommand;
         private bool _showOnlyExpenses;
-        private bool isEditing;
         private string _selectedCategory;
 
         public MainWindowViewModel(IAppService appService, IWindowService windowService)
@@ -42,13 +45,70 @@ namespace TransactionsImporter
         public MainWindowViewModel() : this(new AppService(), new WindowService()) { }
 
         #region Commands
+        
+        public ICommand RoundAmountCommand
+        {
+            get
+            {
+                if (_roundAmountCommand == null)
+                {
+                    _roundAmountCommand = new Command(t => RoundAmount(), () => true);
+                }
+                return _roundAmountCommand;
+            }
+        }
+
+        public ICommand SplitCommand
+        {
+            get
+            {
+                if (_splitCommand == null)
+                {
+                    _splitCommand = new Command(t => SplitTransaction((Model.Transaction)t), () => true);
+                }
+                return _splitCommand;
+            }
+        }
+        public ICommand CancelSplitCommand
+        {
+            get
+            {
+                if (_cancelSplitCommand == null)
+                {
+                    _cancelSplitCommand = new Command(o => 
+                    {
+                        foreach (var t in NotMatchedTransactions)
+                            t.IsBeingSplitted = false;
+                    }, () => true);
+                }
+                return _cancelSplitCommand;
+            }
+        }
+        public ICommand ApplySplitCommand
+        {
+            get
+            {
+                if (_applySplitCommand == null)
+                {
+                    _applySplitCommand = new Command(t =>
+                    {
+                        _appService.SplitTransaction(TransactionSplit);
+                        Refresh();
+                    }, () => true);
+                }
+                return _applySplitCommand;
+            }
+        }
         public ICommand EditCategoryCommand
         {
             get
             {
                 if (_editCategoryCommand == null)
                 {
-                    _editCategoryCommand = new Command(t => IsEditing = true, () => true);
+                    _editCategoryCommand = new Command(t => {
+                        OnSelectionChanged();
+                        ((Model.Transaction)t).IsBeingEdited = true;
+                        }, () => true);
                 }
                 return _editCategoryCommand;
             }
@@ -122,7 +182,7 @@ namespace TransactionsImporter
             {
                 if (_selectionChangedCommand == null)
                 {
-                    _selectionChangedCommand = new Command(o => o = IsEditing = false, () => true);
+                    _selectionChangedCommand = new Command(o => OnSelectionChanged(), () => true);
                 }
                 return _selectionChangedCommand;
             }
@@ -222,6 +282,8 @@ namespace TransactionsImporter
             get => _appService.GetNotMatchedTransactions(string.Empty, false).Count(t => t.IsSelected);
         }
 
+        public TransactionSplit TransactionSplit { get; set; }
+
         public bool IsAllSelected
         {
             get
@@ -264,16 +326,6 @@ namespace TransactionsImporter
             }
         }
 
-        public bool IsEditing
-        {
-            get => isEditing;
-            set
-            {
-                isEditing = value;
-                OnPropertyChanged("IsEditing");
-            }
-        }
-
         public FileType FileType { get; set; } = FileType.MbankCSV;
 
         public decimal TotalAmount => Totals.Sum(t => t.Amount);
@@ -291,6 +343,32 @@ namespace TransactionsImporter
             }
         }
         #endregion
+        
+        private void OnSelectionChanged()
+        {
+            foreach (var t in NotMatchedTransactions)
+            {
+                t.IsBeingSplitted = false;
+                t.IsBeingEdited = false;
+            }
+        }
+
+        private void SplitTransaction(Model.Transaction t)
+        {
+            OnSelectionChanged();
+
+            TransactionSplit = new TransactionSplit
+            {
+                Transaction = t,
+                AmountX = Math.Round(t.Amount / 2, 1)
+            };
+            t.IsBeingSplitted = true;
+        }
+
+        private void RoundAmount()
+        {
+            TransactionSplit.AmountX = Math.Round(TransactionSplit.AmountX);
+        }
 
         private async Task ExecuteOpenFileAsync()
         {

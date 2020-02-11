@@ -10,8 +10,39 @@ namespace TransactionsImporter.Model
 			get => isSelected;
 			set
 			{
-				isSelected = value;
-				OnPropertyChanged("IsSelected");
+				if (isSelected != value)
+				{
+					isSelected = value;
+					OnPropertyChanged("IsSelected");
+				}
+			}
+		}
+
+		private bool isBeingSplitted;
+		public bool IsBeingSplitted
+		{
+			get => isBeingSplitted;
+			set
+			{
+				if (isBeingSplitted != value)
+				{
+					isBeingSplitted = value;
+					OnPropertyChanged("IsBeingSplitted");
+				}
+			}
+		}
+
+		private bool isBeingEdited;
+		public bool IsBeingEdited
+		{
+			get => isBeingEdited;
+			set
+			{
+				if (isBeingEdited != value)
+				{
+					isBeingEdited = value;
+					OnPropertyChanged("IsBeingEdited");
+				}
 			}
 		}
 

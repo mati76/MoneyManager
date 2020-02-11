@@ -134,5 +134,30 @@ namespace TransactionsImporter
 				await sr.WriteAsync(sb);
 			}
 		}
+
+		public void SplitTransaction(TransactionSplit transactionSplit)
+		{
+			_transactions.AddRange(new []
+			{
+				new Model.Transaction
+				{
+					Amount = transactionSplit.AmountX,
+					Category = transactionSplit.Transaction.Category,
+					OriginalCategory = transactionSplit.Transaction.OriginalCategory,
+					Date = transactionSplit.Transaction.Date,
+					Description = transactionSplit.Transaction.Description
+				},
+				new Model.Transaction
+				{
+					Amount = transactionSplit.AmountY,
+					Category = transactionSplit.Transaction.Category,
+					OriginalCategory = transactionSplit.Transaction.OriginalCategory,
+					Date = transactionSplit.Transaction.Date,
+					Description = transactionSplit.Transaction.Description
+				},
+			});
+
+			_transactions.Remove(transactionSplit.Transaction);
+		}
 	}
 }

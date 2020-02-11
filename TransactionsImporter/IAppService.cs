@@ -18,5 +18,6 @@ namespace TransactionsImporter
 		void ClearTransactions();
 		Task LoadTransactionsAsync(string path);
 		Task SaveTransactionsAsync(string path);
+		void SplitTransaction(TransactionSplit transactionSplit);
 	}
 }
