@@ -11,6 +11,8 @@ using System;
 using System.Windows;
 using System.Text;
 using System.Globalization;
+using TransactionsImporter.Windows.TransactionList;
+using TransactionsImporter.Windows.EditTransaction;
 
 namespace TransactionsImporter
 {
@@ -33,6 +35,8 @@ namespace TransactionsImporter
         private ICommand _saveTransactionsCommand;
         private ICommand _splitCommand;
         private ICommand _roundAmountCommand;
+        private ICommand _editTransactionCommand;
+        private ICommand _addTransactionCommand;
         private bool _showOnlyExpenses;
         private string _selectedCategory;
 
@@ -46,6 +50,38 @@ namespace TransactionsImporter
 
         #region Commands
         
+        public ICommand AddTransactionCommand
+        {
+            get
+            {
+                if (_addTransactionCommand == null)
+                {
+                    _addTransactionCommand = new Command(t =>
+                    {
+                        _windowService.ShowModal(new EditTransactionViewModel(new Model.Transaction(), _appService));
+                        Refresh();
+                    }, () => true);
+                }
+                return _addTransactionCommand;
+            }
+        }
+
+        public ICommand EditTransactionCommand
+        {
+            get
+            {
+                if (_editTransactionCommand == null)
+                {
+                    _editTransactionCommand = new Command(t =>
+                    {
+                        _windowService.ShowModal(new EditTransactionViewModel((Model.Transaction)t, _appService));
+                        Refresh();
+                    }, () => true);
+                }
+                return _editTransactionCommand;
+            }
+        }
+
         public ICommand RoundAmountCommand
         {
             get

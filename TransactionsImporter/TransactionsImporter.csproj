@@ -29,7 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="MainWindow.xaml">
+    <Page Update="Windows\EditTransaction\EditTransactionWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\Main\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

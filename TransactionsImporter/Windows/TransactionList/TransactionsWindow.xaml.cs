@@ -1,13 +1,8 @@
 ﻿using System.Windows;
 using TransactionsImporter.Model;
 
-namespace TransactionsImporter
+namespace TransactionsImporter.Windows.TransactionList
 {
-	public interface IView
-	{
-		void SetViewModel(ModelBase viewModel);
-		Window GetWindow();
-	}
 	public partial class TransactionsWindow : Window, IView
 	{
 		public TransactionsWindow()

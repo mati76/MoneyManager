@@ -1,0 +1,43 @@
+﻿<Window x:Class="TransactionsImporter.Windows.EditTransaction.EditTransactionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:TransactionsImporter.ValueConverters"
+        mc:Ignorable="d"
+        Title="Edit Transaction" Height="400" Width="620" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <converters:DateTimeConverter x:Key="dateConverter"/>
+        <converters:CurrencyConverter x:Key="currencyConverter"/>
+    </Window.Resources>
+    <Grid VerticalAlignment="Stretch" Margin="20,20,20,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Border Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Black" CornerRadius="5,5,5,5">
+            <StackPanel TextElement.FontFamily="Arial Rounded MT Bold" TextElement.FontSize="17" Margin="5">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="170">Date:</TextBlock>
+                    <DatePicker HorizontalAlignment="Left" SelectedDate="{Binding Transaction.Date}" VerticalAlignment="Top"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBlock Width="170">Amount:</TextBlock>
+                    <TextBox Width="100" Foreground="DarkBlue" Text="{Binding Transaction.Amount, Converter={StaticResource currencyConverter}}" PreviewTextInput="OnPreviewTextInput"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                    <TextBlock Width="170">Category:</TextBlock>
+                    <ComboBox Width="370" Foreground="DarkBlue" SelectedItem="{Binding Transaction.Category}" ItemsSource="{Binding Categories}" DisplayMemberPath="Name"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                    <TextBlock Width="170">Description:</TextBlock>
+                    <TextBox TextWrapping="Wrap" Height="150" Width="370" Foreground="DarkBlue" Text="{Binding Transaction.Description}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" TextElement.FontFamily="Arial Rounded MT Bold" TextElement.FontSize="15" Grid.Row="2">
+            <Button Content="Apply" Width="100" Height="35"  Command="{Binding SaveTransactionCommand}"/>
+            <Button Margin="10, 0, 0, 0" Content="Close" Grid.Row="2" Width="100" Height="35" Command="{Binding CloseCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>

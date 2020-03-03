@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using TransactionsImporter.Windows;
 
 namespace TransactionsImporter.Model
 {

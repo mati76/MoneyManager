@@ -7,10 +7,13 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="MainWindow.xaml">
+    <Page Update="Windows\EditTransaction\EditTransactionWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="TransactionsWindow.xaml">
+    <Page Update="Windows\Main\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\TransactionList\TransactionsWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

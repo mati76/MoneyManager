@@ -59,19 +59,38 @@
             </Grid>
         </ControlTemplate>
         <DataTemplate x:Key="actionsTemplate">
-            <Button Content="Split" Command="{Binding Path=DataContext.SplitCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
-                    CommandParameter="{Binding}" Width="100" FontFamily="Arial Rounded MT Bold">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBoxItem}},Path=IsMouseOver}" Value="True">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
+            <StackPanel Orientation="Horizontal" TextElement.FontFamily="Arial Rounded MT Bold">
+                <Button Content="Split" Command="{Binding Path=DataContext.SplitCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                        CommandParameter="{Binding}" Width="100">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsExpense}" Value="True"/>
+                                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}},Path=IsMouseOver}" Value="True"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Content="Edit" Command="{Binding Path=DataContext.EditTransactionCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                        CommandParameter="{Binding}" Width="100" Margin="5, 0, 0, 0">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBoxItem}},Path=IsMouseOver}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="amountTemplate">
             <TextBlock Foreground="{Binding Path=Amount, Converter={StaticResource currencyToColorConverter}}" HorizontalAlignment="Right" 
@@ -233,6 +252,7 @@
             <TextBox HorizontalAlignment="Center" Margin="10,3,0,0" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" Background="{x:Null}" Height="25" VerticalAlignment="Top">Filter By Category:</TextBox>
             <ComboBox ItemsSource="{Binding UnmatchedCategories}" Height="25" Width="150" HorizontalAlignment="Left" SelectedValue="{Binding SelectedCategory, Mode=TwoWay}"
                       VerticalAlignment="Top" Margin="10,0,0,0"/>
+            <Button Margin="15, 0, 0, 0" Content="Add Transaction" Command="{Binding AddTransactionCommand}" Height="25" VerticalAlignment="Top" Padding="5, 0, 5, 0"/>
         </StackPanel>
         <ListView Margin="10,10,10,10" ItemsSource="{Binding NotMatchedTransactions}" Grid.Row="4" SelectionMode="Single">
             <ListView.ItemContainerStyle>
@@ -261,7 +281,7 @@
                     <GridViewColumn Width="100" Header="Amount" CellTemplate="{StaticResource amountTemplate}"/>
                     <GridViewColumn Width="200" Header="Category" CellTemplate="{StaticResource categoryTemplate}"/>
                     <GridViewColumn Width="Auto" Header="Description" DisplayMemberBinding="{Binding Description}" />
-                    <GridViewColumn Width="120" CellTemplate="{StaticResource actionsTemplate}"/>
+                    <GridViewColumn Width="230" CellTemplate="{StaticResource actionsTemplate}"/>
                 </GridView>
             </ListView.View>
         </ListView>

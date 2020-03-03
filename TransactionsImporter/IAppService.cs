@@ -18,6 +18,7 @@ namespace TransactionsImporter
 		void ClearTransactions();
 		Task LoadTransactionsAsync(string path);
 		Task SaveTransactionsAsync(string path);
-		void SplitTransaction(TransactionSplit transactionSplit);
+		void SplitTransaction(Model.TransactionSplit transactionSplit);
+		void SaveTransaction(Model.Transaction transaction);
 	}
 }

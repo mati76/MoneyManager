@@ -12,11 +12,11 @@ namespace TransactionsImporter.ValueConverters
         {
             if (value is decimal)
             {
-                var format = "#,0.00";
-                var nfi = (NumberFormatInfo)culture.NumberFormat.Clone();
+                var nfi = (NumberFormatInfo)CultureInfo.CurrentCulture.NumberFormat.Clone();
+                var format = string.Format("#{0}0.00", nfi.NumberDecimalSeparator);
                 nfi.NumberGroupSeparator = " ";
                 if (parameter is int && (int)parameter > 0)
-                    format = "#,0." + string.Join("", Enumerable.Repeat('0', (int)parameter));
+                    format = string.Format("#{0}0." + string.Join("", Enumerable.Repeat('0', (int)parameter)), nfi.NumberDecimalSeparator);
 
                 return ((decimal)value).ToString(format, nfi);
             }
@@ -26,7 +26,7 @@ namespace TransactionsImporter.ValueConverters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return decimal.Parse(value.ToString());
         }
     }
 }

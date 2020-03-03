@@ -159,5 +159,18 @@ namespace TransactionsImporter
 
 			_transactions.Remove(transactionSplit.Transaction);
 		}
+
+		public void SaveTransaction(Model.Transaction transaction)
+		{
+			var tran = _transactions.FirstOrDefault(t => t.Id == transaction.Id);
+			if (tran != null)
+			{
+				tran.Asign(transaction);
+			}
+			else
+			{
+				_transactions.Add(transaction);
+			}
+		}
 	}
 }

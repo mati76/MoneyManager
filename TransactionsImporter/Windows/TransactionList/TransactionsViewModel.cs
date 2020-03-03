@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using TransactionsImporter.Model;
 
-namespace TransactionsImporter
+namespace TransactionsImporter.Windows.TransactionList
 {
 	public class TransactionsViewModel : ModelBase
 	{
